@@ -2,7 +2,7 @@
 name: helm
 
 templates: 
-  bin/helm.erb: bin/helm
+  bin/run.erb: bin/run
   
 packages: 
 - helm
@@ -35,41 +35,31 @@ properties:
 
   repositories:
     description: "array of helm repository in json format"
-    example: "[\n
-                   {'name': 'stable',\n
-                    'url' : 'https://kubernetes-charts.storage.googleapis.com/'\n
-                   },\n
-                   {'name': 'incubator',\n
-                    'url' : 'https://kubernetes-charts-incubator.storage.googleapis.com'\n
-                   }\n
-                  ]"
+    example: |
+      - name: 'stable'
+        url: 'https://kubernetes-charts.storage.googleapis.com/'
+      - name: 'incubator'
+        url : 'https://kubernetes-charts-incubator.storage.googleapis.com'
 
-    default: "['stable','https://kubernetes-charts.storage.googleapis.com/']"
+    default:
+      - name: 'stable'
+        url: 'https://kubernetes-charts.storage.googleapis.com/'
 
   charts:
     description: "array of helm chart in json format defined by his name, his chart and an array of properties"
-    example: "[\n
-                   {'name'      : 'mygrafana',\n
-                    'chart'     : 'stable/grafana',\n
-                    'properties': [\n
-                                   {'name' : 'service.type',\n
-                                    'value': 'ClusterIP'\n
-                                   },\n
-                                   {'name' : 'service.port',\n
-                                    'value': '9000'\n
-                                   }\n
-                                 ]\n
-                   },\n
-                   {'name'      : 'mygrafana2',\n
-                    'chart'     : 'stable/grafana',\n
-                    'properties': [\n
-                                   {'name' : 'service.type',\n
-                                    'value': 'ClusterIP'\n
-                                   },\n
-                                   {'name' : 'service.port',\n
-                                    'value': '9001'\n
-                                   }\n
-                                 ]\n
-                   }\n
-                 ]"
-    default: "[]"
+    example: |
+      - name: 'mygrafana'
+        chart: 'stable/grafana'
+        properties:
+          - name: 'service.type'
+            value: 'ClusterIP'
+          - name: 'service.port'
+            value: '9000'
+      - name: 'mygrafana2'
+        chart: 'stable/grafana'
+        properties:
+          - name: 'service.type'
+            value: 'ClusterIP'
+          - name: 'service.port'
+            value: '9001'
+    default: []

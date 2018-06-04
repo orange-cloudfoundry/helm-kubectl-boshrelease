@@ -8,34 +8,34 @@ packages:
 - helm
 
 properties:
-- kubernetes.host:
-        description: "The hostname (in form of URI) of Kubernetes master"
-        example: "https://cfcr-api.internal.paas"
+  kubernetes.host:
+    description: "The hostname (in form of URI) of Kubernetes master"
+    example: "https://cfcr-api.internal.paas"
 
-- kubernetes.username: 
-        description: "The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
-        default: "kubo-cluster-admin"
+  kubernetes.username: 
+    description: "The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
+    default: "kubo-cluster-admin"
 
-- kubernetes.password:
-        description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
+  kubernetes.password:
+    description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
 
-- kubernetes.client_certificate:
-        description: "PEM-encoded client certificate for TLS authentication."
+  kubernetes.client_certificate:
+    description: "PEM-encoded client certificate for TLS authentication."
 
-- kubernetes.client_key:
-        description: "PEM-encoded client certificate key for TLS authentication."
+  kubernetes.client_key:
+    description: "PEM-encoded client certificate key for TLS authentication."
 
 
-- kubernetes.cluster_ca_certificate:
-        description: "PEM-encoded root certificates bundle for TLS authentication."
+  kubernetes.cluster_ca_certificate:
+    description: "PEM-encoded root certificates bundle for TLS authentication."
 
-- service_account:
-        description: "Service account to install Tiller with."
-        default: "tiller"
+  service_account:
+    description: "Service account to install Tiller with."
+    default: "tiller"
 
-- repositories:
-        description: "array of helm repository in json format"
-        example: "[\n
+  repositories:
+    description: "array of helm repository in json format"
+    example: "[\n
                    {'name': 'stable',\n
                     'url' : 'https://kubernetes-charts.storage.googleapis.com/'\n
                    },\n
@@ -44,11 +44,11 @@ properties:
                    }\n
                   ]"
 
-        default: "['stable','https://kubernetes-charts.storage.googleapis.com/']"
+    default: "['stable','https://kubernetes-charts.storage.googleapis.com/']"
 
-- charts:
-        description: "array of helm chart in json format defined by his name, his chart and an array of properties"
-        example: "[\n
+  charts:
+    description: "array of helm chart in json format defined by his name, his chart and an array of properties"
+    example: "[\n
                    {'name'      : 'mygrafana',\n
                     'chart'     : 'stable/grafana',\n
                     'properties': [\n
@@ -72,4 +72,4 @@ properties:
                                  ]\n
                    }\n
                  ]"
-        default: "[]"
+    default: "[]"

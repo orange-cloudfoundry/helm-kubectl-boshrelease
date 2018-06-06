@@ -14,7 +14,7 @@ packages:
 
 properties:
   director.name:
-     description:"Name of director"
+     description: "Name of director"
      example: "bosh-kubo"
      default: "bosh-kubo"
 

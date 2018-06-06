@@ -19,7 +19,7 @@ properties:
      default: "bosh-kubo"
 
   deployment.name:
-     description:"Name of deployment"
+     description: "Name of deployment"
      example: "cfcr"
      default: "cfcr"
 

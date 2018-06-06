@@ -4,4 +4,4 @@ name: helm
 dependencies: []
 
 files:
-- helm/**/* 
+- helm/2.9.1/helm.tar.gz

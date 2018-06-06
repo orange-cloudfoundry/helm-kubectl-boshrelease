@@ -7,5 +7,8 @@ HELM_VERSION=2.9.1
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
+cp -a ${BOSH_COMPILE_TARGET}/helm/2.9.1/helm.tar.gz ${BOSH_INSTALL_TARGET}/.
 
-tar -xvfz ${BOSH_COMPILE_TARGET}/${HELM_VERSION}/helm.tar.gz ${BOSH_INSTALL_TARGET}/
+ls ${BOSH_INSTALL_TARGET}
+
+tar -xvfz ${BOSH_INSTALL_TARGET}/helm.tar.gz

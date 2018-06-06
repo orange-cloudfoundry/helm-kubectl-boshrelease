@@ -3,7 +3,10 @@ name: helm
 
 templates: 
   bin/run.erb: bin/run
-  config/kubeconfig.erb: config/kubeconfig
+  bin/inithelm.rb.erb: bin/inithelm.rb
+  bin/chart.rb.erb: bin/chart.rb
+  bin/repository.rb.erb: bin/repository.rb
+  config/rbac-config.yaml.erb: config/rbac-config.yaml
   
 packages: 
 - helm
@@ -13,7 +16,7 @@ properties:
   director.name:
      description:"Name of director"
      example: "bosh-kubo"
-     default: bosh-kubo
+     default: "bosh-kubo"
 
   deployment.name:
      description:"Name of deployment"

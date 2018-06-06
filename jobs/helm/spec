@@ -3,11 +3,23 @@ name: helm
 
 templates: 
   bin/run.erb: bin/run
+  config/kubeconfig.erb: config/kubeconfig
   
 packages: 
 - helm
+- kubectl
 
 properties:
+  director.name:
+     description:"Name of director"
+     example: "bosh-kubo"
+     default: bosh-kubo
+
+  deployment.name:
+     description:"Name of deployment"
+     example: "cfcr"
+     default: "cfcr"
+
   kubernetes.host:
     description: "The hostname (in form of URI) of Kubernetes master"
     example: "https://cfcr-api.internal.paas"
@@ -50,6 +62,7 @@ properties:
     example: |
       - name: 'mygrafana'
         chart: 'stable/grafana'
+        namespace: 'default'
         properties:
           - name: 'service.type'
             value: 'ClusterIP'
@@ -57,6 +70,7 @@ properties:
             value: '9000'
       - name: 'mygrafana2'
         chart: 'stable/grafana'
+        namespace: 'default'
         properties:
           - name: 'service.type'
             value: 'ClusterIP'

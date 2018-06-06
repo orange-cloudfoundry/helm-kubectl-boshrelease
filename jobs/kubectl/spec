@@ -1,7 +1,8 @@
 ---
 name: kubectl
 
-templates: {}
+templates:
+   bin/run.erb: bin/run
 
 packages: 
 - kubectl

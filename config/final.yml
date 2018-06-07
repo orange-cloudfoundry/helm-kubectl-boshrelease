@@ -1,1 +1,6 @@
-name: helm-kubectl-boshrelease
+---
+blobstore:
+  provider: s3
+  options:
+    bucket_name: orange-helm-kubectl-boshrelease
+final_name: helm-kubectl

@@ -8,5 +8,5 @@ KUBECTL_VERSION=1.10.3
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-cp ${BOSH_COMPILE_TARGET}/${KUBECTL_VERSION}/kubectl ${BOSH_INSTALL_TARGET}/kubectl
+cp ${BOSH_COMPILE_TARGET}/kubectl/${KUBECTL_VERSION}/kubectl ${BOSH_INSTALL_TARGET}/kubectl
 chmod +x ${BOSH_INSTALL_TARGET}/kubectl

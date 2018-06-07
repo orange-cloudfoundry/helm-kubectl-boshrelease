@@ -1,7 +1,8 @@
-# BOSH Release for metabase
+# BOSH Release for Helm and Kubectl
 
 ## Purpose
 The purpose of this bosh release is to offer a bosh deployment for Helm and Kubectl product
+You can declare in your deployment helm repository and helm chart, and errand will apply charts.
 
 
 ## Usage
@@ -10,9 +11,9 @@ To use this bosh release, first upload it to your bosh:
 
 ```
 bosh target BOSH_HOST
-git clone https://github.com/cloudfoundry-community/metabase-boshrelease.git
-cd metabase-boshrelease
-bosh upload release releases/helm-kubectl/metabase-1.yml
+git clone https://github.com/orange-cloudfoundry/helm-kubectl-boshrelease
+cd helm-kubectl-boshrelease
+bosh upload release releases/helm-kubectl/helm-kubectl-1.yml
 ```
 
 For [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest & deploy a cluster. Note that this requires that you have installed [spruce](https://github.com/geofffranks/spruce).

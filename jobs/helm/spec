@@ -3,7 +3,6 @@ name: helm
 
 templates: 
   bin/run.erb: bin/run
-  bin/inithelm.rb.erb: bin/inithelm.rb
   bin/chart.rb.erb: bin/chart.rb
   bin/repository.rb.erb: bin/repository.rb
   config/rbac-config.yaml.erb: config/rbac-config.yaml

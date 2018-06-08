@@ -2,7 +2,8 @@
 name: kubectl
 
 templates:
-   bin/run.erb: bin/run
+  bin/run.erb: bin/run
+  bin/ingress.rb.erb: bin/ingress.rb
 
 packages: 
 - kubectl

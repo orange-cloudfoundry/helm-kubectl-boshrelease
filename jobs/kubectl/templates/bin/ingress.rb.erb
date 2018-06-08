@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'yaml'
+
+#INGRESS_YAML= <%= p('ingress') %>
+
+
+INGRESS_YAML_TEST= <<~YAML
+- name: dashboard-ingress
+  namespace: kube-system
+  spec:
+    rules:
+    - host: ingress-ops.nd-int-cfapi.itn.intraorange
+      http:
+        paths:
+        - backend:
+            serviceName: kubernetes-dashboard
+            servicePort: 443
+          path: /dashboard
+
+- name: grafana-ingress
+  namespace: kube-system
+  spec:
+    rules:
+    - host: ingress-ops.nd-int-cfapi.itn.intraorange
+      http:
+        paths:
+        - backend:
+            serviceName: grafana
+            servicePort: 443
+          path: /grafana
+YAML
+
+
+
+data = YAML.load(INGRESS_YAML_TEST)
+
+
+
+data.each { |ingress|
+
+    pnamespace = ingress['namespace']
+    pname = ingress['name']
+    pspec = ingress['spec']
+    pfilename="/tmp/#{pname}.yml"
+    File.open(pfilename, 'w+') do |f|
+      f.puts("apiVersion: extensions/v1beta1")
+      f.puts("kind: Ingress")
+      f.puts("metadata:")
+      f.puts("  name: #{pname}")
+      f.puts("  namespace: #{pnamespace}")
+      f.puts("#{pspec.to_yaml}")
+    end
+    cmd = "kubectl apply #{pfilename} "
+    system(cmd) or raise "#{cmd} : ACTION FAILED"
+    File.delete(pfilename)
+}
+
+

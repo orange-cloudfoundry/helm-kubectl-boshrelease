@@ -54,7 +54,7 @@ data.each { |chart|
     else
         cmd = "helm install --namespace #{pnamespace} --name #{chart['name']} #{chart['chart']} #{t}"
     end
-    system(cmd) or raised "#{cmd} : ACTION FAILED"
+    system(cmd) or raise "#{cmd} : ACTION FAILED #{cmd}"
 }
 
 

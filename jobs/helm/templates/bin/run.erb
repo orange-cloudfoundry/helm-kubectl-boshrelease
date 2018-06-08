@@ -6,15 +6,15 @@ export PATH=$PATH:/var/cap/packages/helm/bin:/var/cap/packages/kubectl/
 #-------------------------------------------
 echo "create credential for kubectl and helm"
 #-------------------------------------------
-director_name=<%= p('director.name') =>"
-deployment_name=<%= p('deployment.name') =>"
+director_name= <%= p('director.name') %>"
+deployment_name=<%= p('deployment.name') %>"
 
 cluster_name="kubo:${director_name}:${deployment_name}"
 user_name="kubo:${director_name}:${deployment_name}-admin"
 context_name="kubo:${director_name}:${deployment_name}"
 
-kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="<%= p('kubernetes.cluster_ca_certificate') =>" --embed-certs=true
-kubectl config set-credentials "${user_name}" --token="<%= p('kubernetes.password') =>"
+kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="<%= p('kubernetes.cluster_ca_certificate') %>" --embed-certs=true
+kubectl config set-credentials "${user_name}" --token="<%= p('kubernetes.password') %>"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"
 #-------------------------------------------

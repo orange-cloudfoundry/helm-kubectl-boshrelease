@@ -1,7 +1,8 @@
 ---
 name: kubectl
 
-dependencies: []
+dependencies: 
+- ruby-2.4-r4
 
 files:
 - kubectl/**/* 

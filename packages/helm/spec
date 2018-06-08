@@ -1,7 +1,8 @@
 ---
 name: helm
 
-dependencies: []
+dependencies: 
+- ruby-2.4-r4
 
 files:
 - helm/2.9.1/helm.tar.gz

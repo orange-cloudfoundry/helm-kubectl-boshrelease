@@ -10,10 +10,11 @@ echo "create credential for kubectl and helm"
 director_name=<%= p('director.name') %>
 deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
+address=<%= p('kubernetes.host') %>
 
-ls -als /var/cap/packages/
+ls -als /var/vcap/packages/
 
-ls -als /var/cap/packages/kubectl/
+ls -als /var/vcap/packages/kubectl/
 
 echo ${PATH}
 
@@ -28,7 +29,7 @@ echo "context_name : ${context_name}"
 
 
 
-kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
 echo "config set-cluster done "
 
 kubectl config set-credentials "${user_name}" --token="${password}"

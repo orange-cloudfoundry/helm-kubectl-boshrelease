@@ -1,5 +1,7 @@
 #!/bin/sh
 
+source /var/vcap/packages/ruby-2.4-r4/bosh/runtime.env
+
 export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/helm/bin:/var/vcap/packages/kubectl/
 

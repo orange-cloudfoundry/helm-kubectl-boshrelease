@@ -29,7 +29,7 @@ YAML
 
 
 
-data = YAML.load(CHART_YAML)
+data = CHART_YAML
 
 
 
@@ -37,7 +37,9 @@ data.each { |chart|
     t= ""
     count=0
     pnamespace = chart['namespace']
-    chart['properties'].each{ |property|
+    pproperties = chart['properties']
+    if (pproperties != nil)
+     chart['properties'].each{ |property|
      pname = property['name']
      pvalue = property['value']
 
@@ -49,12 +51,13 @@ data.each { |chart|
      end
 
     }
+    end
     if (pnamespace == nil)
         cmd ="helm install --name #{chart['name']} #{chart['chart']} #{t}"
     else
         cmd = "helm install --namespace #{pnamespace} --name #{chart['name']} #{chart['chart']} #{t}"
     end
-    system(cmd) or raise "#{cmd} : ACTION FAILED #{cmd}"
+    system(cmd) or puts "#{cmd} : ACTION FAILED #{cmd}"
 }
 
 

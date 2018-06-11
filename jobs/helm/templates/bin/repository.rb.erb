@@ -18,7 +18,7 @@ data.each { |repository|
      purl = repository['url']
      cmd = "helm repo add  #{pname} #{purl} "
 
-     system(cmd) or raise "#{cmd} : ACTION FAILED"
+     system(cmd) or puts "#{cmd} : ACTION FAILED"
 
 }
 

@@ -56,7 +56,7 @@ kubectl apply -f /var/vcap/jobs/helm/config/rbac-config.yaml
 #-------------------------------------------
 echo "execute init helm, his repo , and the chart"
 #-------------------------------------------
-
+helm init --client-only
 chmod +x /var/vcap/jobs/helm/bin/repository.rb
 chmod +x /var/vcap/jobs/helm/bin/chart.rb
 

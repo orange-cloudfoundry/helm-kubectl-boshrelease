@@ -6,15 +6,10 @@ REPOSITORY_YAML = <%= p('repositories') %>
 
 
 
-REPOSITORY_YAML_TEST= <<~YAML
----
-- name: stable
-  url: 'https://kubernetes-charts.storage.googleapis.com/'
-- name: 'incubator'
-  url: 'https://kubernetes-charts-incubator.storage.googleapis.com'
-YAML
+REPOSITORY_YAML_TEST = [{"name"=>"stable", "url"=>"https://kubernetes-charts.storage.googleapis.com/"}, {"name"=>"incubator", "url"=>"https://kubernetes-charts-incubator.storage.googleapis.com/"},
+{"name"=>"svc-cat", "url"=>"https://svc-catalog-charts.storage.googleapis.com"}]
 
-data = YAML.load(REPOSITORY_YAML)
+data = REPOSITORY_YAML
 
 
 

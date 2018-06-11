@@ -15,8 +15,8 @@ echo "create credential for kubectl and helm"
 director_name=<%= p('director.name') %>
 deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
-address=<%= p('kubernetes.host') %>
-
+endpoint=<%= p('kubernetes.host') %>
+port=<%= p('kubernetes.port') %>
 
 echo ${PATH}
 echo ${password}
@@ -30,8 +30,6 @@ echo "user_name : ${user_name}"
 context_name="kubo:${director_name}:${deployment_name}"
 echo "context_name : ${context_name}"
 
-endpoint="cfcr-api.internal.paas"
-port="8443"
 address="https://${endpoint}:${port}"
 
 cat /var/vcap/jobs/helm/config/ca_cert.pem

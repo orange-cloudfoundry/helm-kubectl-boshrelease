@@ -26,7 +26,11 @@ properties:
 
   kubernetes.host:
     description: "The hostname (in form of URI) of Kubernetes master"
-    example: "https://cfcr-api.internal.paas"
+    example: "cfcr-api.internal.paas"
+
+  kubernetes.port:
+    description: "The port of Kubernetes master"
+    example: "443"
 
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."

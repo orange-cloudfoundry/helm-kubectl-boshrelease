@@ -39,7 +39,6 @@ properties:
   kubernetes.client_key:
     description: "PEM-encoded client certificate key for TLS authentication."
 
-
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 

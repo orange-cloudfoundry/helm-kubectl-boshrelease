@@ -27,9 +27,13 @@ echo "user_name : ${user_name}"
 context_name="kubo:${director_name}:${deployment_name}"
 echo "context_name : ${context_name}"
 
+endpoint="cfcr-api.internal.paas"
+port="8443"
+address="https://${endpoint}:${port}"
 
+ping cfcr-api.internal.paas -c 5
 
-kubectl config set-cluster "${cluster_name}" --server="${address}:8443" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
 echo "config set-cluster done "
 
 kubectl config set-credentials "${user_name}" --token="${password}"

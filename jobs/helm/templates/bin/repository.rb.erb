@@ -24,6 +24,6 @@ data.each { |repository|
      cmd = "helm repo add  #{pname} #{purl} "
 
      system(cmd) or raise "#{cmd} : ACTION FAILED"
-   end
+
 }
 

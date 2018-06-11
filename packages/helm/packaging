@@ -11,6 +11,6 @@ cp -a ${BOSH_COMPILE_TARGET}/helm/2.9.1/helm.tar.gz ${BOSH_INSTALL_TARGET}/
 
 ls ${BOSH_INSTALL_TARGET}
 
-tar -xvzf ${BOSH_INSTALL_TARGET}/helm.tar.gz
-
-ls ${BOSH_INSTALL_TARGET}
+cd ${BOSH_INSTALL_TARGET}
+tar -xvzf helm.tar.gz
+chmod +x linux-amd64/helm

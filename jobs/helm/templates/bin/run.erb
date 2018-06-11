@@ -10,8 +10,7 @@ director_name=<%= p('director.name') %>
 deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 
-tmp_ca_file="$(mktemp)"
-echo <%= p('kubernetes.cluster_ca_certificate.ca') %> > "${tmp_ca_file}"
+
 
 
 cluster_name="kubo:${director_name}:${deployment_name}
@@ -19,7 +18,7 @@ user_name="kubo:${director_name}:${deployment_name}-admin"
 context_name="kubo:${director_name}:${deployment_name}"
 
 
-kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="${tmp_ca_file}" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"

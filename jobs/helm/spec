@@ -35,12 +35,6 @@ properties:
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
 
-  kubernetes.client_certificate:
-    description: "PEM-encoded client certificate for TLS authentication."
-
-  kubernetes.client_key:
-    description: "PEM-encoded client certificate key for TLS authentication."
-
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 

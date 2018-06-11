@@ -12,11 +12,9 @@ deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 address=<%= p('kubernetes.host') %>
 
-ls -als /var/vcap/packages/
-
-ls -als /var/vcap/packages/kubectl/
 
 echo ${PATH}
+echo ${password}
 
 cluster_name="kubo:${director_name}:${deployment_name}"
 echo "cluster_name : ${cluster_name}"
@@ -31,7 +29,7 @@ endpoint="cfcr-api.internal.paas"
 port="8443"
 address="https://${endpoint}:${port}"
 
-ping cfcr-api.internal.paas -c 5
+cat /var/vcap/jobs/helm/config/ca_cert.pem
 
 kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
 echo "config set-cluster done "

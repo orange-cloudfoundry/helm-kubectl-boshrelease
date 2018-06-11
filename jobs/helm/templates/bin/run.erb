@@ -5,6 +5,7 @@ export PATH=$PATH:/var/cap/packages/helm/bin:/var/cap/packages/kubectl/
 
 #-------------------------------------------
 echo "create credential for kubectl and helm"
+
 #-------------------------------------------
 director_name=<%= p('director.name') %>
 deployment_name=<%= p('deployment.name') %>
@@ -14,14 +15,26 @@ password=<%= p('kubernetes.password') %>
 
 
 cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
-context_name="kubo:${director_name}:${deployment_name}"
+echo "cluster_name : ${cluster_name}"
 
+user_name="kubo:${director_name}:${deployment_name}-admin"
+echo "user_name : ${user_name}"
+
+context_name="kubo:${director_name}:${deployment_name}"
+echo "context_name : ${context_name}"
 
 kubectl config set-cluster "${cluster_name}" --server="$address" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
+echo "config set-cluster done"
+
 kubectl config set-credentials "${user_name}" --token="${password}"
+echo "config set-credentials done"
+
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
+echo "config set-context done"
+
 kubectl config use-context "${context_name}"
+echo "config use-context done"
+
 #-------------------------------------------
 echo "execute kubectl to create a session-account for tiller"
 #-------------------------------------------

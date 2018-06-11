@@ -11,7 +11,7 @@ deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 
 tmp_ca_file="$(mktemp)"
-echo <%= p('kubernetes.cluster_ca_certificate') %> > "${tmp_ca_file}"
+echo <%= p('kubernetes.cluster_ca_certificate.ca') %> > "${tmp_ca_file}"
 
 
 cluster_name="kubo:${director_name}:${deployment_name}

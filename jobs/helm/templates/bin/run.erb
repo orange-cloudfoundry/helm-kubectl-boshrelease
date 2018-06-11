@@ -8,11 +8,10 @@ echo "create credential for kubectl and helm"
 #-------------------------------------------
 director_name=<%= p('director.name') %>
 deployment_name=<%= p('deployment.name') %>
-ca=<%= p('kubernetes.cluster_ca_certificate') %>
 password=<%= p('kubernetes.password') %>
 
 tmp_ca_file="$(mktemp)"
-echo $ca > "${tmp_ca_file}"
+echo <%= p('kubernetes.cluster_ca_certificate') %> > "${tmp_ca_file}"
 
 
 cluster_name="kubo:${director_name}:${deployment_name}

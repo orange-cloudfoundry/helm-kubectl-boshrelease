@@ -28,10 +28,6 @@ properties:
     description: "The hostname (in form of URI) of Kubernetes master"
     example: "https://cfcr-api.internal.paas"
 
-  kubernetes.username: 
-    description: "The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
-    default: "kubo-cluster-admin"
-
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
 

@@ -52,7 +52,7 @@ data.each { |ingress|
       f.puts("  namespace: #{pnamespace}")
       f.puts("#{pspec.to_yaml}")
     end
-    cmd = "kubectl apply #{pfilename} "
+    cmd = "kubectl apply -f #{pfilename} "
     system(cmd) or raise "#{cmd} : ACTION FAILED"
     File.delete(pfilename)
 }

@@ -42,7 +42,7 @@ data.each { |ingress|
 
     pnamespace = ingress['namespace']
     pname = ingress['name']
-    pspec = ingress['spec']
+    pspec = ingress['definition']
     pfilename="/tmp/#{pname}.yml"
     File.open(pfilename, 'w+') do |f|
       f.puts("apiVersion: extensions/v1beta1")

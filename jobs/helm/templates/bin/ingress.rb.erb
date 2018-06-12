@@ -53,7 +53,7 @@ data.each { |ingress|
       f.puts("#{pspec.to_yaml}")
     end
     cmd = "kubectl apply -f #{pfilename} "
-    system(cmd) or raise "#{cmd} : ACTION FAILED"
+    system(cmd) or puts "#{cmd} : ACTION FAILED"
     File.delete(pfilename)
 }
 

@@ -3,7 +3,7 @@
 
 require 'yaml'
 
-#INGRESS_YAML= <%= p('ingress') %>
+INGRESS_YAML= <%= p('ingress') %>
 
 
 INGRESS_YAML_TEST= <<~YAML
@@ -34,7 +34,7 @@ YAML
 
 
 
-data = YAML.load(INGRESS_YAML_TEST)
+data = INGRESS_YAML
 
 
 

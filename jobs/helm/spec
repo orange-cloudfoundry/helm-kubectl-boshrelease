@@ -74,3 +74,31 @@ properties:
           - name: 'service.port'
             value: '9001'
     default: []
+  ingress:
+    description: "array of ingress rules that need to be apply"
+    example: |
+      - name: dashboard-ingress
+        namespace: kube-system
+        spec:
+          rules:
+          - host: ingress-ops.nd-int-cfapi.itn.intraorange
+            http:
+              paths:
+              - backend:
+                  serviceName: kubernetes-dashboard
+                  servicePort: 443
+                path: /dashboard
+
+      - name: grafana-ingress
+        namespace: kube-system
+        spec:
+          rules:
+          - host: ingress-ops.nd-int-cfapi.itn.intraorange
+            http:
+              paths:
+              - backend:
+                  serviceName: grafana
+                  servicePort: 443
+                path: /grafana
+
+    default: []

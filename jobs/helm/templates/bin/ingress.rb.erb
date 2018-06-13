@@ -59,6 +59,8 @@ data.each { |ingress|
       f.puts("metadata:")
       f.puts("  name: #{pname}")
       f.puts("  namespace: #{pnamespace}")
+      f.puts("  annotations:")
+      f.puts("    kubernetes.io/ingress.class: nginx")
       input_lines.each { |line|
         f.puts("#{line}")
         }

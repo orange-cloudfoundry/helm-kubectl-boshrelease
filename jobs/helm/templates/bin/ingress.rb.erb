@@ -37,24 +37,36 @@ YAML
 data = INGRESS_YAML
 
 
-
 data.each { |ingress|
 
     pnamespace = ingress['namespace']
     pname = ingress['name']
     pspec = ingress['definition']
     pfilename="/tmp/#{pname}.yml"
+
+    File.open("pfilename", 'w+') do |f|
+          f.puts("#{pspec.to_yaml}")
+    end
+    input_lines = File.readlines('/tmp/temp')
+    puts "#{input_lines}"
+    input_lines[0]=""
+
+    File.delete(pfilename)
+
     File.open(pfilename, 'w+') do |f|
       f.puts("apiVersion: extensions/v1beta1")
       f.puts("kind: Ingress")
       f.puts("metadata:")
       f.puts("  name: #{pname}")
       f.puts("  namespace: #{pnamespace}")
-      f.puts("#{pspec.to_yaml}")
+      input_lines.each { |line|
+        f.puts("#{line}")
+        }
     end
     cmd = "kubectl apply -f #{pfilename} "
     system(cmd) or puts "#{cmd} : ACTION FAILED"
-    File.delete(pfilename)
+     File.delete(pfilename)
 }
+
 
 

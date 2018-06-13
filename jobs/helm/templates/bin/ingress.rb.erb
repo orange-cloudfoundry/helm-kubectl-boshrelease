@@ -44,10 +44,10 @@ data.each { |ingress|
     pspec = ingress['definition']
     pfilename="/tmp/#{pname}.yml"
 
-    File.open("pfilename", 'w+') do |f|
+    File.open(pfilename, 'w+') do |f|
           f.puts("#{pspec.to_yaml}")
     end
-    input_lines = File.readlines('/tmp/temp')
+    input_lines = File.readlines(pfilename)
     puts "#{input_lines}"
     input_lines[0]=""
 

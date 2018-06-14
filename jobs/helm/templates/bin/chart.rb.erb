@@ -56,12 +56,12 @@ data.each { |chart|
 
     if (pnamespace == nil)
         cmd ="helm install --name #{chart['name']} #{chart['chart']} #{t}"
-        cmd-upgrade ="helm upgrade #{chart['name']} #{chart['chart']} #{t}"
+        cmdUpgrade ="helm upgrade #{chart['name']} #{chart['chart']} #{t}"
     else
         cmd = "helm install --namespace #{pnamespace} --name #{chart['name']} #{chart['chart']} #{t}"
-        cmd-upgrade = "helm upgrade --namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
+        cmdUpgrade = "helm upgrade --namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
     end
-    system(cmd) or system(cmd-upgrade) or puts "#{cmd} : ACTION FAILED #{cmd}"
+    system(cmd) or system(cmdUpgrade) or puts "#{cmd} : ACTION FAILED #{cmd}"
 }
 
 

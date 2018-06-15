@@ -33,9 +33,6 @@ kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"
 
-kubectl create clusterrolebinding tiller-cluster-admin \
-    --clusterrole=cluster-admin \
-    --serviceaccount=kube-system:default
 
 kubectl apply -f /var/vcap/jobs/helm/config/rbac-config.yaml
 chmod +x /var/vcap/jobs/helm/bin/ingress.rb
@@ -44,7 +41,7 @@ chmod +x /var/vcap/jobs/helm/bin/ingress.rb
 
 echo "execute init helm, his repo , and the chart"
 
-helm init --upgrade --wait
+helm init --upgrade --wait --service-account tiller
 chmod +x /var/vcap/jobs/helm/bin/repository.rb
 chmod +x /var/vcap/jobs/helm/bin/chart.rb
 

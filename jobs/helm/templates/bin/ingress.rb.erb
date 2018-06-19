@@ -9,39 +9,48 @@ INGRESS_YAML= <%= p('ingress') %>
 INGRESS_YAML_TEST= <<~YAML
 - name: dashboard-ingress
   namespace: kube-system
-  spec:
-    rules:
-    - host: ingress-ops.nd-int-cfapi.itn.intraorange
-      http:
-        paths:
-        - backend:
-            serviceName: kubernetes-dashboard
-            servicePort: 443
-          path: /dashboard
+  definition:
+      spec:
+        rules:
+        - host: ingress-ops.nd-int-cfapi.itn.intraorange
+          http:
+            paths:
+            - backend:
+                serviceName: kubernetes-dashboard
+                servicePort: 443
+              path: /dashboard
 
 - name: grafana-ingress
   namespace: kube-system
-  spec:
-    rules:
-    - host: ingress-ops.nd-int-cfapi.itn.intraorange
-      http:
-        paths:
-        - backend:
-            serviceName: grafana
-            servicePort: 443
-          path: /grafana
+  annotations:
+  - name: nginx.ingress.kubernetes.io/rewrite-target
+    value: '/'
+  - name: nginx.ingress.kubernetes.io/secure-backends
+    value : '"true"'
+
+  definition:
+    spec:
+      rules:
+      - host: ingress-ops.nd-int-cfapi.itn.intraorange
+        http:
+          paths:
+          - backend:
+              serviceName: grafana
+              servicePort: 443
+            path: /grafana
+
 YAML
 
 
-
 data = INGRESS_YAML
-
+#data = YAML.load(INGRESS_YAML_TEST)
 
 data.each { |ingress|
 
     pnamespace = ingress['namespace']
     pname = ingress['name']
     pspec = ingress['definition']
+    pannotations =ingress['annotations']
     pfilename="/tmp/#{pname}.yml"
 
     File.open(pfilename, 'w+') do |f|
@@ -61,13 +70,18 @@ data.each { |ingress|
       f.puts("  namespace: #{pnamespace}")
       f.puts("  annotations:")
       f.puts("    kubernetes.io/ingress.class: nginx")
+      if (pannotations != nil)
+           pannotations.each{ |annotation|
+            f.puts("    #{annotation['name']}: #{annotation['value']}")
+           }
+      end
       input_lines.each { |line|
         f.puts("#{line}")
         }
     end
     cmd = "kubectl apply -f #{pfilename} "
     system(cmd) or puts "#{cmd} : ACTION FAILED"
-     File.delete(pfilename)
+    File.delete(pfilename)
 }
 
 

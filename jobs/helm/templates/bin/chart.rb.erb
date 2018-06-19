@@ -56,10 +56,10 @@ data.each { |chart|
 
     if (pversion == nil)
         cmd ="helm install "
-        cmdUpgrade = "helm updgrade"
+        cmdUpgrade = "helm upgrade "
     else
         cmd ="helm install version=#{pversion}"
-        cmdUpgrade = "helm updgrade version=#{pversion}"
+        cmdUpgrade = "helm upgrade version=#{pversion}"
     end
 
     if (pnamespace == nil)
@@ -67,7 +67,7 @@ data.each { |chart|
         cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
     else
         cmd = "#{cmd} --namespace #{pnamespace} --name #{chart['name']} #{chart['chart']} #{t}"
-        cmdUpgrade = "#{cmdUpgrade}--namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
+        cmdUpgrade = "#{cmdUpgrade} --namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
     end
 
 

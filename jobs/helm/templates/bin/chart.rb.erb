@@ -70,7 +70,7 @@ data.each { |chart|
         cmdUpgrade = "#{cmdUpgrade} --namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
     end
 
-
+    puts "try to execute : #{cmd)"
 
     system(cmd) or system(cmdUpgrade) or puts "#{cmd} : ACTION FAILED #{cmd}"
 }

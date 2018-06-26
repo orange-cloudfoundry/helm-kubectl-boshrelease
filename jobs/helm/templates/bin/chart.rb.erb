@@ -55,11 +55,11 @@ data.each { |chart|
 
 
     if (pversion == nil)
-        cmd ="helm install "
-        cmdUpgrade = "helm upgrade "
+        cmd ="helm --debug install "
+        cmdUpgrade = "helm --debug upgrade "
     else
-        cmd ="helm install version=#{pversion}"
-        cmdUpgrade = "helm upgrade version=#{pversion}"
+        cmd ="helm --debug install version=#{pversion}"
+        cmdUpgrade = "helm --debug upgrade version=#{pversion}"
     end
 
     if (pnamespace == nil)

@@ -39,6 +39,8 @@ data.each { |chart|
     pnamespace = chart['namespace']
     pproperties = chart['properties']
     pversion = chart['version']
+    pdebug = chart['debug']
+
     if (pproperties != nil)
      chart['properties'].each{ |property|
      pname = property['name']
@@ -54,21 +56,26 @@ data.each { |chart|
     end
 
 
-    if (pversion == nil)
-        cmd ="helm --debug install "
-        cmdUpgrade = "helm --debug upgrade "
-    else
-        cmd ="helm --debug install version=#{pversion}"
-        cmdUpgrade = "helm --debug upgrade version=#{pversion}"
+    cmd ="helm install "
+    cmdUpgrade = "helm upgrade "
+
+    unless pdebug.nil? || pdebug == 0
+        cmd = "#{cmd} --debug "
+        cmdUpgrade = "#{cmdUpgrade} --debug"
     end
 
-    if (pnamespace == nil)
-        cmd ="#{cmd} --name #{chart['name']} #{chart['chart']} #{t}"
-        cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
-    else
-        cmd = "#{cmd} --namespace #{pnamespace} --name #{chart['name']} #{chart['chart']} #{t}"
-        cmdUpgrade = "#{cmdUpgrade} --namespace #{pnamespace} #{chart['name']} #{chart['chart']} #{t}"
+    unless pversion.nil? || pversion == 0
+        cmd ="#{cmd} version=#{pversion}"
+        cmdUpgrade = "#{cmdUpgrade} version=#{pversion}"
     end
+
+    unless pnamespace.nil? || pnamespace == 0
+        cmd = "#{cmd} --namespace #{pnamespace} "
+        cmdUpgrade = "#{cmdUpgrade} --namespace #{pnamespace}"
+    end
+
+    cmd ="#{cmd} --name #{chart['name']} #{chart['chart']} #{t}"
+    cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
 
     puts "try to execute : #{cmd}"
 

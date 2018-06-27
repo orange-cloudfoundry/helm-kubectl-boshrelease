@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eux
-
 export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/helm/linux-amd64/
 export PATH=$PATH:/var/vcap/packages/kubectl/
@@ -15,6 +13,7 @@ deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
+
 
 cluster_name="kubo:${director_name}:${deployment_name}"
 

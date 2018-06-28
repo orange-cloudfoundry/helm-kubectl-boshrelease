@@ -55,7 +55,7 @@ data.each { |chart|
     }
     end
 
-    ispresent = `helm list grafana| wc -l `.strip
+    ispresent = `helm list #{chart['name']}| wc -l `.strip
 
     cmd ="helm install "
     cmdUpgrade = "helm upgrade "

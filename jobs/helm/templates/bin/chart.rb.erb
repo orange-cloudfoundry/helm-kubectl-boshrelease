@@ -55,6 +55,7 @@ data.each { |chart|
     }
     end
 
+    ispresent = `helm list grafana| wc -l `.strip
 
     cmd ="helm install "
     cmdUpgrade = "helm upgrade "
@@ -78,8 +79,13 @@ data.each { |chart|
     cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
 
     puts "try to execute : #{cmd}"
-
-    system(cmd) or system(cmdUpgrade) or puts "#{cmd} : ACTION FAILED #{cmd}"
+    if ispresent=="2"
+      puts "#{cmdUpgrade}"
+      system(cmdUpgrade) or puts "ACTION FAILED"
+    else
+      puts "#{cmd}"
+      system(cmd) or puts "ACTION FAILED #{cmd}"
+    end
 }
 
 

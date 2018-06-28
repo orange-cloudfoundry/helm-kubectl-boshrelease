@@ -51,8 +51,8 @@ data.each { |chart|
 
     ispresent = `helm list #{chart['name']}| wc -l `.strip
 
-    cmd ="helm install "
-    cmdUpgrade = "helm upgrade "
+    cmd ="export HELM_HOME=/var/vcap/store/helm/;helm install "
+    cmdUpgrade = "export HELM_HOME=/var/vcap/store/helm/;helm upgrade "
 
     unless pdebug.nil? || pdebug == 0
         cmd = "#{cmd} --debug "

@@ -45,13 +45,7 @@ data.each { |chart|
      chart['properties'].each{ |property|
      pname = property['name']
      pvalue = property['value']
-
-     if (count==0)
-      t= " --set #{pname}=#{pvalue}"
-      count=1
-     else
-       t= "#{t},#{pname}=#{pvalue}"
-     end
+     t= "#{t} --set #{pname}=#{pvalue}"
     }
     end
 

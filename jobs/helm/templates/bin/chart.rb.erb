@@ -73,9 +73,9 @@ data.each { |chart|
     cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
 
     unless pfile? || pfile == 0
-        File.open('/tmp/#{chart['name']}'.yml', 'w') {|f| f.write pfile.to_yaml }
-        cmd = "#{cmd} -f value /tmp/#{chart['name']}'.yml
-        cmdUpgrade = "#{cmdUpgrade} -f value /tmp/#{chart['name']}'.yml
+        File.open("/tmp/#{chart['name']}.yml", 'w') {|f| f.write pfile.to_yaml }
+        cmd = "#{cmd} -f value /tmp/#{chart['name']}'.yml"
+        cmdUpgrade = "#{cmdUpgrade} -f value /tmp/#{chart['name']}.yml"
     end
 
     puts "try to execute : #{cmd}"

@@ -40,7 +40,7 @@ data.each { |chart|
     pproperties = chart['properties']
     pversion = chart['version']
     pdebug = chart['debug']
-
+    pfile = chart['file']
     if (pproperties != nil)
      chart['properties'].each{ |property|
      pname = property['name']
@@ -71,6 +71,12 @@ data.each { |chart|
 
     cmd ="#{cmd} --name #{chart['name']} #{chart['chart']} #{t}"
     cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
+
+    unless pfile? || pfile == 0
+        File.open('/tmp/#{chart['name']}'.yml', 'w') {|f| f.write pfile.to_yaml }
+        cmd = "#{cmd} -f value /tmp/#{chart['name']}'.yml
+        cmdUpgrade = "#{cmdUpgrade} -f value /tmp/#{chart['name']}'.yml
+    end
 
     puts "try to execute : #{cmd}"
     if ispresent=="2"

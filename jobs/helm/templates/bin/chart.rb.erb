@@ -72,10 +72,10 @@ data.each { |chart|
     cmd ="#{cmd} --name #{chart['name']} #{chart['chart']} #{t}"
     cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
 
-    unless pfile.nil? || pfile == 0
-        File.open("/tmp/#{chart['name']}.yml", 'w') {|f| f.write pfile.to_yaml }
-        cmd = "#{cmd} -f value /tmp/#{chart['name']}'.yml"
-        cmdUpgrade = "#{cmdUpgrade} -f value /tmp/#{chart['name']}.yml"
+    unless pvalue.nil? || pvalue == 0
+        File.open("/tmp/#{chart['name']}.yml", 'w') {|f| f.write pvalue.to_yaml }
+        cmd = "#{cmd} -f /tmp/#{chart['name']}'.yml"
+        cmdUpgrade = "#{cmdUpgrade} -f /tmp/#{chart['name']}.yml"
     end
 
     puts "try to execute : #{cmd}"

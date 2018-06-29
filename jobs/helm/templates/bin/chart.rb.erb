@@ -74,7 +74,7 @@ data.each { |chart|
 
     unless pfile .nil? || pfile  == 0
         File.open("/tmp/#{chart['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
-        cmd = "#{cmd} -f /tmp/#{chart['name']}'.yml"
+        cmd = "#{cmd} -f /tmp/#{chart['name']}.yml"
         cmdUpgrade = "#{cmdUpgrade} -f /tmp/#{chart['name']}.yml"
     end
 

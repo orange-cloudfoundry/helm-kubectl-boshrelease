@@ -51,8 +51,12 @@ data.each { |chart|
 
     ispresent = `helm list #{chart['name']}| wc -l `.strip
 
-    cmd ="export HELM_HOME=/var/vcap/store/helm/;helm install "
-    cmdUpgrade = "export HELM_HOME=/var/vcap/store/helm/;helm upgrade "
+    cmdinit= "export HELM_HOME=/var/vcap/store/helm/"
+    cmdinit= "#{cmdinit}; export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig"
+    system("#{cmdinit};helm init --upgrade --wait --service-account tiller --tiller-namespace  #{chart['name']}")
+
+    cmd ="#{cmdinit};helm install "
+    cmdUpgrade = "#{cmdinit};helm upgrade "
 
     unless pdebug.nil? || pdebug == 0
         cmd = "#{cmd} --debug "

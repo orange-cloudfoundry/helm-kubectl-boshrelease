@@ -64,8 +64,8 @@ data.each { |chart|
     end
 
     unless pversion.nil? || pversion == 0
-        cmd ="#{cmd} version=#{pversion}"
-        cmdUpgrade = "#{cmdUpgrade} version=#{pversion}"
+        cmd ="#{cmd} --version=#{pversion}"
+        cmdUpgrade = "#{cmdUpgrade} --version=#{pversion}"
     end
 
     unless pnamespace.nil? || pnamespace == 0

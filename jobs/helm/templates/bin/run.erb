@@ -34,8 +34,8 @@ kubectl config use-context "${context_name}"
 
 
 kubectl apply -f /var/vcap/jobs/helm/config/rbac-config.yaml
-<% if _p('kubernetes.default-storageclass') do |default-storageclass| %>
-    kubectl patch storageclass <%= default-storageclass %> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+<% if _p('kubernetes.default_storageclass') do |default_storageclass| %>
+    kubectl patch storageclass <%= default_storageclass %> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 <% end %>
 chmod +x /var/vcap/jobs/helm/bin/ingress.rb
 

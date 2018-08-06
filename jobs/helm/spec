@@ -39,9 +39,8 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
-  kubernetes.default_storageclass
+  kubernetes.default_storageclass:
     description: "If defined  put the default attribute to the storage class object"
-    example: ""
 
 
   service_account:

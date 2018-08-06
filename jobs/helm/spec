@@ -39,9 +39,16 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
+  kubernetes.default_storageclass
+    description: "If defined  put the default attribute to the storage class object"
+    example: ""
+
+
   service_account:
     description: "Service account to install Tiller with."
     default: "tiller"
+
+
 
   repositories:
     description: "array of helm repository in json format"

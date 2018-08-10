@@ -21,4 +21,5 @@ data.each { |repository|
      system(cmd) or puts "#{cmd} : ACTION FAILED"
 
 }
-
+cmd = "helm repo update"
+system(cmd) or puts "#{cmd} : ACTION FAILED"

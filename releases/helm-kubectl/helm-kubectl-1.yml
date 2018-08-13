@@ -1,0 +1,31 @@
+name: helm-kubectl
+version: "1"
+commit_hash: 903e0b2
+uncommitted_changes: false
+jobs:
+- name: helm
+  version: d0a4f52247d55c390fa82743910fd8126ff998a6
+  fingerprint: d0a4f52247d55c390fa82743910fd8126ff998a6
+  sha1: edcc082775052305516235ed56f4a12139274d91
+packages:
+- name: helm
+  version: eadd1a6c9ba0a6014b21291e3b79e2c202df836d
+  fingerprint: eadd1a6c9ba0a6014b21291e3b79e2c202df836d
+  sha1: 597ce70c49a85683c346905fb355f533ada375fb
+  dependencies:
+  - ruby-2.4-r4
+- name: kubectl
+  version: eda31452e1366d858c5439cba700fba1f1dd46a4
+  fingerprint: eda31452e1366d858c5439cba700fba1f1dd46a4
+  sha1: ce74d13b1d9f231432733d7f43f4193de9eeae0a
+  dependencies:
+  - ruby-2.4-r4
+- name: ruby-2.4-r4
+  version: 0cdc60ed7fdb326e605479e9275346200af30a25
+  fingerprint: 0cdc60ed7fdb326e605479e9275346200af30a25
+  sha1: 3f1809b9d7e326d8a701de516fb51ea4245913c6
+  dependencies: []
+license:
+  version: f7e162c6a458816b927fd845edce7966b1b4ff46
+  fingerprint: f7e162c6a458816b927fd845edce7966b1b4ff46
+  sha1: 94ffea58a61666792e4a9aa793d6a84059158394

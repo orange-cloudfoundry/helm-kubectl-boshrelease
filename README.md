@@ -1,9 +1,9 @@
 # BOSH Release for Helm and Kubectl
 
 ## Purpose
-The purpose of this bosh release is to offer a bosh deployment for Helm and Kubectl product
-You can declare in your deployment helm repository and helm chart, and errand will apply charts.
-
+The purpose of this bosh release is to offer a bosh deployment for Helm chart and Kubectl product
+You can declare in your deployment helm repositories and helm charts, a default storage class and ingress rules. 
+This bosh release should be use as an errand to apply charts.
 
 ## Usage
 
@@ -15,46 +15,115 @@ git clone https://github.com/orange-cloudfoundry/helm-kubectl-boshrelease
 cd helm-kubectl-boshrelease
 bosh upload release releases/helm-kubectl/helm-kubectl-1.yml
 ```
-
-For [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest & deploy a cluster. Note that this requires that you have installed [spruce](https://github.com/geofffranks/spruce).
-
-```
-templates/make_manifest warden
-bosh -n deploy
-```
-
-For AWS EC2, create a single VM:
-
-```
-templates/make_manifest aws-ec2
-bosh -n deploy
-```
-
-### Override security groups
-
-For AWS & Openstack, the default deployment assumes there is a `default` security group. If you wish to use a different security group(s) then you can pass in additional configuration when running `make_manifest` above.
-
-Create a file `my-networking.yml`:
-
+## Example of use
 ``` yaml
 ---
-networks:
-  - name: helm-kubectl 
-    type: dynamic
-    cloud_properties:
-      security_groups:
-        - helm-kubectl
+#Instance Groups Block                                                                               
+instance_groups:                                                                                     
+- name: cfcr-empty                                                                                   
+  vm_type: small                                                                                     
+  stemcell: trusty                                                                                   
+  networks:                                                                                          
+  - name: tf-net-kubo                                                                                
+  azs: [z1,z2,z3]                                                                                    
+  instances: 1                                                                                       
+  jobs:                                                                                              
+  - name: shell                                                                                      
+    release: shell                                                                                   
+                                                                                                     
+- name: cfcr-addon                                                                                   
+  vm_type: small                                                                                     
+  stemcell: trusty                                                                                   
+  persistent_disk_type: default                                                                      
+  networks:                                                                                          
+  - name: tf-net-kubo                                                                                
+  azs: [z1,z2,z3]                                                                                    
+  lifecycle: errand                                                                                  
+  instances: 1                                                                                       
+  jobs:                                                                                              
+  - name: helm                                                                                       
+    release: helm-kubectl                                                                            
+    properties:                                                                                      
+      kubernetes:                                                                                    
+        host: ((kubernetes.host))                                                                    
+        port: ((kubernetes.port))                                                                    
+        cluster_ca_certificate: ((kubernetes.cluster_ca_certificate))                                
+        password: ((kubernetes-password))                                                            
+        default_storageclass: tf-cinder-storage-class                                                
+                                                                                                     
+      repositories:                                                                                  
+      - name: stable                                                                                 
+        url: https://kubernetes-charts.storage.googleapis.com/                                       
+      - name: incubator                                                                              
+        url : https://kubernetes-charts-incubator.storage.googleapis.com/ 
+        
+      charts:                                                                                        
+      - name: nginx-ingress                                                                          
+        chart: stable/nginx-ingress                                                                  
+        version: 0.23.1                                                                              
+        properties:                                                                                  
+        - name: rbac.create                                                                          
+          value: true                                                                                
+        - name: controller.service.type                                                              
+          value: NodePort                                                                            
+        - name: controller.service.nodePorts.https                                                   
+          value: 30725                                                                               
+        - name: controller.service.nodePorts.http                                                    
+          value: 30726                                                                               
+        - name: revisionHistoryLimit                                                                 
+          value: 5                                                                                   
+        - name: controller.extraArgs.enable-ssl-passthrough                                          
+          value: ""                                                                                  
+                                                                                                     
+                                                                                                     
+      ingress: []                                                                                    
+                                                                                                     
 ```
 
-Where `- helm-kubectl` means you wish to use an existing security group called `helm-kubectl`.
+Charts can also use values instead of properties:
+```
+     charts:                                                                                        
+      - name: nginx-ingress                                                                          
+        chart: stable/nginx-ingress                                                                  
+        version: 0.23.1                                                                              
+        values:                                                                                  
+          rbac:
+            create: true                                                                                
+          controller:
+            service: 
+              type: NodePort                                                                            
+              nodePorts:
+                https: 30725                                                                               
+                http: 30726 
+            extraArgs:
+              enable-ssl-passthrough: ""
+          revisionHistoryLimit: 5                                                                 
+                          
+```
 
-You now suffix this file path to the `make_manifest` command:
+To have debug information during helm deployment use :
+debug: true
 
 ```
-templates/make_manifest openstack-nova my-networking.yml
-bosh -n deploy
+     charts:                                                                                        
+      - name: nginx-ingress                                                                          
+        chart: stable/nginx-ingress                                                                  
+        version: 0.23.1  
+        debug: true
+        values:                                                                                  
+          rbac:
+            create: true                                                                                
+          controller:
+            service: 
+              type: NodePort                                                                            
+              nodePorts:
+                https: 30725                                                                               
+                http: 30726 
+            extraArgs:
+              enable-ssl-passthrough: ""
+          revisionHistoryLimit: 5                                                                 
+                          
 ```
-
 ### Development
 
 As a developer of this release, create new releases and upload them:

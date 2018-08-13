@@ -81,7 +81,8 @@ instance_groups:
 ```
 
 Charts can also use values instead of properties:
-```
+``` yaml
+---
      charts:                                                                                        
       - name: nginx-ingress                                                                          
         chart: stable/nginx-ingress                                                                  
@@ -104,7 +105,8 @@ Charts can also use values instead of properties:
 To have debug information during helm deployment use :
 debug: true
 
-```
+``` yaml
+---
      charts:                                                                                        
       - name: nginx-ingress                                                                          
         chart: stable/nginx-ingress                                                                  

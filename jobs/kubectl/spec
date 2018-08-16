@@ -1,0 +1,54 @@
+---
+name: kubectl
+
+templates: 
+  bin/run.erb: bin/run
+  bin/kubectl.rb.erb: bin/kubectl.rb
+  config/rbac-config.yaml.erb: config/rbac-config.yaml
+  config/ca_cert.pem.erb: config/ca_cert.pem
+  
+packages: 
+- kubectl
+- ruby-2.4-r4
+
+properties:
+  director.name:
+     description: "Name of director"
+     example: "bosh-kubo"
+     default: "bosh-kubo"
+
+  deployment.name:
+     description: "Name of deployment"
+     example: "cfcr"
+     default: "cfcr"
+
+  kubernetes.host:
+    description: "The hostname (in form of URI) of Kubernetes master"
+    example: "cfcr-api.internal.paas"
+
+  kubernetes.port:
+    description: "The port of Kubernetes master"
+    example: "443"
+
+  kubernetes.password:
+    description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
+
+  kubernetes.cluster_ca_certificate:
+    description: "PEM-encoded root certificates bundle for TLS authentication."
+
+  applies:
+    description: "array of apply in yaml format"
+    example: |
+      - name: 'apply-test'
+        namespace: 'kube-system'
+        apply: 'content of yaml file to apply'
+    default: []
+
+  patches:
+    description: "array of patch in yaml format"
+    example: |
+      - name: 'patch-storage-defaultclass'
+        namespace: 'kube-system'
+        patch: 'content of yaml file to patch'
+    default: []
+

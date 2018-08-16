@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'yaml'
+
+APPLIES_YAML= <%= p('applies') %>
+
+data = APPLIES_YAML
+
+
+
+data.each { |apply|
+    t= ""
+    count=0
+    pname = apply['name']
+    pnamespace = apply['namespace']
+    pfile = apply['apply']
+
+    cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
+    system("#{cmdinit};")
+
+    cmd ="#{cmdinit};kubectl apply "
+    unless pnamespace.nil? || pnamespace == 0
+        cmd = "#{cmd} --namespace #{pnamespace} "
+    end
+    unless pfile .nil? || pfile  == 0
+        File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
+        cmd = "#{cmd} -f #{apply['name']}.yml"
+    end
+
+    puts "try to execute : #{cmd}"
+    system(cmd) or puts "ACTION FAILED #{cmd}"
+
+}
+
+

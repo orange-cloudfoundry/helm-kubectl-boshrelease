@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'yaml'
+
+PATCHES_YAML= <%= p('patches') %>
+
+data = PATCHES_YAML
+
+
+
+data.each { |patch|
+    pname = patch['name']
+    pnamespace = patch['namespace']
+    pfile = patch['patch']
+
+    cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
+    system("#{cmdinit};")
+
+    cmd ="#{cmdinit};kubectl patch "
+    unless pnamespace.nil? || pnamespace == 0
+        cmd = "#{cmd} --namespace #{pnamespace} "
+    end
+    unless pfile .nil? || pfile  == 0
+        File.open("#{patch['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
+        cmd = "#{cmd} -f #{patch['name']}.yml"
+    end
+
+    puts "try to execute : #{cmd}"
+    system(cmd) or puts "ACTION FAILED #{cmd}"
+
+}
+
+

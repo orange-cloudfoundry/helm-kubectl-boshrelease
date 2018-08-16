@@ -35,8 +35,8 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
-  applies:
-    description: "array of command in yaml format command can be apply / patch "
+  commands:
+    description: "array of commands in yaml format command can be apply / patch "
     example: |
       - name: 'apply-test'
         cmd: 'apply'

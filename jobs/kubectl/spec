@@ -3,8 +3,8 @@ name: kubectl
 
 templates: 
   bin/run.erb: bin/run
-  bin/kubectl.rb.erb: bin/kubectl.rb
-  config/rbac-config.yaml.erb: config/rbac-config.yaml
+  bin/apply.rb.erb: bin/apply.rb
+  bin/patch.rb.erb: bin/patch.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   
 packages: 

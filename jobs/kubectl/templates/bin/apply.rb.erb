@@ -15,6 +15,7 @@ data.each { |apply|
     pname = apply['name']
 
     pnamespace = apply['namespace']
+    poptions = apply['options']
     pcmd = apply['cmd']
     pfile = apply['apply']
 
@@ -25,10 +26,13 @@ data.each { |apply|
     unless pnamespace.nil? || pnamespace == 0
         cmd = "#{cmd} --namespace #{pnamespace} "
     end
+    unless poptions .nil? || poptions  == 0
+            cmd = "#{cmd} #{apply['options']}"
+        end
     unless pfile .nil? || pfile  == 0
-        File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
-        cmd = "#{cmd} -f #{apply['name']}.yml"
-    end
+            File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
+            cmd = "#{cmd} -f #{apply['name']}.yml"
+        end
 
     puts "try to execute : #{cmd}"
     system(cmd) or puts "ACTION FAILED #{cmd}"

@@ -4,7 +4,6 @@ name: kubectl
 templates: 
   bin/run.erb: bin/run
   bin/apply.rb.erb: bin/apply.rb
-  bin/patch.rb.erb: bin/patch.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   
 packages: 
@@ -37,18 +36,11 @@ properties:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
   applies:
-    description: "array of apply in yaml format"
+    description: "array of command in yaml format command can be apply / patch "
     example: |
       - name: 'apply-test'
+        cmd: 'apply'
         namespace: 'kube-system'
         apply: 'content of yaml file to apply'
-    default: []
-
-  patches:
-    description: "array of patch in yaml format"
-    example: |
-      - name: 'patch-storage-defaultclass'
-        namespace: 'kube-system'
-        patch: 'content of yaml file to patch'
     default: []
 

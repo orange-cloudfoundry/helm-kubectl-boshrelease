@@ -3,9 +3,9 @@
 
 require 'yaml'
 
-APPLIES_YAML= <%= p('applies') %>
+CMDS_YAML= <%= p('commands') %>
 
-data = APPLIES_YAML
+data = CMDS_YAML
 
 
 
@@ -13,13 +13,15 @@ data.each { |apply|
     t= ""
     count=0
     pname = apply['name']
+
     pnamespace = apply['namespace']
+    pcmd = apply['cmd']
     pfile = apply['apply']
 
     cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
     system("#{cmdinit};")
 
-    cmd ="#{cmdinit};kubectl apply "
+    cmd ="#{cmdinit};kubectl #pcmd "
     unless pnamespace.nil? || pnamespace == 0
         cmd = "#{cmd} --namespace #{pnamespace} "
     end

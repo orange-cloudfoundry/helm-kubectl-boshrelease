@@ -40,7 +40,8 @@ properties:
     example: |
       - name: 'apply-test'
         cmd: 'apply'
+        options: ''
         namespace: 'kube-system'
-        apply: 'content of yaml file to apply'
+        apply: 'content of yaml file'
     default: []
 

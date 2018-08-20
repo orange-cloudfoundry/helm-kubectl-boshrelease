@@ -22,7 +22,7 @@ data.each { |apply|
     cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
     system("#{cmdinit};")
 
-    cmd ="#{cmdinit};kubectl #pcmd "
+    cmd ="#{cmdinit};kubectl #{pcmd} "
     unless pnamespace.nil? || pnamespace == 0
         cmd = "#{cmd} --namespace #{pnamespace} "
     end

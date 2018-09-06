@@ -16,16 +16,10 @@ port=<%= p('kubernetes.port') %>
 
 
 cluster_name="kubo:${director_name}:${deployment_name}"
-
 user_name="kubo:${director_name}:${deployment_name}-admin"
-
-
 context_name="kubo:${director_name}:${deployment_name}"
-
-
 address="https://${endpoint}:${port}"
 
-cat /var/vcap/jobs/helm/config/ca_cert.pem
 
 kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/kubectl/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"

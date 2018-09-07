@@ -1,6 +1,6 @@
-helm/2.9.1/helm.tar.gz:
-  size: 9160761
-  sha: e11687da2515ed14b518777f1a31f38b05a820c9
-kubectl/1.10.3/kubectl:
-  size: 54277604
-  sha: 94f996d645e74634a4be67bbb5417f892774230b
+helm/2.10.0/helm.tar.gz:
+  size: 9207549
+  sha: d529ead9b294201c80a276a1169f2c01ebde5de4
+kubectl/1.11.2/kubectl:
+  size: 55401267
+  sha: a634804554a8619c6e15f43534332e5bdae37cb8

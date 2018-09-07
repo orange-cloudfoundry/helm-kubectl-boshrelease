@@ -1,6 +1,6 @@
 set -e
 
-KUBECTL_VERSION=1.10.3
+KUBECTL_VERSION=1.11.2
 
 
  # Available variables

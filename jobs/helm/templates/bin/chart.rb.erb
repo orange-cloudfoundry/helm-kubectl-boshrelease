@@ -55,41 +55,32 @@ data.each { |chart|
     cmdinit= "#{cmdinit}; export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig"
     system("#{cmdinit};helm init --upgrade --wait --service-account tiller ")
 
-    cmd ="#{cmdinit};helm install "
-    cmdUpgrade = "#{cmdinit};helm upgrade "
+
+    cmdUpgrade = "#{cmdinit};helm upgrade --install "
 
     unless pdebug.nil? || pdebug == 0
-        cmd = "#{cmd} --debug "
-        cmdUpgrade = "#{cmdUpgrade} --debug"
+            cmdUpgrade = "#{cmdUpgrade} --debug"
     end
 
     unless pversion.nil? || pversion == 0
-        cmd ="#{cmd} --version=#{pversion}"
         cmdUpgrade = "#{cmdUpgrade} --version=#{pversion}"
     end
 
     unless pnamespace.nil? || pnamespace == 0
-        cmd = "#{cmd} --namespace #{pnamespace} "
         cmdUpgrade = "#{cmdUpgrade} --namespace #{pnamespace}"
     end
 
-    cmd ="#{cmd} --name #{chart['name']} #{chart['chart']} #{t}"
     cmdUpgrade ="#{cmdUpgrade} #{chart['name']} #{chart['chart']} #{t}"
 
     unless pfile .nil? || pfile  == 0
         File.open("#{chart['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
-        cmd = "#{cmd} -f #{chart['name']}.yml"
         cmdUpgrade = "#{cmdUpgrade} -f #{chart['name']}.yml"
     end
 
-    puts "try to execute : #{cmd}"
-    if ispresent=="2"
-      puts "#{cmdUpgrade}"
-      system(cmdUpgrade) or puts "ACTION FAILED"
-    else
-      puts "#{cmd}"
-      system(cmd) or puts "ACTION FAILED #{cmd}"
-    end
+    puts "try to execute : #{cmdUpgrade}"
+    puts "#{cmdUpgrade}"
+    system(cmdUpgrade) or puts "ACTION FAILED"
+
 }
 
 

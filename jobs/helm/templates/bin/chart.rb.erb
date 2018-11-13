@@ -42,10 +42,12 @@ data.each { |chart|
     pdebug = chart['debug']
     pfile = chart['values']
     if (pproperties != nil)
-     chart['properties'].each{ |property|
-     pname = property['name']
-     pvalue = property['value']
-     t= "#{t} --set #{pname}=#{pvalue}"
+     pproperties.each{ |property|
+     if (property != nil)
+      pname = property['name']
+      pvalue = property['value']
+      t= "#{t} --set #{pname}=#{pvalue}"
+     end
     }
     end
 

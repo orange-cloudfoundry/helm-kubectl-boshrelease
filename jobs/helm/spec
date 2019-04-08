@@ -109,3 +109,16 @@ properties:
                 path: /grafana
 
     default: []
+  secrets:
+    description: "array of secret that need to be apply, each entry will be base64 encoded automatically"
+    example: |
+      - name: cert-secret
+        namespace: mynamespace
+        data:
+          - cert: value (not in B 64)
+          - key: value (not in B 64)
+      - name: cert2-secret
+         namespace: mynamespace
+         data:
+           - key: value (not in B 64)
+    default: []

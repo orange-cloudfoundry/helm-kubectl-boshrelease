@@ -1,6 +1,8 @@
 helm/2.10.0/helm.tar.gz:
   size: 9207549
+  object_id: c8d68b94-4c28-4ea2-4883-e6356b7866ba
   sha: d529ead9b294201c80a276a1169f2c01ebde5de4
 kubectl/1.11.2/kubectl:
   size: 55401267
+  object_id: 9de0573f-fdfa-4916-7a3a-e7595a67df46
   sha: a634804554a8619c6e15f43534332e5bdae37cb8

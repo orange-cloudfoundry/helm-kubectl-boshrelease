@@ -5,6 +5,7 @@ templates:
   bin/run.erb: bin/run
   bin/chart.rb.erb: bin/chart.rb
   bin/repository.rb.erb: bin/repository.rb
+  bin/secret.rb.erb: bin/secret.rb
   bin/ingress.rb.erb: bin/ingress.rb
   config/rbac-config.yaml.erb: config/rbac-config.yaml
   config/ca_cert.pem.erb: config/ca_cert.pem

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export http_proxy=<%= p('proxy.http') %>
+export https_proxy=<%= p('proxy.https') %>
 export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/helm/linux-amd64/
 export PATH=$PATH:/var/vcap/packages/kubectl/

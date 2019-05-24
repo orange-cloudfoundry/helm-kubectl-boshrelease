@@ -17,14 +17,19 @@ packages:
 
 properties:
   director.name:
-     description: "Name of director"
-     example: "bosh-kubo"
-     default: "bosh-kubo"
+    description: "Name of director"
+    example: "bosh-kubo"
+    default: "bosh-kubo"
 
   deployment.name:
-     description: "Name of deployment"
-     example: "cfcr"
+    description: "Name of deployment"
+    example: "cfcr"
      default: "cfcr"
+
+  proxy.http:
+    description: "URL of http proxy"
+    example: "http://myproxy.domain.com:8128"
+    default: ""
 
   kubernetes.host:
     description: "The hostname (in form of URI) of Kubernetes master"

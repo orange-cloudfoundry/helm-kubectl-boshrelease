@@ -24,7 +24,7 @@ properties:
   deployment.name:
     description: "Name of deployment"
     example: "cfcr"
-     default: "cfcr"
+    default: "cfcr"
 
   proxy.http:
     description: "URL of http proxy"

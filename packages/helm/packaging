@@ -1,6 +1,6 @@
 set -e
 
-HELM_VERSION=2.10.0
+HELM_VERSION=2.14.0
 
 
  # Available variables

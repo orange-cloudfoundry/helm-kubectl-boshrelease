@@ -2,8 +2,8 @@
 
 #-------------------------
 
-HELM_VERSION=2.10.0
-KUBECTL_VERSION=1.11.2
+HELM_VERSION=2.14.0
+KUBECTL_VERSION=1.14.1
 
 #-------------------------
 

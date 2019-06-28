@@ -45,8 +45,8 @@ YAML
 data = INGRESS_YAML
 #data = YAML.load(INGRESS_YAML_TEST)
 
+pclass= <%= p('ingress_class') %>
 data.each { |ingress|
-
     pnamespace = ingress['namespace']
     pname = ingress['name']
     pspec = ingress['definition']
@@ -69,7 +69,7 @@ data.each { |ingress|
       f.puts("  name: #{pname}")
       f.puts("  namespace: #{pnamespace}")
       f.puts("  annotations:")
-      f.puts("    kubernetes.io/ingress.class: nginx")
+      f.puts("    kubernetes.io/ingress.class: #{pclass}")
       if (pannotations != nil)
            pannotations.each{ |annotation|
             f.puts("    #{annotation['name']}: #{annotation['value']}")

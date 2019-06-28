@@ -98,6 +98,10 @@ properties:
           - name: 'service.port'
             value: '9001'
     default: []
+  ingress_class:
+    description :"select the kubernetes.io/ingress.class"
+    example: "nginx"
+    default: "traefik"
   ingress:
     description: "array of ingress rules that need to be apply"
     example: |

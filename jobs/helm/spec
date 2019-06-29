@@ -99,7 +99,7 @@ properties:
             value: '9001'
     default: []
   ingress_class:
-    description :"select the kubernetes.io/ingress.class"
+    description: "select the kubernetes.io/ingress.class"
     example: "nginx"
     default: "traefik"
   ingress:

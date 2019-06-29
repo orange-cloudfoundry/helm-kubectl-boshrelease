@@ -45,7 +45,7 @@ YAML
 data = INGRESS_YAML
 #data = YAML.load(INGRESS_YAML_TEST)
 
-pclass= <%= p('ingress_class') %>
+pclass= "<%= p('ingress_class') %>"
 data.each { |ingress|
     pnamespace = ingress['namespace']
     pname = ingress['name']

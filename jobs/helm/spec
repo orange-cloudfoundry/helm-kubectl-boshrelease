@@ -100,8 +100,8 @@ properties:
     default: []
   ingress_class:
     description: "select the kubernetes.io/ingress.class"
-    example: "nginx"
-    default: "traefik"
+    example: "traefik"
+    default: "nginx"
   ingress:
     description: "array of ingress rules that need to be apply"
     example: |

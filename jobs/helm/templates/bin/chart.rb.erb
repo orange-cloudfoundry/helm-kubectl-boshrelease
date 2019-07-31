@@ -58,7 +58,7 @@ data.each { |chart|
 
 
 
-    cmdUpgrade = "helm upgrade --install "
+    cmdUpgrade = "helm upgrade --force --install "
 
     unless pdebug.nil? || pdebug == 0
             cmdUpgrade = "#{cmdUpgrade} --debug"

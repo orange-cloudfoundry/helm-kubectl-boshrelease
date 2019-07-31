@@ -28,6 +28,9 @@ CHART_YAML_TEST= <<~YAML
 YAML
 
 
+cmdinit= "export HELM_HOME=/var/vcap/store/helm/"
+cmdinit= "#{cmdinit}; export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig"
+system("#{cmdinit};helm init --upgrade --wait --service-account tiller ")
 
 data = CHART_YAML
 
@@ -41,6 +44,8 @@ data.each { |chart|
     pversion = chart['version']
     pdebug = chart['debug']
     pfile = chart['values']
+    pfiles = chart['files']
+
     if (pproperties != nil)
      pproperties.each{ |property|
      if (property != nil)
@@ -51,14 +56,9 @@ data.each { |chart|
     }
     end
 
-    ispresent = `helm list #{chart['name']}| wc -l `.strip
-
-    cmdinit= "export HELM_HOME=/var/vcap/store/helm/"
-    cmdinit= "#{cmdinit}; export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig"
-    system("#{cmdinit};helm init --upgrade --wait --service-account tiller ")
 
 
-    cmdUpgrade = "#{cmdinit};helm upgrade --install "
+    cmdUpgrade = "helm upgrade --install "
 
     unless pdebug.nil? || pdebug == 0
             cmdUpgrade = "#{cmdUpgrade} --debug"
@@ -77,11 +77,13 @@ data.each { |chart|
     unless pfile .nil? || pfile  == 0
         File.open("#{chart['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
         cmdUpgrade = "#{cmdUpgrade} -f #{chart['name']}.yml"
+        unless pfiles .nil? || pfiles == 0
+            pfiles.each {|file|
+            cmdUpgrade = "#{cmdUpgrade} -f #{file['url']}"
+            }
+        end
     end
-
-    puts "try to execute : #{cmdUpgrade}"
-    puts "#{cmdUpgrade}"
-    system(cmdUpgrade) or puts "ACTION FAILED"
+    system(cmdUpgrade) or puts "ACTION FAILED: #{cmdUpgrade}"
 
 }
 

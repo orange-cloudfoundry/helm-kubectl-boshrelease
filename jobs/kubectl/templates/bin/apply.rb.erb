@@ -8,6 +8,8 @@ CMDS_YAML= <%= p('commands') %>
 data = CMDS_YAML
 
 
+cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
+system("#{cmdinit};")
 
 data.each { |apply|
     t= ""
@@ -19,10 +21,7 @@ data.each { |apply|
     pcmd = apply['cmd']
     pfile = apply['apply']
 
-    cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
-    system("#{cmdinit};")
-
-    cmd ="#{cmdinit};kubectl #{pcmd} "
+    cmd ="kubectl #{pcmd} "
     unless pnamespace.nil? || pnamespace == 0
         cmd = "#{cmd} --namespace #{pnamespace} "
     end
@@ -33,8 +32,6 @@ data.each { |apply|
             File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
             cmd = "#{cmd} -f #{apply['name']}.yml"
         end
-
-    puts "try to execute : #{cmd}"
     system(cmd) or puts "ACTION FAILED #{cmd}"
 
 }

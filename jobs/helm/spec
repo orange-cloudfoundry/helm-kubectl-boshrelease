@@ -135,11 +135,12 @@ properties:
     example: |
       - name: cert-secret
         namespace: mynamespace
-        data:
-          - cert: value (not in B 64)
-          - key: value (not in B 64)
+        data: # defines the data map see https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually
+          - name: keyname
+          - value: keyvalue (not in B 64)
       - name: cert2-secret
          namespace: mynamespace
          data:
-           - key: value (not in B 64)
+          - name: another-keyname
+          - value: another-keyvalue (not in B 64)
     default: []

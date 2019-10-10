@@ -4,7 +4,9 @@
 require 'yaml'
 
 INGRESS_YAML= <%= p('ingress') %>
-
+MAX_RETRIES = 3
+SLEEP_DURATION = 5
+failCmd=[]
 
 INGRESS_YAML_TEST= <<~YAML
 - name: dashboard-ingress
@@ -80,9 +82,41 @@ data.each { |ingress|
         }
     end
     cmd = "kubectl apply -f #{pfilename} "
-    system(cmd) or puts "#{cmd} : ACTION FAILED"
-    File.delete(pfilename)
-}
+     # Begin the retryable operation
+     retry_count = 0
+     begin
+       result=system("#{cmd} > /dev/null 2>&1")
+       while !result && retry_count < MAX_RETRIES
+         retry_count += 1
+         sleep SLEEP_DURATION
+         puts "retry #{retry_count}"
+         result=system("#{cmd} > /dev/null 2>&1")
+       end
+       if !result
+         failCmd.push("#{cmd}")
+         puts "ACTION delayed after all commands: #{cmd}"
+       end
+       if result
+          puts "ACTION SUCCESS: #{cmd}"
+       end
+     end
+
+ }
+ isOnFail=false
+ failCmd.each { |cmd|
+   result=system("#{cmd} > /dev/null")
+         if !result
+           puts "ACTION FAILED: #{cmd}"
+           isOnFail=true
+         end
+         if result
+            puts "ACTION SUCCESS: #{cmd}"
+         end
+ }
+ if (isOnFail)
+     fail("some action cannot be performed")
+ end
+
 
 
 

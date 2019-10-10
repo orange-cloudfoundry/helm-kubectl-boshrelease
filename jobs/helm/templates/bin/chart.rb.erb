@@ -4,7 +4,9 @@
 require 'yaml'
 
 CHART_YAML= <%= p('charts') %>
-
+MAX_RETRIES = 3
+SLEEP_DURATION = 5
+failCmd=[]
 
 CHART_YAML_TEST= <<~YAML
 ---
@@ -83,24 +85,38 @@ data.each { |chart|
             }
         end
     end
-    MAX_RETRIES = 5
-    SLEEP_DURATION = 5
 
     # Begin the retryable operation
     retry_count = 0
     begin
-      result=system(cmdUpgrade)
-      if result!=0 && retry_count < MAX_RETRIES
-        puts "ACTION FAILED: #{cmdUpgrade} "
+      result=system("#{cmdUpgrade} > /dev/null 2>&1")
+      while !result && retry_count < MAX_RETRIES
         retry_count += 1
         sleep SLEEP_DURATION
-        puts "retry #{retry_count}: #{cmdUpgrade}"
-        result=system(cmdUpgrade)
+        puts "retry #{retry_count}"
+        result=system("#{cmdUpgrade} > /dev/null 2>&1")
       end
-      if result!=0
-        puts "No more retry action definitely FAILED: #{cmdUpgrade}"
+      if !result
+        failCmd.push("#{cmdUpgrade}")
+        puts "ACTION delayed after all commands: #{cmdUpgrade}"
+      end
+      if result
+         puts "ACTION SUCCESS: #{cmdUpgrade}"
       end
     end
+
 }
-
-
+isOnFail=false
+failCmd.each { |cmdUpgrade|
+  result=system("#{cmd} > /dev/null")
+        if !result
+          puts "ACTION FAILED: #{cmdUpgrade}"
+          isOnFail=true
+        end
+        if result
+           puts "ACTION SUCCESS: #{cmdUpgrade}"
+        end
+}
+if (isOnFail)
+    fail("some action cannot be performed")
+end

@@ -32,7 +32,25 @@ data.each { |apply|
             File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
             cmd = "#{cmd} -f #{apply['name']}.yml"
         end
-    system(cmd) or puts "ACTION FAILED #{cmd}"
+
+    MAX_RETRIES = 5
+    SLEEP_DURATION = 5
+
+    # Begin the retryable operation
+    retry_count = 0
+    begin
+      result=system(cmd)
+      if result!=0 && retry_count < MAX_RETRIES
+        puts "ACTION FAILED: #{cmd} "
+        retry_count += 1
+        sleep SLEEP_DURATION
+        puts "retry #{retry_count}: #{cmd}"
+        result=system(cmd)
+      end
+      if result!=0
+        puts "No more retry action definitely FAILED: #{cmd}"
+      end
+    end
 
 }
 

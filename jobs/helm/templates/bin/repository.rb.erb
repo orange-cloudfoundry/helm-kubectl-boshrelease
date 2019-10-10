@@ -24,11 +24,11 @@ data.each { |repository|
     if !result
         puts "ACTION FAILED: #{cmd}"
         isOnFail=true
-      end
-      if result
-         puts "ACTION SUCCESS: #{cmd}"
-      end
     end
+    if result
+        puts "ACTION SUCCESS: #{cmd}"
+    end
+
 
 }
 cmd = "helm repo update"

@@ -12,7 +12,10 @@ REPOSITORY_YAML_TEST = [{"name"=>"stable", "url"=>"https://kubernetes-charts.sto
 data = REPOSITORY_YAML
 
 isOnFail=false
-
+puts "============================="
+puts " Helm repo add  "
+puts "============================="
+puts ""
 data.each { |repository|
      pname = repository['name']
      purl = repository['url']
@@ -28,9 +31,11 @@ data.each { |repository|
     if result
         puts "ACTION SUCCESS: #{cmd}"
     end
-
-
 }
+puts "============================="
+puts " Helm repo update "
+puts "============================="
+puts ""
 cmd = "helm repo update"
 result=system("#{cmd} > /dev/null 2>&1")
 if !result

@@ -115,7 +115,7 @@ puts ""
 
 isOnFail=false
 failCmd.each { |cmdUpgrade|
-  result=system("#{cmd} > /dev/null")
+        result=system("#{cmdUpgrade} > /dev/null")
         if !result
           puts "ACTION FAILED: #{cmdUpgrade}"
           isOnFail=true

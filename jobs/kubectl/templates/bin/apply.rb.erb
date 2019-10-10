@@ -41,14 +41,17 @@ data.each { |apply|
     begin
       result=system(cmd)
       if result!=0 && retry_count < MAX_RETRIES
-        puts "ACTION FAILED: #{cmd} "
+        puts "action failed: #{cmd} "
         retry_count += 1
         sleep SLEEP_DURATION
         puts "retry #{retry_count}: #{cmd}"
         result=system(cmd)
       end
       if result!=0
-        puts "No more retry action definitely FAILED: #{cmd}"
+        puts "ACTION FAILED: #{cmd}/n/r No more retry action"
+      end
+      if result==0
+         puts "ACTION SUCCESS: #{cmd}"
       end
     end
 

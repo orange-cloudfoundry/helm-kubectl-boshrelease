@@ -6,7 +6,8 @@ require 'yaml'
 CMDS_YAML= <%= p('commands') %>
 
 data = CMDS_YAML
-
+MAX_RETRIES = 5
+SLEEP_DURATION = 5
 
 cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
 system("#{cmdinit};")
@@ -32,9 +33,6 @@ data.each { |apply|
             File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
             cmd = "#{cmd} -f #{apply['name']}.yml"
         end
-
-    MAX_RETRIES = 5
-    SLEEP_DURATION = 5
 
     # Begin the retryable operation
     retry_count = 0

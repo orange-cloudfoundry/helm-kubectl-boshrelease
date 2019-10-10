@@ -32,6 +32,9 @@ data.each { |repository|
         puts "ACTION SUCCESS: #{cmd}"
     end
 }
+if (isOnFail)
+     fail("some action cannot be performed")
+end
 puts "============================="
 puts " Helm repo update "
 puts "============================="

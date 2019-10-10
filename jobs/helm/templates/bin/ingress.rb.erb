@@ -59,7 +59,6 @@ data.each { |ingress|
           f.puts("#{pspec.to_yaml}")
     end
     input_lines = File.readlines(pfilename)
-    puts "#{input_lines}"
     input_lines[0]=""
 
     File.delete(pfilename)
@@ -103,6 +102,10 @@ data.each { |ingress|
 
  }
  isOnFail=false
+puts "============================="
+puts " Retry unsuccessful ingress"
+puts "============================="
+puts ""
  failCmd.each { |cmd|
    result=system("#{cmd} > /dev/null")
          if !result
@@ -116,6 +119,8 @@ data.each { |ingress|
  if (isOnFail)
      fail("some action cannot be performed")
  end
+puts "============================="
+puts " Ingress done"
 
 
 

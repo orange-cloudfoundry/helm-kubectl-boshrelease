@@ -99,6 +99,8 @@ data.each { |chart|
       if !result
         failCmd.push("#{cmdUpgrade}")
         puts "ACTION delayed after all commands: #{cmdUpgrade}"
+        puts "============================="
+        system("cat #{file['url'])
       end
       if result
          puts "ACTION SUCCESS: #{cmdUpgrade}"
@@ -106,6 +108,11 @@ data.each { |chart|
     end
 
 }
+puts "============================="
+puts " Retry unsuccessful charts"
+puts "============================="
+puts ""
+
 isOnFail=false
 failCmd.each { |cmdUpgrade|
   result=system("#{cmd} > /dev/null")
@@ -120,3 +127,5 @@ failCmd.each { |cmdUpgrade|
 if (isOnFail)
     fail("some action cannot be performed")
 end
+puts "============================="
+puts " Charts done"

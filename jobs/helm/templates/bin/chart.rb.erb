@@ -100,8 +100,11 @@ data.each { |chart|
         failCmd.push("#{cmdUpgrade}")
         puts "ACTION delayed after all commands: #{cmdUpgrade}"
         puts "============================="
-        puts("#{chart['name']}.yml:")
-        system("cat #{chart['name']}.yml")
+
+        unless unless pfile .nil? || pfile  == 0
+            puts("#{chart['name']}.yml:")
+            system("cat #{chart['name']}.yml")
+        end
       end
       if result
          puts "ACTION SUCCESS: #{cmdUpgrade}"

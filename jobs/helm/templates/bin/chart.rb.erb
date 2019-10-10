@@ -83,8 +83,24 @@ data.each { |chart|
             }
         end
     end
-    system(cmdUpgrade) or puts "ACTION FAILED: #{cmdUpgrade}"
+    MAX_RETRIES = 5
+    SLEEP_DURATION = 5
 
+    # Begin the retryable operation
+    retry_count = 0
+    begin
+      result=system(cmdUpgrade)
+      if result!=0 && retry_count < MAX_RETRIES
+        puts "ACTION FAILED: #{cmdUpgrade} "
+        retry_count += 1
+        sleep SLEEP_DURATION
+        puts "retry #{retry_count}: #{cmdUpgrade}"
+        result=system(cmdUpgrade)
+      end
+      if result!=0
+        puts "No more retry ACTION DEFINITLY FAILED: #{cmdUpgrade}"
+      end
+    end
 }
 
 

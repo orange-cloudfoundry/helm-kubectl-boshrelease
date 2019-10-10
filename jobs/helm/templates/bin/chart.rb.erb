@@ -101,7 +101,7 @@ data.each { |chart|
         puts "ACTION delayed after all commands: #{cmdUpgrade}"
         puts "============================="
 
-        unless unless pfile .nil? || pfile  == 0
+        unless pfile .nil? || pfile  == 0
             puts("#{chart['name']}.yml:")
             system("cat #{chart['name']}.yml")
         end

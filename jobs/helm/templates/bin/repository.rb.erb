@@ -11,14 +11,38 @@ REPOSITORY_YAML_TEST = [{"name"=>"stable", "url"=>"https://kubernetes-charts.sto
 
 data = REPOSITORY_YAML
 
-
+isOnFail=false
 
 data.each { |repository|
      pname = repository['name']
      purl = repository['url']
      cmd = "helm repo add  #{pname} #{purl} "
-     system(cmd) or puts "#{cmd} : ACTION FAILED"
+
+    # Begin the retryable operation
+
+    result=system("#{cmd} > /dev/null 2>&1")
+    if !result
+        puts "ACTION FAILED: #{cmd}"
+        isOnFail=true
+      end
+      if result
+         puts "ACTION SUCCESS: #{cmd}"
+      end
+    end
 
 }
 cmd = "helm repo update"
-system(cmd) or puts "#{cmd} : ACTION FAILED"
+result=system("#{cmd} > /dev/null 2>&1")
+if !result
+    puts "ACTION FAILED: #{cmd}"
+    isOnFail=true
+end
+if result
+     puts "ACTION SUCCESS: #{cmd}"
+end
+
+if (isOnFail)
+     fail("some action cannot be performed")
+ end
+puts "============================="
+puts " Helm update repo done"

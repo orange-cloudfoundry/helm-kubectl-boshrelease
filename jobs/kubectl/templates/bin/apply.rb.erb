@@ -37,12 +37,12 @@ data.each { |apply|
     # Begin the retryable operation
     retry_count = 0
     begin
-      result=system("#{cmd} > /dev/null")
+      result=system("#{cmd} > /dev/null 2>&1")
       while !result && retry_count < MAX_RETRIES
         retry_count += 1
         sleep SLEEP_DURATION
         puts "retry #{retry_count}"
-        result=system("#{cmd} > /dev/null")
+        result=system("#{cmd} > /dev/null 2>&1")
       end
       if !result
         failCmd.push("#{cmd}")
@@ -54,13 +54,16 @@ data.each { |apply|
     end
 
 }
-
+isOnFail=false
 failCmd.each { |cmd|
   result=system("#{cmd} > /dev/null")
         if !result
           puts "ACTION FAILED: #{cmd}"
+          isOnFail=true
         end
         if result
            puts "ACTION SUCCESS: #{cmd}"
         end
-         }
+}
+if (isOnFail)
+    fail

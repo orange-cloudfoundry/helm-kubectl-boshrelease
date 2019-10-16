@@ -4,6 +4,8 @@ name: kubectl
 templates: 
   bin/run.erb: bin/run
   bin/apply.rb.erb: bin/apply.rb
+  bin/secret.rb.erb: bin/secret.rb
+  bin/ingress.rb.erb: bin/ingress.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   
 packages: 
@@ -60,3 +62,17 @@ properties:
         apply: 'content of yaml file'
     default: []
 
+  secrets:
+    description: "array of secret that need to be apply, each entry will be base64 encoded automatically"
+    example: |
+      - name: cert-secret
+        namespace: mynamespace
+        data: # defines the data map see https://kubernetes.io/docs/concepts/configuration/secret/#creating-a-secret-manually
+          - name: keyname
+          - value: keyvalue (not in B 64)
+      - name: cert2-secret
+         namespace: mynamespace
+         data:
+          - name: another-keyname
+          - value: another-keyvalue (not in B 64)
+    default: []

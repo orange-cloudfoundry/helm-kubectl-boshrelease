@@ -61,6 +61,37 @@ properties:
         namespace: 'kube-system'
         apply: 'content of yaml file'
     default: []
+  ingress_class:
+    description: "select the kubernetes.io/ingress.class"
+    example: "traefik"
+    default: "nginx"
+  ingress:
+    description: "array of ingress rules that need to be apply"
+    example: |
+      - name: dashboard-ingress
+        namespace: kube-system
+        spec:
+          rules:
+          - host: ingress-ops.nd-int-cfapi.itn.intraorange
+        http:
+          paths:
+          - backend:
+          serviceName: kubernetes-dashboard
+        servicePort: 443
+        path: /dashboard
+
+      - name: grafana-ingress
+        namespace: kube-system
+        spec:
+          rules:
+          - host: ingress-ops.nd-int-cfapi.itn.intraorange
+            http:
+              paths:
+              - backend:
+                  serviceName: grafana
+                  servicePort: 443
+                path: /grafana
+    default: []
 
   secrets:
     description: "array of secret that need to be apply, each entry will be base64 encoded automatically"

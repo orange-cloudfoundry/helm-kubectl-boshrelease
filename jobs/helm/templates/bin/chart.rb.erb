@@ -89,7 +89,11 @@ data.each { |chart|
     # Begin the retryable operation
     retry_count = 0
     begin
-      result=system("#{cmdUpgrade} > /dev/null 2>&1")
+      result=system("#{cmdUpgrade} > /dev/null 2> #{chart['name']}_err.txt")
+      if !result
+          puts "first try failed: #{cmdUpgrade}"
+          system("cat #{chart['name']}_err.txt")
+      end
       while !result && retry_count < MAX_RETRIES
         retry_count += 1
         sleep SLEEP_DURATION

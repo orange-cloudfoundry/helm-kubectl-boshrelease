@@ -29,7 +29,8 @@ kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"
 
-
+chmod +x /var/vcap/jobs/kubectl/bin/ingress.rb
+chmod +x /var/vcap/jobs/kubectl/bin/secret.rb
 chmod +x /var/vcap/jobs/kubectl/bin/apply.rb
 /var/vcap/jobs/kubectl/bin/./apply.rb
 /var/vcap/jobs/kubectl/bin/./ingress.rb

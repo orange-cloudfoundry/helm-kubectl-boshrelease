@@ -89,9 +89,9 @@ data.each { |chart|
     # Begin the retryable operation
     retry_count = 0
     begin
-      result=system("#{cmdUpgrade} > /dev/null 2> #{chart['name']}_err.txt")
+      result=system("#{cmdUpgrade} >#{chart['name']}_err.txt 2>&1 ")
       if !result
-          puts "first try failed: #{cmdUpgrade}"
+          puts "first try failed: #{chart['name']}"
           system("cat #{chart['name']}_err.txt")
       end
       while !result && retry_count < MAX_RETRIES

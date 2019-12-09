@@ -7,8 +7,9 @@ templates:
   bin/repository.rb.erb: bin/repository.rb
   config/rbac-config.yaml.erb: config/rbac-config.yaml
   config/ca_cert.pem.erb: config/ca_cert.pem
-  config/repository_mirror.ca_cert repository_mirror.ca
-packages: 
+  config/mirror_ca_cert.pem.erb config/mirror_ca_cert.pem
+
+packages:
 - helm
 - kubectl
 - ruby-2.4-r4

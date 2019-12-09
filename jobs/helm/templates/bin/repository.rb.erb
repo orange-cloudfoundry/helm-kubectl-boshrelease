@@ -12,6 +12,9 @@ REPOSITORY_YAML_TEST = [{"name"=>"stable", "url"=>"https://kubernetes-charts.sto
 data = REPOSITORY_YAML
 
 isOnFail=false
+prepository_mirror_url= <%= p('repository_mirror.url' %>
+prepository_mirror_enabled= <%= p('repository_mirror.enabled' %>
+repository_mirror_ca_cert = <% p('repository_mirror.ca_cert' %>
 puts "============================="
 puts " Helm repo add  "
 puts "============================="
@@ -19,7 +22,15 @@ puts ""
 data.each { |repository|
      pname = repository['name']
      purl = repository['url']
-     cmd = "helm repo add  #{pname} #{purl} "
+     if (prepository_mirror_enabled)
+        cmd = "helm repo add  #{pname} #{prepository_mirror_url} "
+     else
+        if (repository_mirror_ca_cert<> '')
+            cmd = "helm repo add  #{pname} #{purl} "
+        else
+            cmd = "helm repo add  --ca-file=/var/vcap/store/helm/config/mirror_ca_cert.pem #{pname} #{purl} "
+        end
+     end
 
     # Begin the retryable operation
 

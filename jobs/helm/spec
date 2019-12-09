@@ -9,7 +9,7 @@ templates:
 
   config/rbac-config.yaml.erb: config/rbac-config.yaml
   config/ca_cert.pem.erb: config/ca_cert.pem
-  
+  config/repository_mirror.ca_cert repository_mirror.ca
 packages: 
 - helm
 - kubectl
@@ -72,11 +72,33 @@ properties:
       - name: 'stable'
         url: 'https://kubernetes-charts.storage.googleapis.com/'
       - name: 'incubator'
-        url : 'https://kubernetes-charts-incubator.storage.googleapis.com'
+        url: 'https://kubernetes-charts-incubator.storage.googleapis.com'
+      - name: 'incubator'
+        url: 'https://kubernetes-charts-incubator.storage.googleapis.com'
+      - name: 'kiwigrid'
+        url: 'https://kiwigrid.github.io'
+
+
 
     default:
       - name: 'stable'
         url: 'https://kubernetes-charts.storage.googleapis.com/'
+      - name: 'incubator'
+        url : 'https://kubernetes-charts-incubator.storage.googleapis.com'
+
+
+  repository_mirror.enabled:
+    description: "enable the repository mirror, each repository 'url' declared in repositories array will be replaced by repository_mirror_url"
+    default: false
+
+  repository_mirror.url:
+    description: "url of the repository mirror, must be set in case of repository_mirror.enabled equals true"
+    default: ""
+
+  repository_mirror.ca_cert:
+    description: "if defined PEM-encoded root certificates bundle for TLS authentication of helm mirror repository."
+    default: ""
+
 
   charts:
     description: "array of helm chart in json format defined by his name, his chart and an array of properties"

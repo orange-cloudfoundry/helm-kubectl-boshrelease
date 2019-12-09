@@ -5,8 +5,6 @@ templates:
   bin/run.erb: bin/run
   bin/chart.rb.erb: bin/chart.rb
   bin/repository.rb.erb: bin/repository.rb
-
-
   config/rbac-config.yaml.erb: config/rbac-config.yaml
   config/ca_cert.pem.erb: config/ca_cert.pem
   config/repository_mirror.ca_cert repository_mirror.ca

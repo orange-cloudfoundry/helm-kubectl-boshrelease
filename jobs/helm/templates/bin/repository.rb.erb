@@ -25,7 +25,7 @@ data.each { |repository|
      if (prepository_mirror_enabled)
         cmd = "helm repo add  #{pname} #{prepository_mirror_url} "
      else
-        if (repository_mirror_ca_cert<> '')
+        if (repository_mirror_ca_cert.eql? "")
             cmd = "helm repo add  #{pname} #{purl} "
         else
             cmd = "helm repo add  --ca-file=/var/vcap/store/helm/config/mirror_ca_cert.pem #{pname} #{purl} "

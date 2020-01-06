@@ -1,50 +1,8 @@
 #!/bin/bash
 set -e
+source /var/vcap/jobs/helm/bin/set_env
 
-export http_proxy=<%= p('proxy.http') %>
-export HTTP_PROXY=<%= p('proxy.http') %>
-export https_proxy=<%= p('proxy.https') %>
-export HTTPS_PROXY=<%= p('proxy.https') %>
-export no_proxy=<%= p('proxy.noproxy') %>
-export NO_PROXY=<%= p('proxy.noproxy') %>
-
-export KUBECONFIG=/var/vcap/jobs/helm/config/kubeconfig
-export PATH=$PATH:/var/vcap/packages/helm/linux-amd64/
-export PATH=$PATH:/var/vcap/packages/kubectl/
-export PATH="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bin:$PATH"
-export GEMRC="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bosh/gemrc"
-export HELM_HOME=/var/vcap/store/helm/
-
-mkdir -p /var/vcap/store/helm/
-director_name=<%= p('director.name') %>
-deployment_name=<%= p('deployment.name') %>
-password=<%= p('kubernetes.password') %>
-endpoint=<%= p('kubernetes.host') %>
-port=<%= p('kubernetes.port') %>
-
-
-cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
-context_name="kubo:${director_name}:${deployment_name}"
-address="https://${endpoint}:${port}"
-kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
-kubectl config set-credentials "${user_name}" --token="${password}"
-kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
-kubectl config use-context "${context_name}"
-
-
-kubectl apply -f /var/vcap/jobs/helm/config/rbac-config.yaml
-<% if_p('kubernetes.default_storageclass') do |default_storageclass| %>
-    kubectl patch storageclass <%= default_storageclass %> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-<% end %>
-
-
-
-echo "execute init helm, his repo , and the chart"
-env
-
-
-#helm init --upgrade --wait --service-account tiller
+echo "execute  helm add repo , and install the chart"
 
 chmod +x /var/vcap/jobs/helm/bin/repository.rb
 chmod +x /var/vcap/jobs/helm/bin/chart.rb

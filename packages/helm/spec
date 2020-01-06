@@ -5,4 +5,4 @@ dependencies:
 - ruby-2.4-r4
 
 files:
-- helm/2.14.0/helm.tar.gz
+- helm/helm.tar.gz

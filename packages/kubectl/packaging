@@ -1,12 +1,10 @@
+#!/bin/bash
 set -e
 
-KUBECTL_VERSION=1.14.1
-
-
- # Available variables
+# Available variables
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-cp ${BOSH_COMPILE_TARGET}/kubectl/${KUBECTL_VERSION}/kubectl ${BOSH_INSTALL_TARGET}/kubectl
+cp ${BOSH_COMPILE_TARGET}/kubectl/kubectl ${BOSH_INSTALL_TARGET}/kubectl
 chmod +x ${BOSH_INSTALL_TARGET}/kubectl

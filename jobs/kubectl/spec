@@ -3,8 +3,10 @@ name: kubectl
 
 templates: 
   bin/run.erb: bin/run
+  bin/set_env.erb: bin/set_env
   bin/apply.rb.erb: bin/apply.rb
-  bin/secret.rb.erb: bin/secret.rb
+  bin/secrets.rb.erb: bin/secrets.rb
+  bin/namespaces.rb.erb: bin/namespaces.rb
   bin/ingress.rb.erb: bin/ingress.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   
@@ -52,6 +54,9 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
+  kubernetes.default_storageclass:
+    description: "If defined  put the default attribute to the storage class object"
+
   commands:
     description: "array of commands in yaml format command can be apply / patch "
     example: |
@@ -91,6 +96,9 @@ properties:
                   serviceName: grafana
                   servicePort: 443
                 path: /grafana
+    default: []
+  namespaces:
+    description: "array of namespace that need to be created"
     default: []
 
   secrets:

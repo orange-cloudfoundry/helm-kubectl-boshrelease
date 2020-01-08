@@ -4,4 +4,4 @@ name: jq
 dependencies: []
 
 files:
-- jq/jq
+- jq/jq-linux64

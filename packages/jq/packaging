@@ -1,0 +1,11 @@
+set -e
+
+ # Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+cp -a ${BOSH_COMPILE_TARGET}/jq/jq-linux64 ${BOSH_INSTALL_TARGET}/jq
+
+
+cd ${BOSH_INSTALL_TARGET}
+chmod +x jq

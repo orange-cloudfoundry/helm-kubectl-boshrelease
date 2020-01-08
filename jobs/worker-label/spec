@@ -1,0 +1,38 @@
+---
+name: worker-label
+
+templates:
+  bin/post-deploy.erb: bin/post-deploy
+  bin/set_env.erb: bin/set_env
+
+
+packages:
+- kubectl
+- ruby-2.4-r4
+- jq
+
+properties:
+  director.name:
+    description: "Name of director"
+    example: "bosh-kubo"
+    default: "bosh-kubo"
+
+  deployment.name:
+    description: "Name of deployment"
+    example: "cfcr"
+    default: "cfcr"
+
+  kubernetes.host:
+    description: "The hostname (in form of URI) of Kubernetes master"
+    example: "cfcr-api.internal.paas"
+
+  kubernetes.port:
+    description: "The port of Kubernetes master"
+    example: "443"
+
+  kubernetes.password:
+    description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
+
+  kubernetes.cluster_ca_certificate:
+    description: "PEM-encoded root certificates bundle for TLS authentication."
+

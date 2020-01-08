@@ -1,4 +1,4 @@
 #!/bin/bash
 source /var/vcap/jobs/worker-label/bin/set_env
 
-kubectl label nodes $(kubectl get nodes  -L bosh.id | grep $(cat /var/vcap/bosh/spec.json | jq .id | sed 's/"//g')|cut -d" " -f1) worker=$(cat /var/vcap/bosh/spec.json | jq .deployment)-$(cat /var/vcap/bosh/spec.json | jq .index)
+kubectl label nodes $(kubectl get nodes  -L bosh.id | grep $(cat /var/vcap/bosh/spec.json | jq .id | sed 's/"//g')|cut -d" " -f1) worker="$(cat /var/vcap/bosh/spec.json | jq .deployment|sed 's/"//g'|cut -d" " -f1)-$(cat /var/vcap/bosh/spec.json | jq .index)"

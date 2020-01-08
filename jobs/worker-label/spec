@@ -4,6 +4,7 @@ name: worker-label
 templates:
   bin/post-deploy.erb: bin/post-deploy
   bin/set_env.erb: bin/set_env
+  config/ca_cert.pem.erb: config/ca_cert.pem
 
 
 packages:

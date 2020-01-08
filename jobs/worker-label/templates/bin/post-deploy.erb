@@ -1,4 +1,4 @@
 #!/bin/bash
-source /var/vcap/jobs/kubectl/bin/set_env
+source /var/vcap/jobs/worker-label/bin/set_env
 
 kubectl label nodes $(kubectl get nodes -o wide -L bosh.id | grep $(cat /var/vcap/bosh/spec.json | jq .id)) worker=$(cat /var/vcap/bosh/spec.json | jq .index)

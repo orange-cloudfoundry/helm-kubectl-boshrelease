@@ -7,8 +7,10 @@ templates:
   bin/apply.rb.erb: bin/apply.rb
   bin/secrets.rb.erb: bin/secrets.rb
   bin/namespaces.rb.erb: bin/namespaces.rb
+  bin/delete_namespaces.rb.erb: bin/delete_namespaces.rb
   bin/ingress.rb.erb: bin/ingress.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
+  bin/pre-stop.erb: bin/pre-stop
   
 packages: 
 - kubectl

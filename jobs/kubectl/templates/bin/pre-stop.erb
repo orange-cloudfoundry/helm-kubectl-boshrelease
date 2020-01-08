@@ -1,0 +1,8 @@
+#!/bin/bash
+source /var/vcap/jobs/kubectl/bin/set_env
+
+if [[ "${BOSH_DEPLOYMENT_NEXT_STATE}" == "delete" ]] ; then
+    chmod +x /var/vcap/jobs/kubectl/bin/delete_namespaces.rb
+    /var/vcap/jobs/kubectl/bin/./delete_namespaces.rb
+
+fi

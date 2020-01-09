@@ -12,58 +12,9 @@ failCmd=[]
 data = NAMESPACE_YAML
 
 data.each { |namespace|
-    pfilename="/tmp/#{namespace}.yml"
-
-    File.open(pfilename, 'w+') do |f|
-      f.puts("apiVersion: v1")
-      f.puts("kind: Namespace")
-      f.puts("metadata:")
-      f.puts("  labels:")
-      f.puts("    name: #{namespace}")
-      f.puts("  name: #{namespace}")
-    end
-    cmd = "kubectl apply -f #{pfilename} "
-     # Begin the retryable operation
-     retry_count = 0
-     begin
-       result=system("#{cmd} > /dev/null 2>&1")
-       while !result && retry_count < MAX_RETRIES
-         retry_count += 1
-         sleep SLEEP_DURATION
-         puts "retry #{retry_count}"
-         result=system("#{cmd} > /dev/null 2>&1")
-       end
-       if !result
-         failCmd.push("#{cmd}")
-         puts "ACTION delayed after all commands: #{cmd}"
-       end
-       if result
-          puts "ACTION SUCCESS: #{cmd}"
-       end
-     end
-
+    cmd = "kubectl delete ns #{namespace} "
+    result=system("#{cmd} > /dev/null 2>&1")
  }
- isOnFail=false
-puts "============================="
-puts " Retry unsuccessful namespace creation"
-puts "============================="
-puts ""
- failCmd.each { |cmd|
-   result=system("#{cmd} > /dev/null")
-         if !result
-           puts "ACTION FAILED: #{cmd}"
-           isOnFail=true
-         end
-         if result
-            puts "ACTION SUCCESS: #{cmd}"
-         end
- }
- if (isOnFail)
-     fail("some action cannot be performed")
- end
-puts "============================="
-puts " namespace creation done"
-
 
 
 

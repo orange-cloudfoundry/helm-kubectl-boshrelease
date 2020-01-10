@@ -102,5 +102,8 @@ properties:
     description: "if defined PEM-encoded root certificates bundle for TLS authentication of helm mirror repository."
     default: ""
 
-
+  ingress_class:
+    description: "select the kubernetes.io/ingress.class"
+    example: "traefik"
+    default: "nginx"
 

@@ -9,7 +9,7 @@ require_relative 'helm_repository'
 require_relative 'kubectl_command'
 require_relative 'kubectl_ingress'
 require_relative 'kubectl_namespace'
-require_relative 'kubelet_secret'
+require_relative 'kubectl_secret'
 require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"

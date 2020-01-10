@@ -69,7 +69,7 @@ properties:
     description: "If defined  put the default attribute to the storage class object"
 
   run_on_each_deploy:
-    description: "run this as an errand but also on each deploy"
+    description: "run.erb this as an errand but also on each deploy"
     default: false
 
   action:

@@ -35,7 +35,7 @@ def create_undo_commands_array (actions)
     when 'secret'
       cmd= undo_create_secret(object)
     when 'ingress'
-      cmd = undo_create_ingress(object,ingressClass)
+      cmd = undo_create_ingress(object)
     when 'kubectl'
       cmd = undo_create_kubectl(object)
     when 'helm_repo'

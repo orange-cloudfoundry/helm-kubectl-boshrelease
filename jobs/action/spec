@@ -3,19 +3,19 @@ name: action
 
 templates: 
   bin/run.erb: bin/run
-  bin/post-deploy.erb: bin/bin/post-deploy
-  bin/pre-stop.erb: bin/bin/pre-stop
+  bin/post-deploy.erb: bin/post-deploy
+  bin/pre-stop.erb: bin/pre-stop
   bin/set_env.erb: bin/set_env
-  bin/declare_vars.rb.erb: bin/bin/declare_vars.rb
-  bin/create_command_array.rb: bin/bin/create_command_array.rb
-  bin/helm_chart.rb: bin/bin/helm_chart.rb
-  bin/helm_repository.rb: bin/bin/helm_repository.rb
-  bin/kubectl_command.rb: bin/bin/kubectl_command.rb
-  bin/kubectl_ingress.rb: bin/bin/kubectl_ingress.rb
-  bin/kubectl_namespace.rb: bin/bin/kubectl_namespace.rb
-  bin/kubectl_secret.rb: bin/bin/kubectl_secret.rb
-  bin/main.rb: bin/bin/main.rb
-  bin/uninstall.rb: bin/bin/uninstall.rb
+  bin/declare_vars.rb.erb: bin/declare_vars.rb
+  bin/create_command_array.rb: bin/create_command_array.rb
+  bin/helm_chart.rb: bin/helm_chart.rb
+  bin/helm_repository.rb: bin/helm_repository.rb
+  bin/kubectl_command.rb: bin/kubectl_command.rb
+  bin/kubectl_ingress.rb: bin/kubectl_ingress.rb
+  bin/kubectl_namespace.rb: bin/kubectl_namespace.rb
+  bin/kubectl_secret.rb: bin/kubectl_secret.rb
+  bin/main.rb: bin/main.rb
+  bin/uninstall.rb: bin/uninstall.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   config/mirror_ca_cert.pem.erb: config/mirror_ca_cert.pem
 

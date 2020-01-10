@@ -13,7 +13,6 @@ templates:
   bin/kubectl_command.rb: bin/bin/kubectl_command.rb
   bin/kubectl_ingress.rb: bin/bin/kubectl_ingress.rb
   bin/kubectl_namespace.rb: bin/bin/kubectl_namespace.rb
-  bin/kubectl_pv.rb: bin/bin/kubectl_pv.rb
   bin/kubectl_secret.rb: bin/bin/kubectl_secret.rb
   bin/main.rb: bin/bin/main.rb
   bin/uninstall.rb: bin/bin/uninstall.rb

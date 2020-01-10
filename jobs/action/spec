@@ -7,7 +7,6 @@ templates:
   bin/declare_vars.rb.erb: bin/bin/declare_vars.rb
 
 
-  config/rbac-config.yaml.erb: config/rbac-config.yaml
   config/ca_cert.pem.erb: config/ca_cert.pem
   config/mirror_ca_cert.pem.erb: config/mirror_ca_cert.pem
 

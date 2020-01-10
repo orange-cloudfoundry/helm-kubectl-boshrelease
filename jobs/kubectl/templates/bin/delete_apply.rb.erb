@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+
+require 'yaml'
+
+CMDS_YAML= <%= p('commands') %>
+
+data = CMDS_YAML
+MAX_RETRIES = 3
+SLEEP_DURATION = 5
+
+cmdinit= "export KUBECONFIG=/var/vcap/jobs/kubectl/config/kubeconfig"
+system("#{cmdinit};")
+failCmd=[]
+data.each { |apply|
+    t= ""
+    count=0
+    pname = apply['name']
+
+    pnamespace = apply['namespace']
+    poptions = apply['options']
+    pcmd = apply['cmd']
+    if (pcmd == "apply")
+        pcmd="delete"
+
+        pfile = apply['apply']
+
+        cmd ="kubectl #{pcmd} "
+        unless pnamespace.nil? || pnamespace == 0
+            cmd = "#{cmd} --namespace #{pnamespace} "
+        end
+        unless poptions .nil? || poptions  == 0
+                cmd = "#{cmd} #{apply['options']}"
+            end
+        unless pfile .nil? || pfile  == 0
+                File.open("#{apply['name']}.yml", 'w') {|f| f.write pfile .to_yaml }
+                cmd = "#{cmd} -f #{apply['name']}.yml"
+            end
+        result=system("#{cmd} > /dev/null 2>&1")
+    end
+}

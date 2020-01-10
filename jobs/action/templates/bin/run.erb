@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+source /var/vcap/jobs/action/bin/set_env
+chmod +x /var/vcap/jobs/action/bin/*.rb
+
+cd /var/vcap/jobs/action/bin/
+main.rb
+
+
+
+

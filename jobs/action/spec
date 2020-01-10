@@ -60,40 +60,34 @@ properties:
   kubernetes.default_storageclass:
     description: "If defined  put the default attribute to the storage class object"
 
+  run_on_each_deploy:
+    description: "run this as an errand but also on each deploy"
+    default: false
 
-  service_account:
-    description: "Service account to install Tiller with."
-    default: "tiller"
-
-
-
-  repositories:
-    description: "array of helm repository in json format"
+  action:
+    description: "array of action"
     example: |
-      - name: 'stable'
-        url: 'https://kubernetes-charts.storage.googleapis.com/'
-      - name: 'incubator'
-        url: 'https://kubernetes-charts-incubator.storage.googleapis.com'
-      - name: 'incubator'
-        url: 'https://kubernetes-charts-incubator.storage.googleapis.com'
-      - name: 'kiwigrid'
-        url: 'https://kiwigrid.github.io'
-
-
-
-    default:
-      - name: 'stable'
-        url: 'https://kubernetes-charts.storage.googleapis.com/'
-      - name: 'incubator'
-        url : 'https://kubernetes-charts-incubator.storage.googleapis.com'
-
+      - type: 'namespace'
+        objet: |
+          name= 'grafana'
+      - type: 'helm_chart'
+        object:  |
+          name: 'mygrafana'
+          chart: 'stable/grafana'
+          namespace: 'default'
+          properties:
+              - name: 'service.type'
+          value: 'ClusterIP'
+          - name: 'service.port'
+          value: '9000'
+    default: []
 
   repository_mirror.enabled:
-    description: "enable the repository mirror, each repository 'url' declared in repositories array will be replaced by repository_mirror_url"
+    description: "enable the helm repository mirror, each repository 'url' declared in repositories array will be replaced by repository_mirror_url"
     default: false
 
   repository_mirror.url:
-    description: "url of the repository mirror, must be set in case of repository_mirror.enabled equals true"
+    description: "url of the helm repository mirror, must be set in case of repository_mirror.enabled equals true"
     default: ""
 
   repository_mirror.ca_cert:
@@ -101,24 +95,4 @@ properties:
     default: ""
 
 
-  charts:
-    description: "array of helm chart in json format defined by his name, his chart and an array of properties"
-    example: |
-      - name: 'mygrafana'
-        chart: 'stable/grafana'
-        namespace: 'default'
-        properties:
-          - name: 'service.type'
-            value: 'ClusterIP'
-          - name: 'service.port'
-            value: '9000'
-      - name: 'mygrafana2'
-        chart: 'stable/grafana'
-        namespace: 'default'
-        properties:
-          - name: 'service.type'
-            value: 'ClusterIP'
-          - name: 'service.port'
-            value: '9001'
-    default: []
 

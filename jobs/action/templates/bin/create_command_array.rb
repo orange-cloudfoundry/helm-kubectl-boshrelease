@@ -2,7 +2,7 @@ def create_do_commands_array (actions)
   var cmds= []
   actions.each { |action|
     category= action['type']
-    object= action['type']
+    object= action['object']
     cmd = ""
     case category
     when 'namespace'
@@ -27,7 +27,7 @@ def create_undo_commands_array (actions)
   var cmds= []
   actions.each { |action|
     category= action['type']
-    object= action['type']
+    object= action['object']
     cmd = ""
     case category
     when 'namespace'

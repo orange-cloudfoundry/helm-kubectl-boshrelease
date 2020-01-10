@@ -1,0 +1,6 @@
+#!/bin/bash
+<% if_p("run_on_each_deploy") do |run_on_each_deploy|
+  if run_on_each_deploy %>
+  source /var/vcap/jobs/action/bin/run
+  <% end
+end %>

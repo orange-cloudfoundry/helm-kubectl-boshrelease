@@ -11,6 +11,8 @@ def create_do_commands_array (actions)
       cmd= do_create_secret(object)
     when 'ingress'
       cmd = do_create_ingress(object,ingressClass)
+    when 'pv'
+      cmd = do_create_pv(object)
     when 'kubectl'
       cmd =do_create_kubectl(object)
     when 'helm_repo'
@@ -36,6 +38,8 @@ def create_undo_commands_array (actions)
       cmd= undo_create_secret(object)
     when 'ingress'
       cmd = undo_create_ingress(object)
+    when 'pv'
+      cmd = undo_create_pv(object)
     when 'kubectl'
       cmd = undo_create_kubectl(object)
     when 'helm_repo'
@@ -47,3 +51,5 @@ def create_undo_commands_array (actions)
   }
   cmds
 end
+
+

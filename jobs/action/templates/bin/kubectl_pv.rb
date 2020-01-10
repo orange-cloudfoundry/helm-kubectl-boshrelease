@@ -27,7 +27,7 @@ def do_create_pv(pv)
     f.puts("  required:")
     f.puts("    nodeSelectorTerms:")
     f.puts("    - matchExpressions:")
-    f.puts("      - key: #{label}")
+    f.puts("      - key: worker")
     f.puts("        operator: In")
     f.puts("        values:")
     f.puts("        - #{node}")
@@ -43,3 +43,5 @@ def undo_create_pv(pv)
   return "kubectl delete pv  #{name}"
 
 end
+
+

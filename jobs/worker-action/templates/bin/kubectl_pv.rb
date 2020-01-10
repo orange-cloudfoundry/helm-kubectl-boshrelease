@@ -41,7 +41,21 @@ end
 def undo_create_pv(pv)
   name = pv['name']
   return "kubectl delete pv  #{name}"
-
 end
+
+
+def do_create_storage_class(storageclass)
+  filename= "/tmp/storageclass_#{name}.yml"
+  File.open(filename, 'w+') do |f|
+    f.puts("apiVersion: storage.k8s.io/v1")
+    f.puts("kind: StorageClass")
+    f.puts("metadata:")
+    f.puts("  name: #{storageclass}")
+    f.puts("provisioner: kubernetes.io/no-provisioner")
+    f.puts("volumeBindingMode: WaitForFirstConsumer")
+  end
+  return "kubectl apply -f #{filename} "
+end
+
 
 

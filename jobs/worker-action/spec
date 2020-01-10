@@ -43,7 +43,7 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
-  persistent_volume.create:
+  persistent_volume.storageclass.create:
     description: ""
     default: "false"
 

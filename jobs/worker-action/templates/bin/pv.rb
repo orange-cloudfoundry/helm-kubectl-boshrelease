@@ -42,6 +42,8 @@ def create_do_pv_array (actions)
   cmds
 end
 
+var cmd = do_create_storage_class(storageclass)
+result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
 
 cmds = create_do_pv_array(actions)
 cmds.each{ |cmd|

@@ -72,7 +72,7 @@ properties:
     description: "run.erb this as an errand but also on each deploy"
     default: false
 
-  action:
+  actions:
     description: "array of action"
     example: |
       - type: 'namespace'

@@ -1,0 +1,12 @@
+#!/bin/bash
+source /var/vcap/jobs/worker-action/bin/set_env
+
+if [[ "${BOSH_DEPLOYMENT_NEXT_STATE}" == "delete" ]] ; then
+    set -e
+    source /var/vcap/jobs/worker-action/bin/set_env
+    chmod +x /var/vcap/jobs/worker-action/bin/*.rb
+
+    cd /var/vcap/jobs/worker-action/bin/
+    uninstall.rb
+
+fi

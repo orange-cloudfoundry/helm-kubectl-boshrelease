@@ -1,9 +1,15 @@
 ---
-name: worker-label
+name: worker-action
 
 templates:
-  bin/post-deploy.erb: bin/post-deploy
+  bin/post-deploy.erb: bin/bin/post-deploy
+  bin/pre-stop.erb: bin/bin/pre-stop
   bin/set_env.erb: bin/set_env
+  bin/declare_vars.rb.erb: bin/bin/declare_vars.rb
+  bin/create_command_array.rb: bin/bin/create_command_array.rb
+
+  bin/pv.rb: bin/bin/pv.rb
+  bin/uninstall.rb: bin/bin/uninstall.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
 
 
@@ -37,3 +43,13 @@ properties:
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
 
+  persistent_volume.create:
+    description: ""
+    default: "false"
+
+  persistent_volume.storageclass.name:
+    description: ""
+    default: "manual-local-pv"
+
+  persistent_volume.pvs:
+    default: []

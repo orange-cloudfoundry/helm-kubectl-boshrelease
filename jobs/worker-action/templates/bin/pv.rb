@@ -6,13 +6,8 @@ require 'base64'
 require "json"
 
 require_relative 'declare_vars'
-require_relative 'helm_chart'
-require_relative 'helm_repository'
-require_relative 'kubectl_command'
-require_relative 'kubectl_ingress'
-require_relative 'kubectl_namespace'
-require_relative 'kubectl_secret'
-require_relative 'create_command_array'
+require_relative '../../../action/templates/bin/helm_chart'
+require_relative 'kubectl_pv'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
@@ -21,7 +16,7 @@ def do_shell_pv(pv)
 
   path = pv['path']
   node = pv['node']
-  json = JSON.parse(open("var/vcap/bosh/spec.json").read)
+  json = JSON.parse(open("/var/vcap/bosh/spec.json").read)
   current_deployment=json.['deployment']
   current_name=json.['name']
   current_index=json.['index']

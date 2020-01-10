@@ -1,7 +1,7 @@
 #===============================================================
 # create command for execute kubectl to design pv
 #===============================================================
-def do_create_pv(pv)
+def do_create_pv(pv,storageclass)
   var cmd=""
   name = pv['name']
   storage = pv['storage']
@@ -20,7 +20,7 @@ def do_create_pv(pv)
     f.puts("accessModes:")
     f.puts("- ReadWriteOnce")
     f.puts("persistentVolumeReclaimPolicy: Retain")
-    f.puts("storageClassName: local-storage")
+    f.puts("storageClassName: #{storageclass}")
     f.puts("local:")
     f.puts("  path: #{path}")
     f.puts("nodeAffinity:")

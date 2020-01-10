@@ -1,5 +1,5 @@
 ---
-name: helm
+name: action
 
 templates: 
   bin/run.erb: bin/run

@@ -20,7 +20,7 @@ sleep_duration = 5
 
 failCmd = []
 isOnFail=false
-cmds = create_do_commands_array(actions)
+cmds = create_do_commands_array(ActionProperties.actions)
 cmds.each{ |cmd|
     # Begin the retryable operation
     retry_count = 0

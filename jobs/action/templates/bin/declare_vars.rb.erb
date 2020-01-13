@@ -1,5 +1,21 @@
-actions= <%= p('actions') %>
-ingressClass= "<%= p('ingress_class') %>"
-mirror_url= "<%= p('repository_mirror.url') %>"
-mirror_enabled= <%= p('repository_mirror.enabled') %>
-mirror_ca_cert= "<%= p('repository_mirror.ca_cert') %>"
+class ActionProperties
+def actions
+  return <%= p('actions') %>
+end
+
+def ingressClass
+  return  "<%= p('ingress_class') %>"
+end
+
+def mirror_url
+  return "<%= p('repository_mirror.url') %>"
+end
+
+def mirror_enabled
+ return <%= p('repository_mirror.enabled') %>
+end
+
+def mirror_ca_cert
+ return "<%= p('repository_mirror.ca_cert') %>"
+end
+end

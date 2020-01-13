@@ -3,7 +3,7 @@
 
 require 'yaml'
 require 'base64'
-require "json"
+require 'json'
 
 require 'declare_vars'
 
@@ -18,8 +18,8 @@ def do_shell_pv(pv)
   node = pv['node']
   json = JSON.parse(open("/var/vcap/bosh/spec.json").read)
   current_deployment=json.['deployment']
-  current_name=json.['name']
-  current_index=json.['index']
+  current_name=json['name']
+  current_index=json['index']
 
   current_node= "#{current_deployment}-#{current_name}-#{current_index}"
   if current_node.eql? node

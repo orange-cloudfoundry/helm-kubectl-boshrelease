@@ -17,7 +17,7 @@ def do_shell_pv(pv)
   path = pv['path']
   node = pv['node']
   json = JSON.parse(open("/var/vcap/bosh/spec.json").read)
-  current_deployment=json.['deployment']
+  current_deployment=json['deployment']
   current_name=json['name']
   current_index=json['index']
 
@@ -42,10 +42,10 @@ def create_do_pv_array (actions)
   cmds
 end
 
-var cmd = do_create_storage_class(storageclass)
+var cmd = do_create_storage_class(ActionProperties.storageclass)
 result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
 
-cmds = create_do_pv_array(actions)
+cmds = create_do_pv_array(ActionProperties.actions)
 cmds.each{ |cmd|
   # Begin the retryable operation
   begin

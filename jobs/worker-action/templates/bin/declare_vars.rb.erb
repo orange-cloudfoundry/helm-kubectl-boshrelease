@@ -1,3 +1,11 @@
-actions= <%= p('persistent_volume.pvs') %>
-storageclass= "<%= p('persistent_volume.storageclass.name') %>"
-create_storageclass= <%= p('persistent_volume.storageclass.create') %>
+class ActionProperties
+def actions
+    return <%= p('persistent_volume.pvs') %>
+end
+def storageclass
+  return "<%= p('persistent_volume.storageclass.name') %>"
+end
+def create_storageclass
+  return <%= p('persistent_volume.storageclass.create') %>
+end
+end

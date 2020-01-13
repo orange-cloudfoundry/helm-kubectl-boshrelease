@@ -27,7 +27,7 @@ cluster_name="kubo:${director_name}:${deployment_name}"
 user_name="kubo:${director_name}:${deployment_name}-admin"
 context_name="kubo:${director_name}:${deployment_name}"
 address="https://${endpoint}:${port}"
-kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/helm/config/ca_cert.pem" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"

@@ -4,6 +4,7 @@ source /var/vcap/jobs/action/bin/set_env
 chmod +x /var/vcap/jobs/action/bin/*.rb
 
 cd /var/vcap/jobs/action/bin/
+export RUBYLIB=/var/vcap/jobs/action/bin/
 /var/vcap/jobs/action/bin/./main.rb
 
 

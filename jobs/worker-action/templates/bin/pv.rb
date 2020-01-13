@@ -5,12 +5,12 @@ require 'yaml'
 require 'base64'
 require "json"
 
-require_relative 'declare_vars'
-require_relative '../../../action/templates/bin/helm_chart'
-require_relative 'kubectl_pv'
+require 'declare_vars'
 
-cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
-cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
+require 'kubectl_pv'
+
+cmd_init ="export HELM_HOME=/var/vcap/store/worker-action/;"
+cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/worker-action/config/kubeconfig;")
 
 def do_shell_pv(pv)
 

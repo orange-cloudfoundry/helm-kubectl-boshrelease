@@ -3,14 +3,14 @@
 
 require 'yaml'
 require 'base64'
-require_relative 'declare_vars'
-require_relative 'helm_chart'
-require_relative 'helm_repository'
-require_relative 'kubectl_command'
-require_relative 'kubectl_ingress'
-require_relative 'kubectl_namespace'
-require_relative 'kubectl_secret'
-require_relative 'create_command_array'
+require 'declare_vars'
+require 'helm_chart'
+require 'helm_repository'
+require 'kubectl_command'
+require 'kubectl_ingress'
+require 'kubectl_namespace'
+require 'kubectl_secret'
+require 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")

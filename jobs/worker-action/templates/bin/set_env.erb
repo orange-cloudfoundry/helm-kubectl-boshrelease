@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export KUBECONFIG=/var/vcap/jobs/worker-label/config/kubeconfig
+export KUBECONFIG=/var/vcap/jobs/worker-action/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/kubectl/
 export PATH=$PATH:/var/vcap/packages/jq/
 export PATH="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bin:$PATH"
@@ -21,7 +21,7 @@ context_name="kubo:${director_name}:${deployment_name}"
 address="https://${endpoint}:${port}"
 
 
-kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/worker-label/config/ca_cert.pem" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/worker-action/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 kubectl config use-context "${context_name}"

@@ -32,7 +32,7 @@ def create_undo_commands_array (actions)
     cmd = ""
     case category
     when 'namespace'
-      cmd = (undo_create_namespace(action))
+      cmd = undo_create_namespace(action)
     when 'secret'
       cmd = undo_create_secret(action)
     when 'ingress'

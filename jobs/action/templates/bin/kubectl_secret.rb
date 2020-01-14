@@ -3,14 +3,13 @@
 # create command for execute kubectl to design secret
 #===============================================================
 def do_create_secret(secret)
-  cmd =""
   namespace = secret['namespace']
   name = secret['name']
   spec = secret['data']
   annotations =secret['annotations']
   type= secret['type']
   labels= secret['labels']
-  filename="/tmp/#{name}.yml"
+  filename="/tmp/secret_#{name}.yml"
 
 
   File.open(filename, 'w+') do |f|
@@ -41,8 +40,7 @@ def do_create_secret(secret)
       f.puts(type.to_s)
     end
   end
-  cmd = "kubectl apply -f #{filename} "
-  return cmd
+  return "kubectl apply -f #{filename} "
 end
 
 

@@ -2,7 +2,6 @@
 # create command for execute kubectl to design namespace
 #===============================================================
 def do_create_namespace(namespace)
-  cmd=""
   name = namespace['name']
   annotations = namespace['annotations']
   filename="/tmp/ns_#{name}.yml"
@@ -11,8 +10,8 @@ def do_create_namespace(namespace)
     f.puts("kind: Namespace")
     f.puts("metadata:")
     f.puts("  labels:")
-    f.puts("    name: #{namespace}")
-    f.puts("  name: #{namespace}")
+    f.puts("    name: #{name}")
+    f.puts("  name: #{name}")
 
     if (annotations != nil)
       annotations.each{ |annotation|

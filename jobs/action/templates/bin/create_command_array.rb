@@ -2,7 +2,6 @@ def create_do_commands_array (actions)
   cmds= []
   actions.each { |action|
     category= action['type']
-    puts("action type: #{category}")
     cmd = ""
     case category
     when 'namespace'
@@ -10,7 +9,7 @@ def create_do_commands_array (actions)
     when 'secret'
       cmd = do_create_secret(action)
     when 'ingress'
-      cmd = do_create_ingress(action,ingressClass)
+      cmd = do_create_ingress(action,ActionProperties.ingressClass)
     when 'kubectl'
       cmd = do_create_kubectl(action)
     when 'helm_repo'
@@ -20,6 +19,7 @@ def create_do_commands_array (actions)
     else
       puts("unknown type: #{category}")
     end
+    puts("cmd #{category} created: #{cmd}")
     cmds.push(cmd)
   }
   cmds
@@ -42,13 +42,17 @@ def create_undo_commands_array (actions)
     when 'kubectl'
       cmd = undo_create_kubectl(action)
     when 'helm_repo'
-      # nothing to do
+      # nothing to do #
     when 'helm_chart'
       cmd = undo_install_chart(action)
     else
       puts("unknown type: #{category}")
     end
-    cmds.insert(0,cmd)
+    puts("cmd for uninstall #{category} created: #{cmd}")
+    if !cmd.eql?""
+    else
+      cmds.insert(0,cmd)
+    end
   }
   cmds
 end

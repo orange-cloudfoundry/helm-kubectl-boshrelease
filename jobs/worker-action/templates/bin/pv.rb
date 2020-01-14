@@ -42,8 +42,21 @@ def create_do_pv_array (actions)
   cmds
 end
 
-var cmd = do_create_storage_class(ActionProperties.storageclass)
-result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
+
+if (ActionProperties.create_storageclass)
+  var storageclass =ActionProperties.storageclass
+  filename= "/tmp/storageclass_#{storageclass}.yml"
+  File.open(filename, 'w+') do |f|
+    f.puts("apiVersion: storage.k8s.io/v1")
+    f.puts("kind: StorageClass")
+    f.puts("metadata:")
+    f.puts("  name: #{storageclass}")
+    f.puts("provisioner: kubernetes.io/no-provisioner")
+    f.puts("volumeBindingMode: WaitForFirstConsumer")
+    var cmd = "kubectl apply -f #{filename} "
+    result= system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
+  end
+end
 
 cmds = create_do_pv_array(ActionProperties.actions)
 cmds.each{ |cmd|
@@ -57,7 +70,6 @@ cmds.each{ |cmd|
       puts "ACTION SUCCESS: #{cmd}"
     end
   end
-
 }
 
 

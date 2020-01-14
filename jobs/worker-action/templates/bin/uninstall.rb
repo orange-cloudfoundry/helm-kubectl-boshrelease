@@ -9,7 +9,7 @@ require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
-isOnFail = false
+is_on_fail = false
 cmds = create_undo_commands_array(actions)
 cmds.each{ |cmd|
 
@@ -17,9 +17,9 @@ cmds.each{ |cmd|
       if !result
           puts "first try failed: #{cmd}"
           system("cat err.txt")
-          isOnFail = true
+          is_on_fail = true
       end
 }
-if (isOnFail)
+if (is_on_fail)
   fail("some uninstall cannot be performed need to delete with option --force")
 end

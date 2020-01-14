@@ -8,7 +8,7 @@ def do_create_kubectl(apply)
   cmd = apply['cmd']
   content = apply['content']
 
-  var kubectl_cmd ="kubectl #{cmd} "
+  kubectl_cmd ="kubectl #{cmd} "
   unless namespace.nil? || namespace == 0
     kubectl_cmd = "#{kubectl_cmd} --namespace #{namespace} "
   end
@@ -31,7 +31,7 @@ def undo_create_kubectl(apply)
   cmd = apply['cmd']
   content = apply['content']
 
-  var kubectl_cmd = nil
+  kubectl_cmd = nil
   if cmd.equal?'apply'
     kubectl_cmd ="kubectl delete "
     unless namespace.nil? || namespace == 0

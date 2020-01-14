@@ -23,7 +23,7 @@ def do_install_chart(chart)
     }
   end
 
-  var cmd = "helm upgrade --install "
+  cmd = "helm upgrade --install "
 
   unless debug.nil? || debug == 0
     cmd = "#{cmd} --debug"
@@ -58,7 +58,7 @@ def undo_install_chart(chart)
   namespace = chart['namespace']
   name = chart['name']
 
-  var cmd = "helm delete "
+  cmd = "helm delete "
   unless namespace.nil? || namespace == 0
     cmd = "#{cmd} --namespace #{namespace}"
   end

@@ -1,5 +1,5 @@
 def create_do_commands_array (actions)
-  var cmds= []
+  cmds= []
   actions.each { |action|
     category= action['type']
     cmd = ""
@@ -25,7 +25,7 @@ def create_do_commands_array (actions)
 end
 
 def create_undo_commands_array (actions)
-  var cmds= []
+  cmds= []
   actions.each { |action|
     category= action['type']
     object= action['object']

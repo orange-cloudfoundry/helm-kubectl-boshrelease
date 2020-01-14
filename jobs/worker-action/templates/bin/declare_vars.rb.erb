@@ -3,7 +3,7 @@ def self.actions
     return <%= p('persistent_volume.pvs') %>
 end
 def self.storageclass
-  var result = "<%= p('persistent_volume.storageclass.name') %>"
+  result = "<%= p('persistent_volume.storageclass.name') %>"
   puts "Storageclass: #{result}"
   return result
 end

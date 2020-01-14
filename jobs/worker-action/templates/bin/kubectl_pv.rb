@@ -2,7 +2,7 @@
 # create command for execute kubectl to design pv
 #===============================================================
 def do_create_pv(pv,storageclass)
-  var cmd=""
+  cmd=""
   name = pv['name']
   storage = pv['storage']
   path = pv['path']

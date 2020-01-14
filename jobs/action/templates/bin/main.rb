@@ -18,8 +18,8 @@ cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfi
 max_retries = 3
 sleep_duration = 5
 
-failCmd = []
-isOnFail=false
+fail_cmd = []
+is_on_fail=false
 cmds = create_do_commands_array(ActionProperties.actions)
 cmds.each{ |cmd|
     # Begin the retryable operation
@@ -37,8 +37,8 @@ cmds.each{ |cmd|
         result=system("#{cmd_init}#{cmd} > /dev/null 2>&1")
       end
       if !result
-        failCmd.push("#{cmd}")
-        isOnFail=true
+        fail_cmd.push("#{cmd}")
+        is_on_fail=true
         puts "ACTION delayed after all others: #{cmd}"
       else
          puts "ACTION SUCCESS: #{cmd}"
@@ -46,24 +46,24 @@ cmds.each{ |cmd|
     end
 
 }
-if isOnFail
+if is_on_fail
   puts "============================="
   puts " Retry unsuccessful actions"
   puts "============================="
   puts ""
 
-  isOnFail=false
-  failCmd.each { |cmd|
+  is_on_fail=false
+  fail_cmd.each { |cmd|
           result=system("#{cmd_init}#{cmd} > /dev/null")
           if !result
             puts "ACTION FAILED: #{cmd}"
-            isOnFail=true
+            is_on_fail=true
           end
           if result
              puts "ACTION SUCCESS: #{cmd}"
           end
   }
-  if (isOnFail)
+  if (is_on_fail)
       fail("some action cannot be performed")
   end
  end

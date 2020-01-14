@@ -28,7 +28,7 @@ def do_shell_pv(pv)
 end
 
 def create_do_pv_array (actions)
-  var cmds= []
+  cmds= []
   actions.each { |action|
     category= action['type']
     object= action['object']
@@ -44,7 +44,7 @@ end
 
 
 if (ActionProperties.create_storageclass)
-  var storageclass =ActionProperties.storageclass
+  storageclass =ActionProperties.storageclass
   filename= "/tmp/storageclass_#{storageclass}.yml"
   File.open(filename, 'w+') do |f|
     f.puts("apiVersion: storage.k8s.io/v1")

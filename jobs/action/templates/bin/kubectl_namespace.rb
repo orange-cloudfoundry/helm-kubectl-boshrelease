@@ -2,7 +2,7 @@
 # create command for execute kubectl to design namespace
 #===============================================================
 def do_create_namespace(namespace)
-  var cmd=""
+  cmd=""
   name = namespace['name']
   annotations = namespace['annotations']
   filename="/tmp/ns_#{name}.yml"

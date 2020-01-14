@@ -4,7 +4,6 @@
 def do_add_repo(repository,mirror_enabled,mirror_url,mirror_ca_cert)
   name = repository['name']
   url = repository['url']
-  var cmd = ""
   if mirror_enabled
     cmd = "helm repo add  #{name} #{mirror_url} "
   else

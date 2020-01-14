@@ -3,7 +3,7 @@
 # create command for execute kubectl to design secret
 #===============================================================
 def do_create_secret(secret)
-  var cmd =""
+  cmd =""
   namespace = secret['namespace']
   name = secret['name']
   spec = secret['data']

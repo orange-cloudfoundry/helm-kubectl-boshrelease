@@ -2,7 +2,6 @@
 # create command for execute kubectl to design ingress rule
 #===============================================================
 def do_create_ingress(ingress,ingress_class)
-  var cmd=""
   namespace = ingress['namespace']
   name = ingress['name']
   spec = ingress['definition']

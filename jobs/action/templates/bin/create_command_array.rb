@@ -5,15 +5,13 @@ def create_do_commands_array (actions)
     cmd = ""
     case category
     when 'namespace'
-      cmd.push(do_create_namespace(action))
+      cmd = (do_create_namespace(action))
     when 'secret'
-      cmd= do_create_secret(action)
+      cmd = do_create_secret(action)
     when 'ingress'
       cmd = do_create_ingress(action,ingressClass)
-    when 'pv'
-      cmd = do_create_pv(action)
     when 'kubectl'
-      cmd =do_create_kubectl(action)
+      cmd = do_create_kubectl(action)
     when 'helm_repo'
       cmd = do_add_repo(action,mirror_enabled,mirror_url,mirro_ca_cert)
     when 'helm_chart'
@@ -32,9 +30,9 @@ def create_undo_commands_array (actions)
     cmd = ""
     case category
     when 'namespace'
-      cmd.push(undo_create_namespace(action))
+      cmd = (undo_create_namespace(action))
     when 'secret'
-      cmd= undo_create_secret(action)
+      cmd = undo_create_secret(action)
     when 'ingress'
       cmd = undo_create_ingress(action)
     when 'pv'

@@ -2,6 +2,7 @@ def create_do_commands_array (actions)
   cmds= []
   actions.each { |action|
     category= action['type']
+    puts("action type: #{category}")
     cmd = ""
     case category
     when 'namespace'
@@ -16,6 +17,8 @@ def create_do_commands_array (actions)
       cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'
       cmd = do_install_chart(action)
+    else
+      puts("unknown type: #{category}")
     end
     cmds.push(cmd)
   }
@@ -26,7 +29,6 @@ def create_undo_commands_array (actions)
   cmds= []
   actions.each { |action|
     category= action['type']
-    object= action['object']
     cmd = ""
     case category
     when 'namespace'
@@ -43,6 +45,8 @@ def create_undo_commands_array (actions)
       # nothing to do
     when 'helm_chart'
       cmd = undo_install_chart(action)
+    else
+      puts("unknown type: #{category}")
     end
     cmds.insert(0,cmd)
   }

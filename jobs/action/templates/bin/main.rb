@@ -29,17 +29,17 @@ cmds.each{ |cmd|
       if !result
           puts "first try failed: #{cmd}"
           system("cat err.txt")
-      end
-      while !result && retry_count < max_retries
-        retry_count += 1
-        sleep sleep_duration
-        puts "retry #{retry_count}"
-        result=system("#{cmd_init}#{cmd} > /dev/null 2>&1")
-      end
-      if !result
-        fail_cmd.push("#{cmd}")
-        is_on_fail=true
-        puts "ACTION delayed after all others: #{cmd}"
+          while !result && retry_count < max_retries
+            retry_count += 1
+            sleep sleep_duration
+            puts "retry #{retry_count}"
+            result=system("#{cmd_init}#{cmd} > /dev/null 2>&1")
+          end
+          if !result
+            fail_cmd.push("#{cmd}")
+            is_on_fail=true
+            puts "ACTION delayed after all others: #{cmd}"
+          end
       else
          puts "ACTION SUCCESS: #{cmd}"
       end

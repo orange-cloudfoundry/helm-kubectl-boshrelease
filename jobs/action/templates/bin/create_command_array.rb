@@ -13,7 +13,7 @@ def create_do_commands_array (actions)
     when 'kubectl'
       cmd = do_create_kubectl(action)
     when 'helm_repo'
-      cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirro_ca_cert)
+      cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'
       cmd = do_install_chart(action)
     end

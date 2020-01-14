@@ -4,8 +4,8 @@
 def do_add_repo(repository,mirror_enabled,mirror_url,mirror_ca_cert)
   name = repository['name']
   url = repository['url']
-  if ActionProperties.mirror_enabled
-    cmd = "helm repo add  #{name} #{ActionProperties.mirror_url} "
+  if mirror_enabled
+    cmd = "helm repo add  #{name} #{mirror_url} "
   else
     if mirror_ca_cert.eql? nil
       cmd = "helm repo add  #{name} #{url} "

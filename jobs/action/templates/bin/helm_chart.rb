@@ -8,7 +8,7 @@ def do_install_chart(chart)
   properties = chart['properties']
   version = chart['version']
   debug = chart['debug']
-  values = chart['values']
+  values = chart['values_file_content']
   files = chart['files']
   name = chart['name']
   filename= "chart_#{name}.yml"

@@ -1,21 +1,21 @@
 class ActionProperties
-def actions
+def self.actions
   return <%= p('actions') %>
 end
 
-def ingressClass
+def self.ingressClass
   return  "<%= p('ingress_class') %>"
 end
 
-def mirror_url
+def self.mirror_url
   return "<%= p('repository_mirror.url') %>"
 end
 
-def mirror_enabled
+def self.mirror_enabled
  return <%= p('repository_mirror.enabled') %>
 end
 
-def mirror_ca_cert
+def self.mirror_ca_cert
  return "<%= p('repository_mirror.ca_cert') %>"
 end
 end

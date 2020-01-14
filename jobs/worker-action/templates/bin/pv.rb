@@ -53,7 +53,7 @@ if (ActionProperties.create_storageclass)
     f.puts("  name: #{storageclass}")
     f.puts("provisioner: kubernetes.io/no-provisioner")
     f.puts("volumeBindingMode: WaitForFirstConsumer")
-    var cmd = "kubectl apply -f #{filename} "
+    cmd = "kubectl apply -f #{filename} "
     result= system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
   end
 end

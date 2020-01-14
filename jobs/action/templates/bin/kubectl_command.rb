@@ -13,7 +13,7 @@ def do_create_kubectl(apply)
     kubectl_cmd = "#{kubectl_cmd} --namespace #{namespace} "
   end
   unless options .nil? || options  == 0
-    kubectl_cmd = "#{kubectl_cmd} #{apply['options']}"
+    kubectl_cmd = "#{kubectl_cmd} #{options}"
   end
   unless content .nil? || content  == 0
     File.open("#{name}.yml", 'w') {|f| f.write content .to_yaml }

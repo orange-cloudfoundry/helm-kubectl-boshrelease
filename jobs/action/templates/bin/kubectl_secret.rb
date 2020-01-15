@@ -24,8 +24,8 @@ def do_create_secret(secret)
         f.puts("    #{annotation['name']}: #{annotation['value']}")
       }
     end
-    f.puts("  labels:")
     if (labels != nil)
+      f.puts("  labels:")
       labels.each{ |label|
         f.puts("    #{label['name']}: #{label['value']}")
       }

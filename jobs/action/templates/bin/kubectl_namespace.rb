@@ -7,6 +7,7 @@ def do_create_namespace(namespace)
   filename="/tmp/ns_#{name}.yml"
 
   File.open(filename, 'w+') do |f|
+    f.puts("apiVersion: v1")
     f.puts("kind: Namespace")
     f.puts("metadata:")
     f.puts("  labels:")

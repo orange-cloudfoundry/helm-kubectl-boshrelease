@@ -7,6 +7,6 @@ if [[ "${BOSH_DEPLOYMENT_NEXT_STATE}" == "delete" ]] ; then
     chmod +x /var/vcap/jobs/action/bin/*.rb
 
     cd /var/vcap/jobs/action/bin/
-    uninstall.rb
+    export RUBYLIB=/var/vcap/jobs/action/bin/; /var/vcap/jobs/action/bin/./uninstall.rb
 
 fi

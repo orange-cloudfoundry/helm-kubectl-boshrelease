@@ -16,8 +16,10 @@ def create_do_commands_array (actions)
       cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'
       cmd = do_install_chart(action)
+    when 'pv'
+      puts("ERROR !!! type: #{category} is only managed by worker-action job not by action job")
     else
-      puts("unknown type: #{category}")
+      puts("ERROR !!! unknown type: #{category}")
     end
     puts("cmd #{category} created: #{cmd}")
     cmds.push(cmd)

@@ -16,9 +16,7 @@ def do_install_chart(chart)
   if properties != nil
     properties.each{ |property|
       if property != nil
-        name = property['name']
-        value = property['value']
-        t= "#{t} --set #{name}=#{value}"
+         t= "#{t} --set #{property['name']}=#{property['value']}"
       end
     }
   end
@@ -48,7 +46,7 @@ def do_install_chart(chart)
       cmd = "#{cmd} -f #{file['url']}"
     }
   end
-  cmd;
+  cmd
 end
 
 #===============================================================

@@ -7,7 +7,6 @@ def do_create_secret(secret)
   name = secret['name']
   spec = secret['data']
   annotations =secret['annotations']
-  type= secret['type']
   labels= secret['labels']
   filename="/tmp/secret_#{name}.yml"
 
@@ -37,7 +36,6 @@ def do_create_secret(secret)
         b.delete!("\n")
         f.puts("  #{data['name']}: #{b}")
       }
-      f.puts(type.to_s)
     end
   end
   "kubectl apply -f #{filename} "

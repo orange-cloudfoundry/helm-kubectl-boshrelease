@@ -11,7 +11,7 @@ def do_install_chart(chart)
   values = chart['values_file_content']
   files = chart['files']
   name = chart['name']
-  filename= "chart_#{name}.yml"
+  filename= "/tmp/chart_#{name}.yml"
 
   if properties != nil
     properties.each{ |property|
@@ -48,7 +48,7 @@ def do_install_chart(chart)
       cmd = "#{cmd} -f #{file['url']}"
     }
   end
-  cmd
+  cmd;
 end
 
 #===============================================================

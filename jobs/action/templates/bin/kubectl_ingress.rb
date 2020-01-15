@@ -24,7 +24,7 @@ def do_create_ingress(ingress,ingress_class)
     f.puts("  namespace: #{namespace}")
     f.puts("  annotations:")
     f.puts("    kubernetes.io/ingress.class: #{ingress_class}")
-    if (annotations != nil)
+    if annotations != nil
       annotations.each{ |annotation|
         f.puts("    #{annotation['name']}: #{annotation['value']}")
       }
@@ -33,8 +33,7 @@ def do_create_ingress(ingress,ingress_class)
       f.puts("#{line}")
     }
   end
-  cmd = "kubectl apply -f #{filename} "
-  cmd
+  "kubectl apply -f #{filename} "
 end
 
 #===============================================================
@@ -46,6 +45,6 @@ def undo_create_ingress(ingress)
   unless namespace.nil? || namespace == 0
     return "kubectl delete ingress #{name}"
   end
-  return "kubectl delete ingress -n #{namespace} #{name}"
+  "kubectl delete ingress -n #{namespace} #{name}"
 
 end

@@ -19,28 +19,28 @@ def do_create_secret(secret)
     f.puts("  name: #{name}")
     f.puts("  namespace: #{namespace}")
     f.puts("  annotations:")
-    if (annotations != nil)
+    if annotations != nil
       annotations.each{ |annotation|
         f.puts("    #{annotation['name']}: #{annotation['value']}")
       }
     end
-    if (labels != nil)
+    if labels != nil
       f.puts("  labels:")
       labels.each{ |label|
         f.puts("    #{label['name']}: #{label['value']}")
       }
     end
-    if (spec != nil)
+    if spec != nil
       f.puts("data:")
-      spec.each { |spec|
-        b=  Base64.encode64(spec['value'])
+      spec.each { |data|
+        b=  Base64.encode64(data['value'])
         b.delete!("\n")
-        f.puts("  #{spec['name']}: #{b}")
+        f.puts("  #{data['name']}: #{b}")
       }
       f.puts(type.to_s)
     end
   end
-  return "kubectl apply -f #{filename} "
+  "kubectl apply -f #{filename} "
 end
 
 
@@ -53,6 +53,6 @@ def undo_create_secret(secret)
     unless namespace.nil? || namespace == 0
       return "kubectl delete secret #{name}"
     end
-    return "kubectl delete secret -n #{namespace} #{name}"
+    "kubectl delete secret -n #{namespace} #{name}"
 
 end

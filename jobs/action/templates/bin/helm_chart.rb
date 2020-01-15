@@ -62,6 +62,5 @@ def undo_install_chart(chart)
   unless namespace.nil? || namespace == 0
     cmd = "#{cmd} --namespace #{namespace}"
   end
-  cmd = "#{cmd} #{name}"
-  cmd
+  "#{cmd} #{name}"
 end

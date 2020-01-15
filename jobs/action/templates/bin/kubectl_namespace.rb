@@ -14,20 +14,19 @@ def do_create_namespace(namespace)
     f.puts("    name: #{name}")
     f.puts("  name: #{name}")
 
-    if (annotations != nil)
+    if annotations != nil
       annotations.each{ |annotation|
         f.puts("    #{annotation['name']}: #{annotation['value']}")
       }
     end
   end
-  cmd = "kubectl apply -f #{filename} "
-  cmd
+  "kubectl apply -f #{filename} "
 end
 
 #===============================================================
 # create command for delete namespace
 #===============================================================
-def undo_create_namespace(ingress)
+def undo_create_namespace(namespace)
   name = namespace['name']
-  return "kubectl delete ns #{name} "
+  "kubectl delete ns #{name} "
 end

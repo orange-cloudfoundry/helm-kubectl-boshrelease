@@ -51,6 +51,14 @@ properties:
     example: "127.0.0.1, localhost, *.internal.paas"
     default: ""
 
+  kubernetes.config:
+    description: "content of .kube/config file, if defined it will be use instead of others parameters"
+    default: ""
+
+  kubernetes.usecontext:
+    description: "content of .kube/config file, if defined it will be use instead of others parameters"
+    default: "cfcr"
+
   kubernetes.host:
     description: "The hostname (in form of URI) of Kubernetes master"
     example: "cfcr-api.internal.paas"

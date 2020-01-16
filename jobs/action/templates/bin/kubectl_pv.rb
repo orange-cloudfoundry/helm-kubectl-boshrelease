@@ -2,7 +2,6 @@
 # create command for execute kubectl to design pv
 #===============================================================
 def do_create_pv(pv,storageclass)
-  cmd=""
   name = pv['name']
   storage = pv['storage']
   path = pv['path']
@@ -27,7 +26,7 @@ def do_create_pv(pv,storageclass)
     f.puts("  required:")
     f.puts("    nodeSelectorTerms:")
     f.puts("    - matchExpressions:")
-    f.puts("      - key: worker")
+    f.puts("      - key: #{label}")
     f.puts("        operator: In")
     f.puts("        values:")
     f.puts("        - #{node}")

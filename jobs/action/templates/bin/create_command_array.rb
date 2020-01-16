@@ -17,7 +17,7 @@ def create_do_commands_array (actions)
     when 'helm_chart'
       cmd = do_install_chart(action)
     when 'pv'
-      puts("ERROR !!! type: #{category} is only managed by worker-action job not by action job")
+      cmd = do_create_pv(action, ActionProperties.storageclass)
     else
       puts("ERROR !!! unknown type: #{category}")
     end
@@ -47,6 +47,8 @@ def create_undo_commands_array (actions)
       # nothing to do #
     when 'helm_chart'
       cmd = undo_install_chart(action)
+    when 'pv'
+      cmd = undo_create_pv(action)
     else
       puts("unknown type: #{category}")
     end

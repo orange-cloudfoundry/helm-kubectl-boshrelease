@@ -4,7 +4,7 @@
 require 'yaml'
 require 'base64'
 require_relative 'declare_vars'
-require_relative 'kubectl_pv'
+require_relative '../../../action/templates/bin/kubectl_pv'
 require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"

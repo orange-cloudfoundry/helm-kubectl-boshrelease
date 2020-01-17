@@ -55,8 +55,12 @@ properties:
     description: "content of .kube/config file, if defined it will be use instead of others parameters"
     default: ""
 
+  kubernetes.configpath:
+    description: "use this parameter only if  .kube/config file is already defined in the vm at this path"
+    default: ""
+
   kubernetes.usecontext:
-    description: "content of .kube/config file, if defined it will be use instead of others parameters"
+    description: "say witch context use inside .kube/config"
     default: "cfcr"
 
   kubernetes.host:

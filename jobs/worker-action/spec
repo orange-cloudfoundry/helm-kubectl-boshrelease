@@ -37,6 +37,18 @@ properties:
     description: "The port of Kubernetes master"
     example: "443"
 
+  kubernetes.config:
+    description: "content of .kube/config file, if defined it will be use instead of others parameters"
+    default: ""
+
+  kubernetes.configpath:
+    description: "use this parameter only if  .kube/config file is already defined in the vm at this path"
+    default: ""
+
+  kubernetes.usecontext:
+    description: "say witch context use inside .kube/config"
+    default: "cfcr"
+
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
 

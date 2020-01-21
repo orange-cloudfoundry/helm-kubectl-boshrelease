@@ -16,15 +16,12 @@ export GEMRC="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bosh/gemrc"
 export HELM_HOME=/var/vcap/store/helm/
 
 mkdir -p /var/vcap/store/helm/
-director_name=<%= p('director.name') %>
-deployment_name=<%= p('deployment.name') %>
-password=<%= p('kubernetes.password') %>
+
 endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
 
 
-cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
+
 context_name=<%= p('kubernetes.usecontext') %>
 <% if !p('kubernetes.config_path').empty? and p('kubernetes.config_path') != "nil" %>
 export KUBECONFIG=<%= p('kubernetes.config_path') %>
@@ -32,6 +29,10 @@ export KUBECONFIG=<%= p('kubernetes.config_path') %>
 <% if !p('kubernetes.config').empty? and p('kubernetes.config') != "nil" %>
 cp /var/vcap/jobs/action/config/config /var/vcap/jobs/action/config/kubeconfig
 <% else %>
+cluster_name="kubo"
+user_name="admin"
+
+password=<%= p('kubernetes.password') %>
 address="https://${endpoint}:${port}"
 kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"

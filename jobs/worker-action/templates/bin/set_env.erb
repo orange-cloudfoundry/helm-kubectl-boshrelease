@@ -15,8 +15,8 @@ endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
 
 
-cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
+cluster_name="kubo"
+user_name="admin"
 context_name="kubo:${director_name}:${deployment_name}"
 address="https://${endpoint}:${port}"
 

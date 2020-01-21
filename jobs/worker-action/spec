@@ -19,16 +19,6 @@ packages:
 - jq
 
 properties:
-  director.name:
-    description: "Name of director"
-    example: "bosh-kubo"
-    default: "bosh-kubo"
-
-  deployment.name:
-    description: "Name of deployment"
-    example: "cfcr"
-    default: "cfcr"
-
   kubernetes.host:
     description: "The hostname (in form of URI) of Kubernetes master"
     example: "cfcr-api.internal.paas"

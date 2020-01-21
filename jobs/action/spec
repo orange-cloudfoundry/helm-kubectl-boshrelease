@@ -25,16 +25,6 @@ packages:
 - ruby-2.4-r4
 
 properties:
-  director.name:
-    description: "Name of director"
-    example: "bosh-kubo"
-    default: "bosh-kubo"
-
-  deployment.name:
-    description: "Name of deployment"
-    example: "cfcr"
-    default: "cfcr"
-
   proxy.http:
     description: "URL of http proxy"
     example: "http://myproxy.domain.com:8128"

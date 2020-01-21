@@ -45,6 +45,10 @@ properties:
     description: "say witch context use inside .kube/config"
     default: "cfcr"
 
+  kubernetes.config_path:
+    description: "use this parameter only if  .kube/config file is already defined in the vm at this path"
+    default: ""
+
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
 

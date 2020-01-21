@@ -31,7 +31,7 @@ properties:
     description: "content of .kube/config file, if defined it will be use instead of others parameters"
     default: ""
 
-  kubernetes.configpath:
+  kubernetes.config_path:
     description: "use this parameter only if  .kube/config file is already defined in the vm at this path"
     default: ""
 

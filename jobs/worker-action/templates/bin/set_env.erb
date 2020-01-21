@@ -24,10 +24,10 @@ context_name=<%= p('kubernetes.usecontext') %>
 export KUBECONFIG=<%= p('kubernetes.config_path') %>
 <% else %>
 <% if !p('kubernetes.config').empty? and p('kubernetes.config') != "nil" %>
-cp /var/vcap/jobs/action/config/config /var/vcap/jobs/action/config/kubeconfig
+cp /var/vcap/jobs/worker-action/config/config /var/vcap/jobs/worker-action/config/kubeconfig
 <% else %>
 address="https://${endpoint}:${port}"
-kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
+kubectl config set-cluster "${cluster_name}" --server="${address}" --certificate-authority="/var/vcap/jobs/worker-action/config/ca_cert.pem" --embed-certs=true
 kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 <% end %>

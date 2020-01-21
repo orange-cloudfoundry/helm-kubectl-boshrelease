@@ -8,8 +8,6 @@ export GEMRC="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bosh/gemrc"
 
 
 
-director_name=<%= p('director.name') %>
-deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
@@ -17,11 +15,10 @@ port=<%= p('kubernetes.port') %>
 
 cluster_name="kubo"
 user_name="admin"
-context_name="kubo:${director_name}:${deployment_name}"
 address="https://${endpoint}:${port}"
 
-cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
+cluster_name="kubo"
+user_name="admin"
 context_name=<%= p('kubernetes.usecontext') %>
 <% if !p('kubernetes.config_path').empty? and p('kubernetes.config_path') != "nil" %>
 export KUBECONFIG=<%= p('kubernetes.config_path') %>

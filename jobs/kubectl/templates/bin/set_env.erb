@@ -11,16 +11,14 @@ export GEMRC="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bosh/gemrc"
 export HELM_HOME=/var/vcap/store/helm/
 
 mkdir -p /var/vcap/store/helm/
-director_name=<%= p('director.name') %>
-deployment_name=<%= p('deployment.name') %>
 password=<%= p('kubernetes.password') %>
 endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
 
 
-cluster_name="kubo:${director_name}:${deployment_name}"
-user_name="kubo:${director_name}:${deployment_name}-admin"
-context_name="kubo:${director_name}:${deployment_name}"
+cluster_name="kubo"
+user_name="admin"
+context_name=<%= p('kubernetes.usecontext') %>
 address="https://${endpoint}:${port}"
 
 

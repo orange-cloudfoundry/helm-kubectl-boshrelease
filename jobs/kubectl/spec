@@ -17,15 +17,6 @@ packages:
 - ruby-2.4-r4
 
 properties:
-  director.name:
-    description: "Name of director"
-    example: "bosh-kubo"
-    default: "bosh-kubo"
-
-  deployment.name:
-    description: "Name of deployment"
-    example: "cfcr"
-    default: "cfcr"
 
   proxy.https:
     description: "URL of https proxy"
@@ -49,6 +40,11 @@ properties:
   kubernetes.port:
     description: "The port of Kubernetes master"
     example: "443"
+
+  kubernetes.usecontext:
+    description: "say witch context use inside .kube/config"
+    default: "cfcr"
+
 
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."

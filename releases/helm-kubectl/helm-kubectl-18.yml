@@ -1,0 +1,63 @@
+name: helm-kubectl
+version: "18"
+commit_hash: 6adc7c4
+uncommitted_changes: false
+jobs:
+- name: action
+  version: 8b2465f43b0fcea58958262eb6cf191affc91108c5b662c248e930b06e6ffd57
+  fingerprint: 8b2465f43b0fcea58958262eb6cf191affc91108c5b662c248e930b06e6ffd57
+  sha1: sha256:5eb00510fa929b42133dfb2a6a1abfacea930b984e79aad6a93867880804dfe5
+  packages:
+  - helm
+  - kubectl
+  - ruby-2.4-r4
+- name: helm
+  version: 01c69c5a6cc09d1b506a33b6c1831fec5677fd983ce6a5013a8170a51b0a8779
+  fingerprint: 01c69c5a6cc09d1b506a33b6c1831fec5677fd983ce6a5013a8170a51b0a8779
+  sha1: sha256:5a0659ddac71bc47247deee7948514316c15d6f54d159b297aea8b49ff4d1cde
+  packages:
+  - helm
+  - kubectl
+  - ruby-2.4-r4
+- name: kubectl
+  version: 9d1034041a46127880a0b0dafffab6752ce8a53b128495cabc66b09c25e1afaf
+  fingerprint: 9d1034041a46127880a0b0dafffab6752ce8a53b128495cabc66b09c25e1afaf
+  sha1: sha256:8c7fec42254647143f12dac85d716dbb8bca838556a6a18bb24ec95184239f96
+  packages:
+  - kubectl
+  - ruby-2.4-r4
+- name: worker-action
+  version: f193d4a8a029726a035e18184b6c2ddd874f1792e09f90b0419f5f2998613699
+  fingerprint: f193d4a8a029726a035e18184b6c2ddd874f1792e09f90b0419f5f2998613699
+  sha1: sha256:e5b957f727988c195f4b8667acb672c1759bbd471f1cb6be22742c956ead4988
+  packages:
+  - kubectl
+  - ruby-2.4-r4
+  - jq
+packages:
+- name: helm
+  version: 5cc9d62f61ce198c964ca576545b172004a61a275112c571aff2de56fc8537ba
+  fingerprint: 5cc9d62f61ce198c964ca576545b172004a61a275112c571aff2de56fc8537ba
+  sha1: sha256:4f2a69f7ee7c533e7025c4efa581d978285f094f901da860ac67a9a7ffa565f4
+  dependencies:
+  - ruby-2.4-r4
+- name: jq
+  version: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  fingerprint: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  sha1: sha256:c30b23c85f35d89cbcf1273f4de859b64d26ee8f352c321e1394dbafc08f17a2
+  dependencies: []
+- name: kubectl
+  version: c24962f9c38d9cddf79b4ffd63b37d054477f7964ac40bcf8635fe01bcd8e232
+  fingerprint: c24962f9c38d9cddf79b4ffd63b37d054477f7964ac40bcf8635fe01bcd8e232
+  sha1: sha256:25b1f1ff68af2ac8431bda9131652b45edf74a6796686958792ac0ba9e8474ef
+  dependencies:
+  - ruby-2.4-r4
+- name: ruby-2.4-r4
+  version: 0cdc60ed7fdb326e605479e9275346200af30a25
+  fingerprint: 0cdc60ed7fdb326e605479e9275346200af30a25
+  sha1: 3f1809b9d7e326d8a701de516fb51ea4245913c6
+  dependencies: []
+license:
+  version: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  fingerprint: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  sha1: sha256:c4a3fad64da34e39a227c0623c17cdbbe17f244305055a032c3fa35f746f6624

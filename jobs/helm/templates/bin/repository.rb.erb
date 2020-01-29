@@ -22,15 +22,16 @@ puts ""
 data.each { |repository|
      pname = repository['name']
      purl = repository['url']
-     if (prepository_mirror_enabled)
-        cmd = "helm repo add  #{pname} #{prepository_mirror_url} "
-     else
-        if (repository_mirror_ca_cert.eql? nil)
-            cmd = "helm repo add  #{pname} #{purl} "
-        else
-            cmd = "helm repo add  --ca-file=/var/vcap/store/helm/config/mirror_ca_cert.pem #{pname} #{purl} "
-        end
-     end
+
+      if !prepository_mirror_enabled
+         cmd = "helm repo add  #{pname} #{purl} "
+       else
+         if repository_mirror_ca_cert == ""
+           cmd = "helm repo add  #{pname} #{prepository_mirror_url} "
+         else
+           cmd = "helm repo add  --ca-file=/var/vcap/store/action/config/mirror_ca_cert.pem #{pname} #{repository_mirror_ca_cert} "
+         end
+       end
 
     # Begin the retryable operation
 

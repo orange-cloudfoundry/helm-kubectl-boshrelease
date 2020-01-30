@@ -20,7 +20,7 @@ def create_do_pv_array (actions)
     cmd = ""
     case category
     when 'pv'
-      cmd = do_shell_pv(object)
+      cmd = do_shell_pv(action)
     end
     cmds.push(cmd)
   }

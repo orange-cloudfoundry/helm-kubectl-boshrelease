@@ -8,6 +8,7 @@ templates:
   bin/declare_vars.rb.erb: bin/declare_vars.rb
   bin/kubectl_pv.rb: bin/kubectl_pv.rb
   bin/pv.rb: bin/pv.rb
+  bin/pv_script.rb: bin/pv_script.rb
   bin/run.erb: bin/run
   bin/uninstall.rb: bin/uninstall.rb
   config/ca_cert.pem.erb: config/ca_cert.pem

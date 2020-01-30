@@ -22,7 +22,10 @@ def create_do_pv_array (actions)
     case category
     when 'pv'
       cmd = do_shell_pv(action)
+    else
+      puts("ERROR !!! unknown type: #{category}")
     end
+    puts("cmd #{category} created: #{cmd}")
     cmds.push(cmd)
   }
   cmds

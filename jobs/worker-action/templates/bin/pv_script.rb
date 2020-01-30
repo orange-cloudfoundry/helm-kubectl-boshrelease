@@ -11,5 +11,8 @@ def do_shell_pv(pv)
   current_node= "#{current_deployment}-#{current_name}-#{current_index}"
   if current_node.eql? node
     return "mkdir -p #{path};  chcon -Rt svirt_sandbox_file_t #{path};  chmod 777 #{path};"
+  else
+    return " #pv not applicable #{current_node} <> #{node}"
   end
+
 end

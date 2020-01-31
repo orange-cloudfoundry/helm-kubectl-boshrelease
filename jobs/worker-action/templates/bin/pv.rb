@@ -18,15 +18,17 @@ def create_do_pv_array (actions)
   cmds= []
   actions.each { |action|
     category= action['type']
-    cmd = ""
-    case category
+      case category
     when 'pv'
       cmd = do_shell_pv(action)
+      cmds.push(cmd)
+      puts("cmd #{category} created: #{cmd}")
+      cmd = do_create_pv(action,ActionProperties.storageclass)
+      cmds.push(cmd)
+      puts("cmd #{category} created: #{cmd}")
     else
       puts("ERROR !!! unknown type: #{category}")
     end
-    puts("cmd #{category} created: #{cmd}")
-    cmds.push(cmd)
   }
   cmds
 end

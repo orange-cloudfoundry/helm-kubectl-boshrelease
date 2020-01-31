@@ -23,7 +23,7 @@ def create_do_pv_array (actions)
       cmd = do_shell_pv(action)
       cmds.push(cmd)
       puts("cmd #{category} created: #{cmd}")
-      cmd = do_create_pv(action,ActionProperties.storageclass)
+      cmd = do_create_pv(action,ActionProperties.storageclass,ActionProperties.based_on_label)
       cmds.push(cmd)
       puts("cmd #{category} created: #{cmd}")
     else

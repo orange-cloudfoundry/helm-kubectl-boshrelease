@@ -50,9 +50,13 @@ properties:
     description: ""
     default: "false"
 
+  persistent_volume.based_on_label:
+    description: "label used to check node name"
+    default: "worker"
+
   persistent_volume.storageclass.name:
     description: ""
-    default: "manual-local-pv"
+    default: "manual_local_pv"
 
   persistent_volume.pvs:
     default: []

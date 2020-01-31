@@ -1,11 +1,10 @@
 #===============================================================
 # create command for execute kubectl to design pv
 #===============================================================
-def do_create_pv(pv,storageclass)
+def do_create_pv(pv,storageclass,based_on_label)
   name = pv['name']
   storage = pv['storage']
   path = pv['path']
-  label = pv['label']
   node = pv['node']
   filename= "/tmp/pv_#{name}.yml"
   File.open(filename, 'w+') do |f|
@@ -15,21 +14,21 @@ def do_create_pv(pv,storageclass)
     f.puts("  name: #{name}")
     f.puts("spec: ")
     f.puts("  capacity:")
-    f.puts("  storage: #{storage}")
-    f.puts("accessModes:")
-    f.puts("- ReadWriteOnce")
-    f.puts("persistentVolumeReclaimPolicy: Retain")
-    f.puts("storageClassName: #{storageclass}")
-    f.puts("local:")
-    f.puts("  path: #{path}")
-    f.puts("nodeAffinity:")
-    f.puts("  required:")
-    f.puts("    nodeSelectorTerms:")
-    f.puts("    - matchExpressions:")
-    f.puts("      - key: #{label}")
-    f.puts("        operator: In")
-    f.puts("        values:")
-    f.puts("        - #{node}")
+    f.puts("    storage: #{storage}")
+    f.puts("  accessModes:")
+    f.puts("  - ReadWriteOnce")
+    f.puts("  persistentVolumeReclaimPolicy: Retain")
+    f.puts("  storageClassName: #{storageclass}")
+    f.puts("  local:")
+    f.puts("    path: #{path}")
+    f.puts("  nodeAffinity:")
+    f.puts("    required:")
+    f.puts("      nodeSelectorTerms:")
+    f.puts("      - matchExpressions:")
+    f.puts("        - key: #{based_on_label}")
+    f.puts("          operator: In")
+    f.puts("          values:")
+    f.puts("          - #{node}")
   end
   return "kubectl apply -f #{filename} "
 end

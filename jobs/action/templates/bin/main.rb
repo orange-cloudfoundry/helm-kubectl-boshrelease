@@ -13,7 +13,6 @@ require 'kubectl_secret'
 require 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
-cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
 
 max_retries = 3
 sleep_duration = 5

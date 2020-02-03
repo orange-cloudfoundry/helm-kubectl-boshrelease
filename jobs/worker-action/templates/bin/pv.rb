@@ -11,7 +11,6 @@ require 'kubectl_pv'
 require 'pv_script'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/worker-action/;"
-cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/worker-action/config/kubeconfig;")
 
 
 def create_do_pv_array (actions)

@@ -150,7 +150,7 @@ Helm chart deployment can be customize by properties or by value file
 Caution: During bosh delete-deployment the created instance of chart will be deleted.
 ## add kubectl cmd
 
-example with an apply deployment
+example of use with an apply deployment
 ``` yaml
 - type: replace
   path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
@@ -190,7 +190,9 @@ example with an apply deployment
             nodeSelector:
               'beta.kubernetes.io/os': linux
 ```
-example with direct apply on content from internet 
+
+example of use with direct apply on content from internet :
+
 ``` yaml
 - type: replace
   path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
@@ -201,12 +203,38 @@ example with direct apply on content from internet
     options: "-f https://github.com/jetstack/cert-manager/releases/download/v((cert-manager-version))/cert-manager-no-webhook.yaml"
 ``` 
 
+example of use to produce a config map with very large content:
 
-
+```  yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=kubectl/properties/commands/-
+  value:
+    name: "cm-grafana-k8s-master-node-exporter-dashboard"
+    cmd: "replace"
+    options: " --force --save-config=false "
+    apply:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: dash-k8s-all-node-exporter
+        namespace: monitoring
+        labels:
+          grafana_dashboard: '1'
+      data:
+        grafana_k8d_all_node_exporter_dashboard.json: |
+          {
+            "annotations": {
+              "list": [
+                {
+                  "builtIn": 1,
+                  ....
+```                   
+                  
 ## add secret
 
 This action will encode in base64 the content of value and create a K8S secret in the namespace.
 
+example of use:
 ``` yaml
 - type: replace
   path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
@@ -233,6 +261,7 @@ ingress default type can be customize by `ingress_class` property.
 | annotations      |        []       |      array of {name:"",value:""} |
 | definition      |               |      specification of ingress |
 
+example of use:
 
 ``` yaml
 - type: replace

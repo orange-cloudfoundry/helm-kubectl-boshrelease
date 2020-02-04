@@ -7,9 +7,11 @@ This bosh release should be use as an errand to apply charts.
 It uses Helm V3.
 
 ## Usage
+see web site: https://orange-cloudfoundry.github.io/helm-kubectl-boshrelease/
 
 ### Upload the last release
 To use this bosh release, first upload it to your bosh:
+Note: _change the index the helm-kubectl release_
 
 ```
 bosh target BOSH_HOST
@@ -81,6 +83,9 @@ instance_groups:
         name: incubator
         url: https://kubernetes-charts-incubator.storage.googleapis.com/
 ```
+### Action job
+Action job provide an array of action. They are apply during bosh errand usage or on each deploy in case of `run_on_each_deploy=true`
+How it works internally: Each action will be converted into kubectl or helm command 
 ## add namespace
 As helm_V3 doesn't create namespace, you can create namespace by using this kind of operator.
  
@@ -217,12 +222,65 @@ This action will encode in base64 the content of value and create a K8S secret i
         aws_secret_access_key = ((backup_remote_s3_secret_access_key))
 ```
 
-## add persistent volume
-
 ## add ingress
+ingress default type can be customize by `ingress_class` property.
+
+| name      |     default    |   comment |
+| ------------- |: -------------: | ---------: |
+| type     |        ingress        |      define the type of action |
+| name        |               |      must be unique inside ingress type |
+| namespace       |   ""            |      namespace of the ingress |
+| annotations      |        []       |      array of {name:"",value:""} |
+| definition      |               |      specification of ingress |
 
 
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: ingress
+    name: dashboard-ingress
+    namespace: kube-system
+    annotations:
+    - name: "traefik.fontend.rule.type"
+      value: "PathPrefixStrip"
+    - name: "ingress.kubernetes.io/ssl-proxy-headers"
+      value: "X-Forwarded-Proto:https"
+    definition:
+      spec:
+        tls:
+        - hosts:
+          - dashboard.mydomain
+          secretName: kubernetes-dashboard-certs-valid
 
+        rules:
+        - host: dashboard.mydomain
+          http:
+            paths:
+            - backend:
+                serviceName: dashboard-kubernetes-dashboard
+                servicePort: 443
+              path: /
+
+```
+### Worker Action job
+WorkerAction job add unique and predictable label on each node to evict the fact that the node name is iaas dependant.
+## add persistent volume
+The job worker-action is able to create static pv. 
+
+It uses node label to determine where the static pv will be store and on specific path.
+
+``` yaml
+- type: replace
+  path: /instance_groups/name=worker/jobs/name=worker-action/properties/persistent_volume/pvs/-
+  value:
+    type: pv
+    name: gitlab-minio-0
+    storage: 10Gi
+    path: /var/vcap/store/gitlab-minio-local-pv/minio-0
+    node: cfcr-worker-0
+
+```
 ### Development
 
 As a developer of this release, create new releases and upload them:

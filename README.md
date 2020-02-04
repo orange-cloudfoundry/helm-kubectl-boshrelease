@@ -142,10 +142,80 @@ Helm chart deployment can be customize by properties or by value file
         ...
                           
 ```
-
+Caution: During bosh delete-deployment the created instance of chart will be deleted.
 ## add kubectl cmd
 
+example with an apply deployment
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: kubectl
+    name: "deploy-k8sdash"
+    cmd: "apply"
+    options: ""
+    content:
+      kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: k8dash
+        namespace: kube-system
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            k8s-app: k8dash
+        template:
+          metadata:
+            labels:
+              k8s-app: k8dash
+          spec:
+            containers:
+            - name: k8dash
+              image: herbrandson/k8dash:latest
+              ports:
+              - containerPort: 4654
+              livenessProbe:
+                httpGet:
+                  scheme: HTTP
+                  path: /
+                  port: 4654
+                initialDelaySeconds: 30
+                timeoutSeconds: 30
+            nodeSelector:
+              'beta.kubernetes.io/os': linux
+```
+example with direct apply on content from internet 
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: kubectl
+    name: "crd-for-cert-manager"
+    cmd: "apply"
+    options: "-f https://github.com/jetstack/cert-manager/releases/download/v((cert-manager-version))/cert-manager-no-webhook.yaml"
+``` 
+
+
+
 ## add secret
+
+This action will encode in base64 the content of value and create a K8S secret in the namespace.
+
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: secret
+    name: cloud-credentials
+    namespace: velero
+    data:
+    - name: cloud
+      value: |
+        [default]
+        aws_access_key_id = backup_remote_s3_access_key_id
+        aws_secret_access_key = ((backup_remote_s3_secret_access_key))
+```
 
 ## add persistent volume
 

@@ -8,10 +8,26 @@ It uses Helm V3.
 
 ## Usage
 see web site: https://orange-cloudfoundry.github.io/helm-kubectl-boshrelease/
+These bosh release is composed by 4 jobs
+
+- worker-action
+  - it creates a predictable label worker on each Node
+  - it creates Static Persistent volumes and dedicated storageclass
+- action
+  - it creates namespace
+  - it applies kubectl command
+  - it adds helm repository
+  - it creates helm chart instance
+  - it creates secret
+  - it creates Ingress
+- helm (old job deprecated)
+
+- kubectl (old job deprecated)
+
 
 ### Upload the last release
 To use this bosh release, first upload it to your bosh:
-Note: _change the index the helm-kubectl release_
+Note: _change the index the helm-kubectl-index.yml to the last version of the bosh release_
 
 ```
 bosh target BOSH_HOST

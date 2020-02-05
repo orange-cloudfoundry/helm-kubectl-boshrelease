@@ -13,7 +13,6 @@ require_relative 'kubectl_secret'
 require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
-cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
 isOnFail = false
 cmds = create_undo_commands_array(actions)
 cmds.each{ |cmd|

@@ -33,7 +33,7 @@ def create_do_pv_array (actions)
 end
 
 
-if (ActionProperties.create_storageclass = true)
+if (ActionProperties.create_storageclass.eql? "true")
   storageclass =ActionProperties.storageclass
   filename= "/tmp/storageclass_#{storageclass}.yml"
   File.open(filename, 'w+') do |f|

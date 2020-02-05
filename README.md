@@ -24,10 +24,11 @@ These bosh release is composed by 4 jobs
 
 - kubectl (old job deprecated)
 
-
+During undeploy of the bosh release every thing created by action will be deleted.
+ 
 ### Upload the last release
 To use this bosh release, first upload it to your bosh:
-Note: _change the index the helm-kubectl-index.yml to the last version of the bosh release_
+Note: _change the index the helm-kubectl-[index].yml to the last version of the bosh release_
 
 ```
 bosh target BOSH_HOST
@@ -105,7 +106,7 @@ How it works internally: Each action will be converted into kubectl or helm comm
 ## add namespace
 As helm_V3 doesn't create namespace, you can create namespace by using this kind of operator.
  
-example: 
+basic example: 
 ``` yaml
  - type: replace
    path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
@@ -113,6 +114,25 @@ example:
      type: namespace
      name: my-namespace    
 ```
+
+example with annotations and labels:
+
+``` yaml
+ - type: replace
+   path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+   value:
+     type: namespace
+     name: my-namespace
+     annotations:
+     - name: myannotation
+       value: hello
+     labels:
+     - name: mylabel
+       value: hello
+         
+```
+
+
 Caution: During bosh delete-deployment the created namespace will be deleted. So be careful do  not create `kube-system` namespace with this kind of operator. 
 
 ## add helm repository

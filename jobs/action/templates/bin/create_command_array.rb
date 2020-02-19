@@ -21,7 +21,7 @@ def create_do_commands_array (actions)
     else
       puts("ERROR !!! unknown type: #{category}")
     end
-    puts("cmd #{category} created: #{cmd}")
+    puts("#{cmd}")
     cmds.push(cmd)
   }
   cmds

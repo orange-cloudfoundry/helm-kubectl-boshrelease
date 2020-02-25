@@ -14,7 +14,7 @@ require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 isOnFail = false
-cmds = create_undo_commands_array(actions)
+cmds = create_undo_commands_array(ActionProperties.actions)
 cmds.each{ |cmd|
 
       result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")

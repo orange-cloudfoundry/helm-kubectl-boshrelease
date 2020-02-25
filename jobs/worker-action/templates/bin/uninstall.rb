@@ -4,22 +4,15 @@
 require 'yaml'
 require 'base64'
 require_relative 'declare_vars'
-require_relative '../../../action/templates/bin/kubectl_pv'
-require_relative 'create_command_array'
+require_relative 'kubectl_pv'
 
-cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
-cmd_init =("#{cmd_init} export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig;")
-is_on_fail = false
-cmds = create_undo_commands_array(actions)
-cmds.each{ |cmd|
-
-      result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
-      if !result
-          puts "first try failed: #{cmd}"
-          system("cat err.txt")
-          is_on_fail = true
-      end
-}
-if (is_on_fail)
-  fail("some uninstall cannot be performed need to delete with option --force")
+if (ActionProperties.create_storageclass.eql? "true")
+  storageclass =ActionProperties.storageclass
+  cmd = "kubectl delete storageclass #{storageclass} "
+  result= system("#{cmd}")
+  if !result
+    puts "ACTION FAILED: #{cmd}"
+  else
+    puts "ACTION SUCCESS: #{cmd}"
+  end
 end

@@ -11,6 +11,7 @@ require 'kubectl_ingress'
 require 'kubectl_namespace'
 require 'kubectl_secret'
 require 'create_command_array'
+require 'bcrypt'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 

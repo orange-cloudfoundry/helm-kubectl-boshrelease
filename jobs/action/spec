@@ -14,6 +14,7 @@ templates:
   bin/kubectl_ingress.rb: bin/kubectl_ingress.rb
   bin/kubectl_namespace.rb: bin/kubectl_namespace.rb
   bin/kubectl_secret.rb: bin/kubectl_secret.rb
+  bin/kubectl_basicauth.rb: bin/kubectl_basicauth.rb
   bin/main.rb: bin/main.rb
   bin/uninstall.rb: bin/uninstall.rb
   config/ca_cert.pem.erb: config/ca_cert.pem

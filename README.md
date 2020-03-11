@@ -285,6 +285,21 @@ example of use:
         aws_access_key_id = backup_remote_s3_access_key_id
         aws_secret_access_key = ((backup_remote_s3_secret_access_key))
 ```
+## add secret for basic auth
+
+This action will encode in base64 the content of value and create a K8S secret in the namespace.
+
+example of use:
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: secret_basic_auth
+    name: mybasicauth
+    namespace: traefik
+    user: admin
+    password: ((mypassword))
+```
 
 ## add ingress
 ingress default type can be customize by `ingress_class` property.

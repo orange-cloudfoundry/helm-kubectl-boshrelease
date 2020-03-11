@@ -37,7 +37,7 @@ def do_create_basic_auth(secret)
       chaine="#{user}:#{encryptedpassword}"
       b=  Base64.encode64(chaine)
       b.delete!("\n")
-      f.puts("  user: #{b}")
+      f.puts("  users: #{b}")
     end
   end
   "kubectl apply -f #{filename} "

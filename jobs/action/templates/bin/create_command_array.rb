@@ -8,7 +8,7 @@ def create_do_commands_array (actions)
       cmd = (do_create_namespace(action))
     when 'secret'
       cmd = do_create_secret(action)
-    when 'secret_basic_auth'
+    when 'basic_auth_secret'
       cmd = do_create_basic_auth(action)
     when 'ingress'
       cmd = do_create_ingress(action,ActionProperties.ingressClass)

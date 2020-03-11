@@ -294,7 +294,7 @@ example of use:
 - type: replace
   path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
   value:
-    type: secret_basic_auth
+    type: basic_auth_secret
     name: mybasicauth
     namespace: traefik
     user: admin

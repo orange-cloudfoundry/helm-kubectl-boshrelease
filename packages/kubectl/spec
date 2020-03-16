@@ -2,7 +2,7 @@
 name: kubectl
 
 dependencies: 
-- ruby-2.4-r4
+- ruby-2.6.5-r0.29.0
 
 files:
 - kubectl/**/* 

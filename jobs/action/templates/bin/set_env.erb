@@ -1,5 +1,19 @@
 #!/bin/bash
 set -e
+ASSERT_GEM_VERSION=3.1.2
+source "/var/vcap/packages/action/bosh/runtime.env"
+
+export PATH=$PATH:/var/vcap/packages/ruby-2.6.5-r0.29.0/bin/
+gems_version=$(bundle exec gem -v)
+
+
+if [[ $gems_version == *"$ASSERT_GEM_VERSION"* ]]; then
+  echo "found correct rubygems version $gems_version"
+else
+  echo "wrong rubygems version: $gems_version"
+  exit 1
+fi
+export GEM_PATH=$GEM_PATH:/var/vcap/packages/action/gem_home/ruby/2.6.0/
 
 export http_proxy=<%= p('proxy.http') %>
 export HTTP_PROXY=<%= p('proxy.http') %>
@@ -11,8 +25,6 @@ export NO_PROXY=<%= p('proxy.noproxy') %>
 export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/helm/linux-amd64/
 export PATH=$PATH:/var/vcap/packages/kubectl/
-export PATH="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bin:$PATH"
-export GEMRC="${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r4/bosh/gemrc"
 export HELM_HOME=/var/vcap/store/helm/
 
 mkdir -p /var/vcap/store/helm/

@@ -10,6 +10,7 @@ require 'kubectl_command'
 require 'kubectl_ingress'
 require 'kubectl_namespace'
 require 'kubectl_secret'
+require 'kubectl_basicauth'
 require 'create_command_array'
 require 'bcrypt'
 

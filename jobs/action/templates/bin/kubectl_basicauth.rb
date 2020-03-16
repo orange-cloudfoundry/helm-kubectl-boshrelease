@@ -31,14 +31,14 @@ def do_create_basic_auth(secret)
         f.puts("    #{label['name']}: #{label['value']}")
       }
     end
-    if spec != nil
-      f.puts("data:")
-      encryptedpassword=BCrypt::Password.create("#{password}")
-      chaine="#{user}:#{encryptedpassword}"
-      b=  Base64.encode64(chaine)
-      b.delete!("\n")
-      f.puts("  users: #{b}")
-    end
+
+    f.puts("data:")
+    encryptedpassword=BCrypt::Password.create("#{password}")
+    chaine="#{user}:#{encryptedpassword}"
+    b=  Base64.encode64(chaine)
+    b.delete!("\n")
+    f.puts("  users: #{b}")
+
   end
   "kubectl apply -f #{filename} "
 end

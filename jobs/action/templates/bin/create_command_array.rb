@@ -18,8 +18,8 @@ def create_do_commands_array (actions)
       cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'
       cmd = do_install_chart(action)
-    when 'pv'
-      cmd = do_create_pv(action, ActionProperties.storageclass)
+#     when 'pv'
+#      cmd = do_create_pv(action, ActionProperties.storageclass)
     else
       puts("ERROR !!! unknown type: #{category}")
     end
@@ -37,20 +37,20 @@ def create_undo_commands_array (actions)
     case category
     when 'namespace'
       cmd = undo_create_namespace(action)
+    when 'basic_auth_secret'
+      cmd = undo_create_basic_auth(action)
     when 'secret'
       cmd = undo_create_secret(action)
     when 'ingress'
       cmd = undo_create_ingress(action)
-    when 'pv'
-      cmd = undo_create_pv(action)
+#    when 'pv'
+#      cmd = undo_create_pv(action)
     when 'kubectl'
       cmd = undo_create_kubectl(action)
     when 'helm_repo'
       # nothing to do #
     when 'helm_chart'
       cmd = undo_install_chart(action)
-    when 'pv'
-      cmd = undo_create_pv(action)
     else
       puts("unknown type: #{category}")
     end

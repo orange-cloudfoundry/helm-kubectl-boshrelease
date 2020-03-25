@@ -1,0 +1,71 @@
+name: helm-kubectl
+version: "20"
+commit_hash: 022bb06
+uncommitted_changes: false
+jobs:
+- name: action
+  version: 0be7eef84b00a9402cb11d3f56fc25c4bf56084041219656f61480bdf6ce96af
+  fingerprint: 0be7eef84b00a9402cb11d3f56fc25c4bf56084041219656f61480bdf6ce96af
+  sha1: sha256:92d35f53d38ac5259180aa1d8d7fd2cf483d043cdd5d378f351ebc2b06675f25
+  packages:
+  - helm
+  - kubectl
+  - ruby-2.6.5-r0.29.0
+  - action
+- name: helm
+  version: 10172a53ba5f326d8e4d6781c3d20a317eaf303df7cec87d4ec8b804b56fd05e
+  fingerprint: 10172a53ba5f326d8e4d6781c3d20a317eaf303df7cec87d4ec8b804b56fd05e
+  sha1: sha256:a3b71d86ffb716514ba6db1420990c087725f9e0d3c16116481973040e297974
+  packages:
+  - helm
+  - kubectl
+  - ruby-2.6.5-r0.29.0
+- name: kubectl
+  version: 613f79803a006d37a282e41e258e7f32b948c53229563d49580f217f28a00721
+  fingerprint: 613f79803a006d37a282e41e258e7f32b948c53229563d49580f217f28a00721
+  sha1: sha256:466d5e4e6a0dd76428a55bbc0afed659f65b5510d0ced32395486855c6bf7ffe
+  packages:
+  - kubectl
+  - ruby-2.6.5-r0.29.0
+- name: worker-action
+  version: 4ceee19ddd6ca3a79cd59cc6ccc31034812d9f3d59c04fe0e076c2c067d0c21e
+  fingerprint: 4ceee19ddd6ca3a79cd59cc6ccc31034812d9f3d59c04fe0e076c2c067d0c21e
+  sha1: sha256:4413063d1b42a664ee333d015e12eefca6d74bff5c90c15c14bb618bdc1721f3
+  packages:
+  - kubectl
+  - ruby-2.6.5-r0.29.0
+  - jq
+  - action
+packages:
+- name: action
+  version: dde418cdf9f46bc6ebb35c9504bc3adc9e78725ac2eef0e3f4f8b71ca5c568df
+  fingerprint: dde418cdf9f46bc6ebb35c9504bc3adc9e78725ac2eef0e3f4f8b71ca5c568df
+  sha1: sha256:248dab3a8cd35b0ca6111506070dd55a54c066c085808723c5c7e7edb21603c9
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: helm
+  version: 691c69660e61a5139d5aa4e4b64f0f040cfe780e084084e12254fe0e9dec1024
+  fingerprint: 691c69660e61a5139d5aa4e4b64f0f040cfe780e084084e12254fe0e9dec1024
+  sha1: sha256:182f79651d66f93550e35a936dfea81c9eb9ae7646602049ae4acc6ebc313c7c
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: jq
+  version: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  fingerprint: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  sha1: sha256:c30b23c85f35d89cbcf1273f4de859b64d26ee8f352c321e1394dbafc08f17a2
+  dependencies: []
+- name: kubectl
+  version: bb43a3bf60c2c0be8ec95c7e85c77e0c7dcf1c4c62d0b6069e57e184c50c6c5b
+  fingerprint: bb43a3bf60c2c0be8ec95c7e85c77e0c7dcf1c4c62d0b6069e57e184c50c6c5b
+  sha1: sha256:6a94153edbcf1a924538176503de4b276915580343ca817f583de278de2ac2aa
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: ruby-2.6.5-r0.29.0
+  version: 269dc54d5306119b0e4f89be04f6c470b4876f552753815586fd1ab8ebeaa70d
+  fingerprint: 269dc54d5306119b0e4f89be04f6c470b4876f552753815586fd1ab8ebeaa70d
+  sha1: sha256:67381e113bdb1ec2b025e5ddc441efb3a077d2c19a324ffbff090aaf200cd6a7
+  dependencies: []
+license:
+  version: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  fingerprint: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  sha1: sha256:c4a3fad64da34e39a227c0623c17cdbbe17f244305055a032c3fa35f746f6624

@@ -55,7 +55,7 @@ def create_undo_commands_array (actions)
       puts("unknown type: #{category}")
     end
     puts("cmd for uninstall #{category} created: #{cmd}")
-    if !cmd.eql?""
+    if cmd.eql?""
     else
       cmds.insert(0,cmd)
     end

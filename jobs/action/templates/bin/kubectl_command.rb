@@ -33,7 +33,7 @@ def undo_create_kubectl(apply)
 
   kubectl_cmd = nil
   filename = "/tmp/#{name}.yml"
-  if cmd.equal?'apply'
+  if cmd.eql? 'apply'
     kubectl_cmd ="kubectl delete "
     unless namespace.nil? || namespace == 0
       kubectl_cmd = "#{kubectl_cmd} --namespace #{namespace} "

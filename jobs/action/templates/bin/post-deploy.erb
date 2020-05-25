@@ -1,7 +1,22 @@
 #!/bin/bash
 
+RUN_DIR=/var/vcap/sys/run/action
+LOG_DIR=/var/vcap/sys/log/action
+DATA_DIR=/var/vcap/store/action
 
 <% if_p("run_on_each_deploy") do |run_on_each_deploy|
+
+
+    setup_directories() {
+      mkdir -p "$RUN_DIR" "$LOG_DIR" "$DATA_DIR"
+      chown -R vcap:vcap "$RUN_DIR" "$LOG_DIR" "$DATA_DIR"
+    }
+    send_process_stdout_to_logfile() {
+      exec 1>> "$LOG_DIR/$NAME.stdout.log"
+    }
+    send_process_stderr_to_logfile() {
+      exec 2>> "$LOG_DIR/$NAME.stderr.log"
+    }
   if run_on_each_deploy %>
   source /var/vcap/jobs/action/bin/run
   <% end

@@ -76,7 +76,7 @@ properties:
 
   run_on_each_deploy:
     description: "run.erb this as an errand but also on each deploy"
-    default: false
+    default: true
 
   actions:
     description: "array of action"

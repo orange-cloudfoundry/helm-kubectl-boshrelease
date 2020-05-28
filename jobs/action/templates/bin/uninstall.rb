@@ -10,6 +10,10 @@ require_relative 'kubectl_command'
 require_relative 'kubectl_ingress'
 require_relative 'kubectl_namespace'
 require_relative 'kubectl_secret'
+require_relative 'kubectl_basicauth'
+
+
+
 require_relative 'create_command_array'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"

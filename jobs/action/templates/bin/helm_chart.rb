@@ -56,7 +56,7 @@ def undo_install_chart(chart)
   namespace = chart['namespace']
   name = chart['name']
 
-  cmd = "helm delete "
+  cmd = "helm uninstall "
   unless namespace.nil? || namespace == 0
     cmd = "#{cmd} --namespace #{namespace}"
   end

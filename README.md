@@ -269,6 +269,7 @@ example of use to produce a config map with very large content:
 ## add secret
 
 This action will encode in base64 the content of value and create a K8S secret in the namespace.
+By default the type of the secret is generic but it can be override by `secret_type`  
 
 example of use:
 ``` yaml

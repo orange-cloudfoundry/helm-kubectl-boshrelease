@@ -8,7 +8,7 @@ def do_create_secret(secret)
   spec = secret['data']
   annotations =secret['annotations']
   labels= secret['labels']
-  type= secret['type']
+  secret_type= secret['secret_type']
   filename="/tmp/secret_#{name}.yml"
 
 
@@ -30,8 +30,8 @@ def do_create_secret(secret)
         f.puts("    #{label['name']}: #{label['value']}")
       }
     end
-    if type != nil
-      f.puts("type: #{type}")
+    if secret_type != nil
+      f.puts("type: #{secret_type}")
     end
     if spec != nil
       f.puts("data:")

@@ -33,6 +33,34 @@ endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
 
 
+case <%= p('config') %> in
+
+path_config_file)
+  cp p('kubernetes.config_path') /var/vcap/jobs/action/config/kubeconfig
+  kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  ;;
+
+provided_config)
+  cp /var/vcap/jobs/action/config/config /var/vcap/jobs/action/config/kubeconfig
+  kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  ;;
+
+token)
+  address="https://${endpoint}:${port}"
+  kubectl config set-cluster "cfcr" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
+  kubectl config set-credentials "admin" --token="<%= p('kubernetes.password') %>"
+  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
+  kubectl config use-context "cfcr"
+  ;;
+
+certificate)
+  address="https://${endpoint}:${port}"
+  kubectl config set-cluster "cfcr" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
+  kubectl config set-credentials "admin" --client-key /var/vcap/jobs/action/config/client-key.pem --client-certificate /var/vcap/jobs/action/config/client-certificate.pem --embed-certs
+  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
+  kubectl config use-context "cfcr"
+  ;;
+esac
 
 context_name=<%= p('kubernetes.usecontext') %>
 <% if !p('kubernetes.config_path').empty? and p('kubernetes.config_path') != "nil" %>
@@ -51,5 +79,5 @@ kubectl config set-credentials "${user_name}" --token="${password}"
 kubectl config set-context "${context_name}" --cluster="${cluster_name}" --user="${user_name}"
 <% end %>
 <% end %>
-kubectl config use-context "${context_name}"
+
 

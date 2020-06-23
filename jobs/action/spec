@@ -27,6 +27,15 @@ packages:
 - action
 
 properties:
+  config:
+    description: |
+      "define how the kubectl will create the config, can be
+      - path_config_file
+      - provided_config
+      - token
+      - certificate"
+    default: "token"
+
   proxy.http:
     description: "URL of http proxy"
     example: "http://myproxy.domain.com:8128"
@@ -42,6 +51,7 @@ properties:
     description: "list of no proxy"
     example: "127.0.0.1, localhost, *.internal.paas"
     default: ""
+
 
   kubernetes.config:
     description: "content of .kube/config file, if defined it will be use instead of others parameters"
@@ -70,6 +80,14 @@ properties:
 
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."
+
+  kubernetes.client_certificate:
+    description: "PEM-encoded user certificates bundle for TLS authentication."
+    default: ""
+
+  kubernetes.client_key:
+    description: "PEM-encoded user key bundle for TLS authentication."
+    default: ""
 
   kubernetes.default_storageclass:
     description: "If defined  put the default attribute to the storage class object"

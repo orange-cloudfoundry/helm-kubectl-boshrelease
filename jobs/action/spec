@@ -19,6 +19,8 @@ templates:
   bin/uninstall.rb: bin/uninstall.rb
   config/ca_cert.pem.erb: config/ca_cert.pem
   config/mirror_ca_cert.pem.erb: config/mirror_ca_cert.pem
+  config/client-certificate.pem.erb: config/client-certificate.pem
+  config/client-key.pem.erb: config/client-key.pem
 
 packages:
 - helm

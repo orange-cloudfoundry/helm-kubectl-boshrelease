@@ -36,7 +36,7 @@ port=<%= p('kubernetes.port') %>
 case <%= p('config') %> in
 
 path_config_file )
-  cp p('kubernetes.config_path') /var/vcap/jobs/action/config/kubeconfig
+  cp <%= p('kubernetes.config_path')%> /var/vcap/jobs/action/config/kubeconfig
   kubectl config use-context "<%= p('kubernetes.usecontext') %>"
   ;;
 

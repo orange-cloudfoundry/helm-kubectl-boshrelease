@@ -77,6 +77,7 @@ properties:
 
   kubernetes.password:
     description: "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
+    default: ""
 
   kubernetes.cluster_ca_certificate:
     description: "PEM-encoded root certificates bundle for TLS authentication."

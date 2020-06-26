@@ -31,12 +31,13 @@ mkdir -p /var/vcap/store/helm/
 
 endpoint=<%= p('kubernetes.host') %>
 port=<%= p('kubernetes.port') %>
+config=<%= p('config') %>
+config_path=<%= p('kubernetes.config_path') %>
 
-
-case <%= p('config') %> in
+case ${config} in
 
 path_config_file )
-  cp <%= p('kubernetes.config_path')%> /var/vcap/jobs/action/config/kubeconfig
+  cp ${config_path} /var/vcap/jobs/action/config/kubeconfig
   kubectl config use-context "<%= p('kubernetes.usecontext') %>"
   ;;
 

@@ -20,9 +20,6 @@ These bosh release is composed by 4 jobs
   - it creates helm chart instance
   - it creates secret
   - it creates Ingress
-- helm (old job deprecated)
-
-- kubectl (old job deprecated)
 
 During undeploy of the bosh release every thing created by action will be deleted.
  

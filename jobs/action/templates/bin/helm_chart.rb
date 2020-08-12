@@ -21,7 +21,7 @@ def do_install_chart(chart)
     }
   end
 
-  cmd = "helm upgrade --install "
+  cmd = "helm upgrade --install --atomic --cleanup-on-fail"
 
   unless debug.nil? || debug == 0
     cmd = "#{cmd} --debug"

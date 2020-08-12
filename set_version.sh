@@ -1,5 +1,5 @@
-export HELM_VERSION=3.0.2
-export KUBECTL_VERSION=1.15.4
+export HELM_VERSION=3.3.0
+export KUBECTL_VERSION=1.18.5
 
 echo "helm version:"$HELM_VERSION
 echo "kubectl version:"$KUBECTL_VERSION

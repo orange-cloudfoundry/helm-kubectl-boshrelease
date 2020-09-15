@@ -16,7 +16,7 @@ require 'bcrypt'
 
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 
-max_retries = 3
+max_retries = 1
 sleep_duration = 5
 
 fail_cmd = []

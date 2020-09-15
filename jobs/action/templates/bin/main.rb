@@ -21,6 +21,11 @@ sleep_duration = 5
 
 fail_cmd = []
 is_on_fail=false
+result=system("#{cmd_init} kubectl get node > err.txt 2>&1 ")
+if !result
+  puts "unable to do kubectl get node=> Stop errand"
+  exit(-1)
+end
 puts "============================="
 puts("create list of commands")
 puts "============================="

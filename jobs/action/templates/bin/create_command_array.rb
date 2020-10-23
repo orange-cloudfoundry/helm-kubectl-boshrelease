@@ -5,7 +5,7 @@ def create_do_commands_array (actions)
     cmd = ""
     case category
     when 'namespace'
-      cmd = (do_create_namespace(action))
+      cmd = (do_create_namespace(action,ActionProperties.default_per_namespace_max_pods)
     when 'secret'
       cmd = do_create_secret(action)
     when 'basic_auth_secret'

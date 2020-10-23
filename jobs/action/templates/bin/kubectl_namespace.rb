@@ -47,6 +47,7 @@ def do_create_namespace(namespace, default_per_namespace_max_pods)
     end
   end
   cmd
+end
 
 #===============================================================
 # create command for delete namespace

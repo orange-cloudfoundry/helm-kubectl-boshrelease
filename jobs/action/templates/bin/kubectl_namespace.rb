@@ -42,8 +42,8 @@ def do_create_namespace(namespace, default_per_namespace_max_pods)
       f.puts("  namespace: #{name}")
       f.puts("spec:")
       f.puts("  hard:")
-      f.puts("    pod: max_pod")
-    cmd ="kubectl apply -f #{filename} ;kubectl apply -f #{filenameresourcequota}"
+      f.puts("    pods: #{max_pods}")
+    cmd ="kubectl apply -f #{filename}; kubectl apply -f #{filenameresourcequota}"
     end
   end
   cmd

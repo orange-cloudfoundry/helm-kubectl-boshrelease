@@ -6,7 +6,7 @@ def do_create_namespace(namespace, default_per_namespace_max_pods)
   annotations = namespace['annotations']
   labels = namespace['labels']
   max_pods = namespace['max_pods']
-  filename=."/tmp/ns_#{name}.yml"
+  filename="/tmp/ns_#{name}.yml"
   filenameresourcequota="/tmp/ns_#{name}_quota.yml"
   File.open(filename, 'w+') do |f|
     f.puts("apiVersion: v1")

@@ -134,3 +134,6 @@ properties:
     example: "traefik"
     default: "nginx"
 
+  default_per_namespace.max_pods:
+    description:"define max pod allowed per namespace. if set to -1 means no limit. This value can be overridden by namespace action"
+    default: "100"

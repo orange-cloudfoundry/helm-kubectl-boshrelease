@@ -16,6 +16,7 @@ require_relative 'kubectl_basicauth'
 
 require_relative 'create_command_array'
 
+if (ActionProperties.undo_action_on_delete_deployment)
 cmd_init ="export HELM_HOME=/var/vcap/store/action/;"
 isOnFail = false
 puts "============================="
@@ -23,19 +24,22 @@ puts "create list of undo commands"
 puts "============================="
 
 cmds = create_undo_commands_array(ActionProperties.actions)
-puts "============================="
-puts "execute list of commands"
-puts "============================="
 
-cmds.each{ |cmd|
-      puts "#{cmd}"
-      result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
-      if !result
-          puts "first try failed: #{cmd}"
-          system("cat err.txt")
-          isOnFail = true
-      end
-}
-if (isOnFail)
-  fail("some uninstall cannot be performed need to delete with option --force")
+
+  puts "============================="
+  puts "execute list of commands"
+  puts "============================="
+
+  cmds.each{ |cmd|
+        puts "#{cmd}"
+        result=system("#{cmd_init}#{cmd} > err.txt 2>&1 ")
+        if !result
+            puts "first try failed: #{cmd}"
+            system("cat err.txt")
+            isOnFail = true
+        end
+  }
+  if (isOnFail)
+    fail("some uninstall cannot be performed need to delete with option --force")
+    end
 end

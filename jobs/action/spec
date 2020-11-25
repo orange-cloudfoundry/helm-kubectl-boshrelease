@@ -137,3 +137,7 @@ properties:
   default_per_namespace.max_pods:
     description: "define max pod allowed per namespace. if set to -1 means no limit. This value can be overridden by namespace action"
     default: "100"
+
+  undo_action_on_delete_deployment:
+    description: "all action performed will be reverted during bosh delete-deployment (blocking process can be found in case of bad CRD or Helm chart)."
+    default: true

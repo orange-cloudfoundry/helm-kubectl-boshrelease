@@ -14,6 +14,8 @@ def create_do_commands_array (actions)
       cmd = do_create_ingress(action,ActionProperties.ingressClass)
     when 'kubectl'
       cmd = do_create_kubectl(action)
+    when 'exec'
+      cmd = do_create_exec(action)
     when 'helm_repo'
       cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'

@@ -8,6 +8,7 @@ templates:
   bin/set_env.erb: bin/set_env
   bin/declare_vars.rb.erb: bin/declare_vars.rb
   bin/create_command_array.rb: bin/create_command_array.rb
+  bin/command.rb: bin/command.rb
   bin/helm_chart.rb: bin/helm_chart.rb
   bin/helm_repository.rb: bin/helm_repository.rb
   bin/kubectl_command.rb: bin/kubectl_command.rb

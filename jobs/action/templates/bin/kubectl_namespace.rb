@@ -54,5 +54,5 @@ end
 #===============================================================
 def undo_create_namespace(namespace)
   name = namespace['name']
-  "kubectl delete ns #{name} "
+  "kubectl delete ns #{name} --ignore-not-found=true "
 end

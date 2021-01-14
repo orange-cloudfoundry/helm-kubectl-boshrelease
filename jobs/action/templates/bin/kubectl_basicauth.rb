@@ -51,8 +51,8 @@ def undo_create_basic_auth(secret)
     namespace = secret['namespace']
     name = secret['name']
     unless namespace.nil? || namespace == 0
-      return "kubectl delete secret #{name}"
+      return "kubectl delete secret #{name} --ignore-not-found=true "
     end
-    "kubectl delete secret -n #{namespace} #{name}"
+    "kubectl delete secret -n #{namespace} #{name} --ignore-not-found=true "
 
 end

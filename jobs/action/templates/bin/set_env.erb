@@ -34,32 +34,40 @@ port=<%= p('kubernetes.port') %>
 config=<%= p('config') %>
 config_path=<%= p('kubernetes.config_path') %>
 
+certificate_authority = ""
+<% if_p("kubernetes.cluster_ca_certificate") do |prop| %>
+    certificate_authority = "--certificate-authority=\"/var/vcap/jobs/action/config/ca_cert.pem\" "
+<% end %>
+
+
+insecure=<%= p('kubernetes.insecure_skip_tls_verify') %>
+
 case ${config} in
 
 path_config_file )
   cp ${config_path} /var/vcap/jobs/action/config/kubeconfig
-  kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  kubectl config use-context "<%= p('kubernetes.usecontext') %>" --insecure-skip-tls-verify=${insecure}
   ;;
 
 provided_config )
   cp /var/vcap/jobs/action/config/config /var/vcap/jobs/action/config/kubeconfig
-  kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  kubectl config use-context "<%= p('kubernetes.usecontext') %>" --insecure-skip-tls-verify=${insecure}
   ;;
 
 token )
   address="https://${endpoint}:${port}"
-  kubectl config set-cluster "cfcr" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
-  kubectl config set-credentials "admin" --token="<%= p('kubernetes.password') %>"
-  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
-  kubectl config use-context "cfcr"
+  kubectl config set-cluster "cfcr" --server="${address}" ${certificate_authority} --embed-certs=true --insecure-skip-tls-verify=${insecure}
+  kubectl config set-credentials "admin" --token="<%= p('kubernetes.password') %>" --insecure-skip-tls-verify=${insecure}
+  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin" --insecure-skip-tls-verify=${insecure}
+  kubectl config use-context "cfcr" --insecure-skip-tls-verify=${insecure}
   ;;
 
 certificate )
   address="https://${endpoint}:${port}"
-  kubectl config set-cluster "cfcr" --server="${address}" --certificate-authority="/var/vcap/jobs/action/config/ca_cert.pem" --embed-certs=true
-  kubectl config set-credentials "admin" --client-key /var/vcap/jobs/action/config/client-key.pem --client-certificate /var/vcap/jobs/action/config/client-certificate.pem --embed-certs
-  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
-  kubectl config use-context "cfcr"
+  kubectl config set-cluster "cfcr" --server="${address}" ${certificate_authority} --embed-certs=true --insecure-skip-tls-verify=${insecure}
+  kubectl config set-credentials "admin" --client-key /var/vcap/jobs/action/config/client-key.pem --client-certificate /var/vcap/jobs/action/config/client-certificate.pem --embed-certs --insecure-skip-tls-verify=${insecure}
+  kubectl config set-context "cfcr" --cluster="cfcr" --user="admin" --insecure-skip-tls-verify=${insecure}
+  kubectl config use-context "cfcr" --insecure-skip-tls-verify=${insecure}
   ;;
 esac
 

@@ -43,8 +43,8 @@ def undo_create_ingress(ingress)
   namespace = ingress['namespace']
   name = ingress['name']
   unless namespace.nil? || namespace == 0
-    return "kubectl delete ingress #{name}"
+    return "kubectl delete ingress #{name} --ignore-not-found=true "
   end
-  "kubectl delete ingress -n #{namespace} #{name}"
+  "kubectl delete ingress -n #{namespace} #{name} --ignore-not-found=true "
 
 end

@@ -25,6 +25,7 @@ export NO_PROXY=<%= p('proxy.noproxy') %>
 export KUBECONFIG=/var/vcap/jobs/action/config/kubeconfig
 export PATH=$PATH:/var/vcap/packages/helm/linux-amd64/
 export PATH=$PATH:/var/vcap/packages/kubectl/
+export PATH=$PATH:/var/vcap/packages/kustomize/
 export HELM_HOME=/var/vcap/store/helm/
 
 mkdir -p /var/vcap/store/helm/

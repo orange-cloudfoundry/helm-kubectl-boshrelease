@@ -1,12 +1,12 @@
 helm/helm.tar.gz:
-  size: 13323294
-  sha: sha256:538f85b4b73ac6160b30fd0ab4b510441aa3fa326593466e8bf7084a9c288420
+  size: 12327633
+  sha: sha256:3fff0354d5fba4c73ebd5db59a59db72f8a5bbe1117a0b355b0c2983e98db95b
 jq/jq-linux64:
   size: 3027945
   sha: sha256:c6b3a7d7d3e7b70c6f51b706a3b90bd01833846c54d32ca32f0027f00226ff6d
 kubectl/kubectl:
-  size: 44044288
-  sha: sha256:1bdab3fd6aecf1ab40fa9076e8ac487cd028a16f911da2d25d121033f6f61de0
+  size: 42950656
+  sha: sha256:5f5a0bebde8a8782b2d9de9bd314dce722f9f960bee090b121ea5ac38cf4377d
 set_version.sh:
-  size: 132
-  sha: sha256:f23cf9e4aa442fb6a9fecd4dd1df3ec812294cf87f84910da57c2d675463379f
+  size: 162
+  sha: sha256:52baaae05c4b9f22bf7b741466bbd582601e5ebf54a399d4b552287ea577d8a9

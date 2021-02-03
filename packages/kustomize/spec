@@ -1,8 +1,8 @@
 ---
-name: helm
+name: kustomize
 
 dependencies: 
 - ruby-2.6.5-r0.29.0
 
 files:
-- helm/helm.tar.gz
+- kustomize/kustomize.tar.gz

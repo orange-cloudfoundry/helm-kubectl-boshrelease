@@ -7,6 +7,9 @@ jq/jq-linux64:
 kubectl/kubectl:
   size: 42950656
   sha: sha256:5f5a0bebde8a8782b2d9de9bd314dce722f9f960bee090b121ea5ac38cf4377d
+kustomize/kustomize.tar.gz:
+  size: 12160807
+  sha: sha256:f5c76a726cbd27b74587fcd2816e86b3f6279d84043b7ed3725bf48b1bc8ca4a
 set_version.sh:
   size: 162
   sha: sha256:52baaae05c4b9f22bf7b741466bbd582601e5ebf54a399d4b552287ea577d8a9

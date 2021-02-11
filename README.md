@@ -163,7 +163,7 @@ Helm chart deployment can be customize by properties or by value file
     - name: unicorn.ingress.enabled
       value: false
 
-    values-file-content:
+    values_file_content:
       global:
         ## GitLab operator is Alpha. Not for production use.
         operator:

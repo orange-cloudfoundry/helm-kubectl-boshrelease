@@ -48,11 +48,13 @@ case ${config} in
 path_config_file )
   cp ${config_path} /var/vcap/jobs/action/config/kubeconfig
   kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  chmod go-r /var/vcap/jobs/action/config/kubeconfig
   ;;
 
 provided_config )
   cp /var/vcap/jobs/action/config/config /var/vcap/jobs/action/config/kubeconfig
   kubectl config use-context "<%= p('kubernetes.usecontext') %>"
+  chmod go-r /var/vcap/jobs/action/config/kubeconfig
   ;;
 
 token )
@@ -61,6 +63,7 @@ token )
   kubectl config set-credentials "admin" --token="<%= p('kubernetes.password') %>"
   kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
   kubectl config use-context "cfcr"
+  chmod go-r /var/vcap/jobs/action/config/kubeconfig
   ;;
 
 certificate )
@@ -69,6 +72,7 @@ certificate )
   kubectl config set-credentials "admin" --client-key /var/vcap/jobs/action/config/client-key.pem --client-certificate /var/vcap/jobs/action/config/client-certificate.pem --embed-certs
   kubectl config set-context "cfcr" --cluster="cfcr" --user="admin"
   kubectl config use-context "cfcr"
+  chmod go-r /var/vcap/jobs/action/config/kubeconfig
   ;;
 esac
 

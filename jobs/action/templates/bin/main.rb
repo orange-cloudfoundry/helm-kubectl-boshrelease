@@ -28,8 +28,17 @@ if !result
   exit(-1)
 end
 puts "============================="
+puts("create list of undo commands")
+puts "============================="
+cmds = create_undo_commands_array(ActionProperties.actions)
+filename="/var/vcap/data/action/undo_actions_list.yml"
+File.open(filename, 'w+') do |f|
+  cmds.each{ |cmd| f.puts("#{cmd}") }
+end
+puts "============================="
 puts("create list of commands")
 puts "============================="
+
 cmds = create_do_commands_array(ActionProperties.actions)
 filename="/var/vcap/data/action/actions_list.yml"
 File.open(filename, 'w+') do |f|

@@ -11,7 +11,7 @@ def do_install_chart(chart)
   values = chart['values_file_content']
   files = chart['files']
   name = chart['name']
-  filename= "/tmp/chart_#{name}.yml"
+  filename= "/var/vcap/data/action/chart_#{name}.yml"
 
   if properties != nil
     properties.each{ |property|

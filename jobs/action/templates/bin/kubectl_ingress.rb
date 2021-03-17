@@ -6,7 +6,7 @@ def do_create_ingress(ingress,ingress_class)
   name = ingress['name']
   spec = ingress['definition']
   annotations =ingress['annotations']
-  filename="/tmp/ingress_#{name}.yml"
+  filename="/var/vcap/data/action/ingress_#{name}.yml"
 
   File.open(filename, 'w+') do |f|
     f.puts("#{spec.to_yaml}")

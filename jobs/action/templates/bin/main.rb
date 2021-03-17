@@ -31,6 +31,11 @@ puts "============================="
 puts("create list of commands")
 puts "============================="
 cmds = create_do_commands_array(ActionProperties.actions)
+filename="/var/vcap/data/action/actions_list.yml"
+File.open(filename, 'w+') do |f|
+  cmds.each{ |cmd| f.puts("#{cmd}") }
+end
+
 puts "============================="
 puts("execute list of commands")
 puts "============================="

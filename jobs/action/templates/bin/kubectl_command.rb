@@ -7,7 +7,7 @@ def do_create_kubectl(apply)
   options = apply['options']
   cmd = apply['cmd']
   content = apply['content']
-  filename = "/tmp/#{name}.yml"
+  filename = "/var/vcap/data/action/#{name}.yml"
   kubectl_cmd ="kubectl #{cmd} "
   unless namespace.nil? || namespace == 0
     kubectl_cmd = "#{kubectl_cmd} --namespace #{namespace} "
@@ -32,7 +32,7 @@ def undo_create_kubectl(apply)
   content = apply['content']
 
   kubectl_cmd = nil
-  filename = "/tmp/#{name}.yml"
+  filename = "/var/vcap/data/action/#{name}.yml"
   if cmd.eql? 'apply'
     kubectl_cmd ="kubectl delete --ignore-not-found=true "
     unless namespace.nil? || namespace == 0

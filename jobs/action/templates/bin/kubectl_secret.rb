@@ -9,7 +9,7 @@ def do_create_secret(secret)
   annotations =secret['annotations']
   labels= secret['labels']
   secret_type= secret['secret_type']
-  filename="/tmp/secret_#{name}.yml"
+  filename="/var/vcap/data/action/secret_#{name}.yml"
 
 
   File.open(filename, 'w+') do |f|

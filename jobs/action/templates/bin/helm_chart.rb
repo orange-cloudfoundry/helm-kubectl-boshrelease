@@ -7,7 +7,8 @@ def do_install_chart(chart)
   namespace = chart['namespace']
   properties = chart['properties']
   version = chart['version']
-  debug = chart['debug']
+  command = chart['cmd']
+  options = chart['options']
   values = chart['values_file_content']
   files = chart['files']
   name = chart['name']
@@ -21,12 +22,14 @@ def do_install_chart(chart)
     }
   end
 
-  cmd = "helm upgrade --install --atomic --cleanup-on-fail"
-
-  unless debug.nil? || debug == 0
-    cmd = "helm upgrade --install "
-    cmd = "#{cmd} --debug"
+  if command.nil?
+    command = "upgrade"
   end
+  if options.nil?
+    options = "--install --atomic --cleanup-on-fail"
+  end
+
+  cmd = "helm #{command} #{options}"
 
   unless version.nil? || version == 0
     cmd = "#{cmd} --version=#{version}"
@@ -56,10 +59,13 @@ end
 def undo_install_chart(chart)
   namespace = chart['namespace']
   name = chart['name']
-
-  cmd = "helm uninstall "
-  unless namespace.nil? || namespace == 0
-    cmd = "#{cmd} --namespace #{namespace}"
+  command = chart['cmd']
+  if (command.nil? || ("install".eql? command) || ("udate".eql? command))
+    cmd = "helm uninstall "
+    unless namespace.nil? || namespace == 0
+      cmd = "#{cmd} --namespace #{namespace}"
+    end
+    "#{cmd} #{name}"
   end
-  "#{cmd} #{name}"
+  end
 end

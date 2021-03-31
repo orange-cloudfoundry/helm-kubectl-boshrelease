@@ -180,6 +180,8 @@ Helm chart deployment can be customize by properties or by value file
         ...
                           
 ```
+By default the helm type will perform
+
 Caution: During bosh delete-deployment the created instance of chart will be deleted.
 ## add kubectl cmd
 
@@ -339,24 +341,6 @@ example of use:
                 serviceName: dashboard-kubernetes-dashboard
                 servicePort: 443
               path: /
-
-```
-### Worker Action job
-WorkerAction job add unique and predictable label on each node to evict the fact that the node name is iaas dependant.
-## add persistent volume
-The job worker-action is able to create static pv. 
-
-It uses node label to determine where the static pv will be store and on specific path.
-
-``` yaml
-- type: replace
-  path: /instance_groups/name=worker/jobs/name=worker-action/properties/persistent_volume/pvs/-
-  value:
-    type: pv
-    name: gitlab-minio-0
-    storage: 10Gi
-    path: /var/vcap/store/gitlab-minio-local-pv/minio-0
-    node: cfcr-worker-0
 
 ```
 ### Development

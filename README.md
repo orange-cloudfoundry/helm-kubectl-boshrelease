@@ -8,18 +8,16 @@ It uses Helm V3.
 
 ## Usage
 see web site: https://orange-cloudfoundry.github.io/helm-kubectl-boshrelease/
-These bosh release is composed by 4 jobs
+These bosh release is composed by 1 jobs
 
-- worker-action
-  - it creates a predictable label worker on each Node
-  - it creates Static Persistent volumes and dedicated storageclass
 - action
   - it creates namespace
   - it applies kubectl command
   - it adds helm repository
   - it creates helm chart instance
   - it creates secret
-  - it creates Ingress
+  - it creates basic auth secret
+  - it can execute any shell
 
 During undeploy of the bosh release every thing created by action will be deleted.
  
@@ -81,7 +79,6 @@ instance_groups:
         cluster_ca_certificate: ((kubernetes.cluster_ca_certificate))
         password: ((kubernetes-password))
         default_storageclass: ((default_storageclass))
-      ingress_class: traefik
       proxy:
         https: ((https_proxy))
         http: ((http_proxy))
@@ -301,48 +298,36 @@ example of use:
     password: ((mypassword))
 ```
 
-## add ingress
-ingress default type can be customize by `ingress_class` property.
+## add exec action
+This action let user to use kubelet or helm or kustomise in shell
+to perform any shell script.
 
-| name      |     default    |   comment |
-| ------------- |: -------------: | ---------: |
-| type     |        ingress        |      define the type of action |
-| name        |               |      must be unique inside ingress type |
-| namespace       |   ""            |      namespace of the ingress |
-| annotations      |        []       |      array of {name:"",value:""} |
-| definition      |               |      specification of ingress |
+example:
 
-example of use:
-
-``` yaml
+``` 
 - type: replace
-  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  path: /instance_groups/name=k8s-helm-addons/jobs/name=action/properties/actions/-
   value:
-    type: ingress
-    name: dashboard-ingress
-    namespace: kube-system
-    annotations:
-    - name: "traefik.fontend.rule.type"
-      value: "PathPrefixStrip"
-    - name: "ingress.kubernetes.io/ssl-proxy-headers"
-      value: "X-Forwarded-Proto:https"
-    definition:
-      spec:
-        tls:
-        - hosts:
-          - dashboard.mydomain
-          secretName: kubernetes-dashboard-certs-valid
-
-        rules:
-        - host: dashboard.mydomain
-          http:
-            paths:
-            - backend:
-                serviceName: dashboard-kubernetes-dashboard
-                servicePort: 443
-              path: /
-
+    type: exec
+    cmd: |
+      cat << EOF > /tmp/coredns.yml
+      ((coredns_clusterrole))
+      ---
+      ((coredns_clusterrolebinding))
+      ---
+      ((coredns_configmap))
+      ---
+      ((coredns_deployment))
+      ---
+      ((coredns_service))
+      EOF
+      kubectl apply -f  /tmp/coredns.yml
 ```
+
+
+
+
+
 ### Development
 
 As a developer of this release, create new releases and upload them:

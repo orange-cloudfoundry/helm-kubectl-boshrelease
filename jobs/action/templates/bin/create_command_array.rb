@@ -10,8 +10,6 @@ def create_do_commands_array (actions)
       cmd = do_create_secret(action)
     when 'basic_auth_secret'
       cmd = do_create_basic_auth(action)
-    when 'ingress'
-      cmd = do_create_ingress(action,ActionProperties.ingressClass)
     when 'kubectl'
       cmd = do_create_kubectl(action)
     when 'exec'
@@ -20,8 +18,6 @@ def create_do_commands_array (actions)
       cmd = do_add_repo(action,ActionProperties.mirror_enabled,ActionProperties.mirror_url,ActionProperties.mirror_ca_cert)
     when 'helm_chart'
       cmd = do_install_chart(action)
-#     when 'pv'
-#      cmd = do_create_pv(action, ActionProperties.storageclass)
     else
       puts("ERROR !!! unknown type: #{category}")
     end
@@ -43,10 +39,6 @@ def create_undo_commands_array (actions)
       cmd = undo_create_basic_auth(action)
     when 'secret'
       cmd = undo_create_secret(action)
-    when 'ingress'
-      cmd = undo_create_ingress(action)
-#    when 'pv'
-#      cmd = undo_create_pv(action)
     when 'kubectl'
       cmd = undo_create_kubectl(action)
     when 'helm_repo'

@@ -14,7 +14,7 @@ These bosh release is composed by 1 jobs
   - it creates namespace
   - it applies kubectl command
   - it adds helm repository
-  - it creates helm chart instance
+  - it creates helm chart instance, or any helm command
   - it creates secret
   - it creates basic auth secret
   - it can execute any shell
@@ -180,6 +180,20 @@ Helm chart deployment can be customize by properties or by value file
 By default the helm type will perform
 
 Caution: During bosh delete-deployment the created instance of chart will be deleted.
+
+Helm sample using custom command:
+``` yaml
+- type: replace
+  path: /instance_groups/name=cfcr-helm-addons/jobs/name=action/properties/actions/-
+  value:
+    type: helm_chart
+    name: gitlab
+    chart:  gitlab/gitlab
+    namespace: gitlab
+    version: ((gitlab-version))
+    cmd: test # override default helm command (ie: 'upgrade') 
+    options: # override default options (ie: '--install --atomic --cleanup-on-fail') and reset it
+```
 ## add kubectl cmd
 
 example of use with an apply deployment

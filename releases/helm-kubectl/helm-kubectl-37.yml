@@ -1,0 +1,54 @@
+name: helm-kubectl
+version: "37"
+commit_hash: 93a1da4
+uncommitted_changes: false
+jobs:
+- name: action
+  version: b136a710cd9717b7e68642f9c313d7e8b017d011b7a1d8832c47ce6052c963b9
+  fingerprint: b136a710cd9717b7e68642f9c313d7e8b017d011b7a1d8832c47ce6052c963b9
+  sha1: sha256:f54479a1076886982418ef75501aea761d03213aa820a3564f7d6199a6ccfa3c
+  packages:
+  - helm
+  - kubectl
+  - kustomize
+  - ruby-2.6.5-r0.29.0
+  - action
+packages:
+- name: action
+  version: 9d0128bb4ca642b88cb03925b72ad5847ba39446ea8f3e55e3a3fcb8caba73c3
+  fingerprint: 9d0128bb4ca642b88cb03925b72ad5847ba39446ea8f3e55e3a3fcb8caba73c3
+  sha1: sha256:4314011b10cc3d1280881d6c52ed7523a978b72410f000e1684ebfd6480fe883
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: helm
+  version: ea64901e9868926b6285adf4bd2d6fe4f844e37e9687f589079f5645b51a5bb7
+  fingerprint: ea64901e9868926b6285adf4bd2d6fe4f844e37e9687f589079f5645b51a5bb7
+  sha1: sha256:d6a324c437c5974ef1a7fca95d14f496a8983c746f8fc96a19cfc00c9af7f345
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: jq
+  version: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  fingerprint: ee1d21dc94ebef5bc2295c0f3541db434b465358f038bf45b0854eb81a8d3f57
+  sha1: sha256:c30b23c85f35d89cbcf1273f4de859b64d26ee8f352c321e1394dbafc08f17a2
+  dependencies: []
+- name: kubectl
+  version: 51ce5a711e6b3ae7ca8f16ef60488e72539fd7b238aa272fcc8cd79c540ba730
+  fingerprint: 51ce5a711e6b3ae7ca8f16ef60488e72539fd7b238aa272fcc8cd79c540ba730
+  sha1: sha256:464e3d52d1ed3c8d9312b015ff93f021824fa0915f5dcbee929ac755a0dff9f0
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: kustomize
+  version: 057a1c5b2ceeb0112485979234f9ebceafe1704d0724281b5faf692b5303676b
+  fingerprint: 057a1c5b2ceeb0112485979234f9ebceafe1704d0724281b5faf692b5303676b
+  sha1: sha256:10852693c505f9ecb8869f311e2653a68f98e5fa75f889bee3fa48a0ed0d3ac1
+  dependencies:
+  - ruby-2.6.5-r0.29.0
+- name: ruby-2.6.5-r0.29.0
+  version: 269dc54d5306119b0e4f89be04f6c470b4876f552753815586fd1ab8ebeaa70d
+  fingerprint: 269dc54d5306119b0e4f89be04f6c470b4876f552753815586fd1ab8ebeaa70d
+  sha1: sha256:67381e113bdb1ec2b025e5ddc441efb3a077d2c19a324ffbff090aaf200cd6a7
+  dependencies: []
+license:
+  version: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  fingerprint: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  sha1: sha256:c4a3fad64da34e39a227c0623c17cdbbe17f244305055a032c3fa35f746f6624

@@ -1,15 +1,15 @@
 helm/helm.tar.gz:
-  size: 12327633
-  sha: sha256:3fff0354d5fba4c73ebd5db59a59db72f8a5bbe1117a0b355b0c2983e98db95b
+  size: 12373244
+  sha: sha256:2170a1a644a9e0b863f00c17b761ce33d4323da64fc74562a3a6df2abbf6cd70
 jq/jq-linux64:
   size: 3027945
   sha: sha256:c6b3a7d7d3e7b70c6f51b706a3b90bd01833846c54d32ca32f0027f00226ff6d
 kubectl/kubectl:
-  size: 42950656
-  sha: sha256:5f5a0bebde8a8782b2d9de9bd314dce722f9f960bee090b121ea5ac38cf4377d
+  size: 42987520
+  sha: sha256:7128c9e38ab9c445a3b02d3d0b3f0f15fe7fbca56fd87b84e575d7b29e999ad9
 kustomize/kustomize.tar.gz:
-  size: 12160807
-  sha: sha256:f5c76a726cbd27b74587fcd2816e86b3f6279d84043b7ed3725bf48b1bc8ca4a
+  size: 5216969
+  sha: sha256:3ef93195ede4b7664b7ec65284461dd8eeb9f5404e7db5eb5bf59003085a0c98
 set_version.sh:
-  size: 162
-  sha: sha256:52baaae05c4b9f22bf7b741466bbd582601e5ebf54a399d4b552287ea577d8a9
+  size: 233
+  sha: sha256:ef3316c970faf800152398ff68de2c89abe6f8ef51fe100d44ed6143e4604adf

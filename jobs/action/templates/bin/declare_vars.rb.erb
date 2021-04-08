@@ -3,10 +3,6 @@ def self.actions
   return <%= p('actions') %>
 end
 
-def self.ingressClass
-  return  "<%= p('ingress_class') %>"
-end
-
 def self.default_per_namespace_max_pods
   return  "<%= p('default_per_namespace.max_pods') %>"
 end

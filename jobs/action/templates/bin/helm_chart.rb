@@ -67,5 +67,4 @@ def undo_install_chart(chart)
     end
     "#{cmd} #{name}"
   end
-  end
 end

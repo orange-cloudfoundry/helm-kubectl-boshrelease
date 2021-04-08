@@ -12,7 +12,7 @@ git tag "$version"
 git push
 echo "Ensure S3 bucket are publicly available !"
 # see https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-policy.html
-aws s3api set-bucket-policy-status --bucket orange-helm-kubectl-boshrelease --policy file://aws-s3-bucket-policy.json
+aws s3api put-bucket-policy --bucket orange-helm-kubectl-boshrelease --policy file://aws-s3-bucket-policy.json
 
 echo "Create a github release"
 {

@@ -1,8 +1,6 @@
 ---
 name: kustomize
 
-dependencies: 
-- ruby-2.6.5-r0.29.0
 
 files:
 - kustomize/kustomize.tar.gz

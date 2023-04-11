@@ -3,7 +3,7 @@ set -e
 ASSERT_GEM_VERSION=3.1.2
 source "/var/vcap/packages/action/bosh/runtime.env"
 
-export PATH=$PATH:/var/vcap/packages/ruby-2.6.5-r0.29.0/bin/
+export PATH=$PATH:/var/vcap/packages/ruby-3.1/bin/
 gems_version=$(bundle exec gem -v)
 
 
@@ -13,7 +13,7 @@ else
   echo "wrong rubygems version: $gems_version"
   exit 1
 fi
-export GEM_PATH=$GEM_PATH:/var/vcap/packages/action/gem_home/ruby/2.6.0/
+export GEM_PATH=$GEM_PATH:/var/vcap/packages/action/gem_home/ruby/3.1/
 
 export http_proxy=<%= p('proxy.http') %>
 export HTTP_PROXY=<%= p('proxy.http') %>

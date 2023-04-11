@@ -26,7 +26,7 @@ packages:
 - helm
 - kubectl
 - kustomize
-- ruby-2.6.5-r0.29.0
+- ruby-3.1
 - action
 
 properties:

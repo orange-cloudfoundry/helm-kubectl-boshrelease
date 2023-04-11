@@ -2,7 +2,7 @@
 
 set -eux
 
-PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
+#PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
 # shellcheck disable=1090
 source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-3.1/bosh/compile.env"
@@ -10,5 +10,6 @@ source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-3.1/bosh/compile.env"
 cp -r ./action/. "${BOSH_INSTALL_TARGET}/"
 
 bosh_bundle_local --gemfile="${BOSH_INSTALL_TARGET}/Gemfile"
+#bosh_bundle_local
 
 bosh_generate_runtime_env

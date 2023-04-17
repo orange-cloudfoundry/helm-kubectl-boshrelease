@@ -9,7 +9,6 @@ require_relative 'helm_repository'
 require_relative 'kubectl_command'
 require_relative 'kubectl_namespace'
 require_relative 'kubectl_secret'
-require_relative 'kubectl_basicauth'
 
 
 

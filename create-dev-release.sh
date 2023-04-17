@@ -1,4 +1,4 @@
 #!/bin/bash
 ./addblob.sh
 
-bosh create-release #--force #:
+bosh create-release --force 

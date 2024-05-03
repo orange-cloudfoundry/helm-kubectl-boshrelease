@@ -29,8 +29,44 @@ jobs:
         with:
           token: ${{ github.token }}
           branch: master
-          noVersionBumpBehavior: patch
+          noVersionBumpBehavior: minor
           majorList: major
+
+      - name: vendor-add-blob
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_BOSH_ACCES_KEY_ID: ${{ secrets.AWS_BOSH_ACCES_KEY_ID }}
+          AWS_BOSH_SECRET_ACCES_KEY: ${{ secrets.AWS_BOSH_SECRET_ACCES_KEY }}
+        run: |
+          set -x # enable traces
+          #pwd
+          #find .
+          # configure git
+          git config --global user.name "workflows/k9s-package/create-final-bosh-release"
+          git config --global user.email "<>"
+          git config --global --add safe.directory /github/workspace
+          export VENDIR_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+          ./vendor.sh
+          echo "State after vendir:"
+          tree -s src
+          git add vendir.lock
+          # FIXME: optimize for idempotency 
+          ./addblob.sh
+          remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${GITHUB_SERVER_URL#https://}/${GITHUB_REPOSITORY}.git"
+          
+          git add config/blobs.yml
+          git status
+          if git commit -a --dry-run 2>&1 >/dev/null;then 
+            git commit -a -m "updating blobs" && \
+              git push ${remote_repo} HEAD:${GITHUB_REF_NAME}
+          else
+            echo "Nothing to commit"
+          fi
+          echo "Resulting State:" 
+          tree -s src
+          if [ -d blobs ];then # The blobs dir is only present when a blob is modified or has not yet been published.
+            tree -s blobs
+          fi
 
       - name: create bosh release
         id: create-bosh-release

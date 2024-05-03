@@ -35,6 +35,7 @@
       description: 'Auto-merge patch releases, e.g. from 1.28.1 to 1.28.2',
       matchPackageNames: [
         'kubernetes/kubernetes',
+        'orange-cloudfoundry/create-bosh-release-action',
       ],
       //see https://docs.renovatebot.com/key-concepts/automerge/#automerge-non-major-updates
       matchUpdateTypes: [

@@ -2,6 +2,11 @@
 set -x
 set -e # exit on non-zero status
 
+DEV_MODE="false"
+if [ "$1" = "dev-mode" ];then
+  DEV_MODE="true"
+fi
+
 echo "Current blobs"
 bosh blobs
 
@@ -51,7 +56,7 @@ EOS
 echo "Configuring S3 blobstore systematically: S3 credential are required during the bosh create-release to download the blobs"
 configureS3BlobStore
 
-if [ "${NEW_BLOBS_WERE_ADDED}" == "true" ] ; then
+if [[ "$DEV_MODE" == "false" && "${NEW_BLOBS_WERE_ADDED}" == "true" ]] ; then
   echo "Current blobs before upload"
   bosh blobs
 
@@ -62,5 +67,3 @@ if [ "${NEW_BLOBS_WERE_ADDED}" == "true" ] ; then
   bosh blobs
 
 fi
-
-rm -rf src/github.com/*

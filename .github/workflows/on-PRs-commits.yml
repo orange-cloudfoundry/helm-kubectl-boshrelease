@@ -55,7 +55,7 @@ jobs:
           AWS_BOSH_ACCES_KEY_ID: ${{ secrets.AWS_BOSH_ACCES_KEY_ID }}
           AWS_BOSH_SECRET_ACCES_KEY: ${{ secrets.AWS_BOSH_SECRET_ACCES_KEY }}
         run: |
-          set -x # enable traces
+          #set -x # enable traces
           #pwd
           #find .
           # configure git
@@ -66,28 +66,12 @@ jobs:
           ./vendor.sh
           echo "State after vendir (src/github.com):"
           tree -s src/github.com
-          git add vendir.lock
-          # FIXME: optimize for idempotency 
-          ./addblob.sh
-          remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${GITHUB_SERVER_URL#https://}/${GITHUB_REPOSITORY}.git"
-          
-          git add config/blobs.yml
-          git status
-          if git commit -a --dry-run 2>&1 >/dev/null;then 
-            git commit -a -m "updating blobs" && \
-              git push ${remote_repo} HEAD:${GITHUB_REF_NAME}
-          else
-            echo "Nothing to commit"
-          fi
+          ./addblob.sh dev-mode
           echo "Resulting State (src/github.com):" 
           tree -s src/github.com
           if [ -d blobs ];then # The blobs dir is only present when a blob is modified or has not yet been published.
             tree -s blobs
           fi
-      # TODO: optimize to only create a dev release if the blobs.yaml file has some changes
-      # Possibly by setting an env var and checking it into next step
-      # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
-      # and if clause https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsif
       - name: create bosh dev release
         id: create-bosh-release
         uses: orange-cloudfoundry/create-bosh-release-action@114f237653682479efe231f6d89e57096f8afe63 # v1.0.2 # will create dev release when pushed git ref is not a tag

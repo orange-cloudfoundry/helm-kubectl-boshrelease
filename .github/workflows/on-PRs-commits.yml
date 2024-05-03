@@ -1,0 +1,113 @@
+name: create-dev-release-on-PR
+
+on:
+  push:
+    branches-ignore:
+      - master
+    tags-ignore:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      # TODO: add caching for cli downloads, see https://github.com/marketplace/actions/cache
+      - name: Install bosh-cli
+        #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
+        uses: jaxxstorm/action-install-gh-release@c5ead9a448b4660cf1e7866ee22e4dc56538031a # v1.10.0
+        with:
+          repo: cloudfoundry/bosh-cli
+          tag: v7.4.0
+          extension-matching: disable
+          chmod: 0755
+          rename-to: bosh
+
+          # searching for bosh-cli-7.4.0-linux-amd64 with (linux|x86_64|x64|amd64).*(linux|x86_64|x64|amd64).*.(tar.gz|zip)
+          #               bosh-cli-7.4.0-linux-amd64
+
+      - name: Install vendir cli
+        #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
+        uses: jaxxstorm/action-install-gh-release@c5ead9a448b4660cf1e7866ee22e4dc56538031a # v1.10.0
+        with:
+          repo: carvel-dev/vendir
+          tag: v0.34.6
+          extension-matching: disable
+          chmod: 0755
+          rename-to: vendir
+
+      - name: Install yq cli
+        #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
+        uses: jaxxstorm/action-install-gh-release@c5ead9a448b4660cf1e7866ee22e4dc56538031a # v1.10.0
+        with:
+          repo: mikefarah/yq
+          tag: v4.34.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # reduce potential rate limiting
+
+      - name: vendor-add-blob
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_BOSH_ACCES_KEY_ID: ${{ secrets.AWS_BOSH_ACCES_KEY_ID }}
+          AWS_BOSH_SECRET_ACCES_KEY: ${{ secrets.AWS_BOSH_SECRET_ACCES_KEY }}
+        run: |
+          set -x # enable traces
+          #pwd
+          #find .
+          # configure git
+          git config --global user.name "workflows/k9s-package/create-final-bosh-release"
+          git config --global user.email "<>"
+          git config --global --add safe.directory /github/workspace
+          export VENDIR_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+          ./vendor.sh
+          echo "State after vendir (src/github.com):"
+          tree -s src/github.com
+          git add vendir.lock
+          # FIXME: optimize for idempotency 
+          ./addblob.sh
+          remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@${GITHUB_SERVER_URL#https://}/${GITHUB_REPOSITORY}.git"
+          
+          git add config/blobs.yml
+          git status
+          if git commit -a --dry-run 2>&1 >/dev/null;then 
+            git commit -a -m "updating blobs" && \
+              git push ${remote_repo} HEAD:${GITHUB_REF_NAME}
+          else
+            echo "Nothing to commit"
+          fi
+          echo "Resulting State (src/github.com):" 
+          tree -s src/github.com
+          if [ -d blobs ];then # The blobs dir is only present when a blob is modified or has not yet been published.
+            tree -s blobs
+          fi
+      # TODO: optimize to only create a dev release if the blobs.yaml file has some changes
+      # Possibly by setting an env var and checking it into next step
+      # See https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
+      # and if clause https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsif
+      - name: create bosh dev release
+        id: create-bosh-release
+        uses: orange-cloudfoundry/create-bosh-release-action@114f237653682479efe231f6d89e57096f8afe63 # v1.0.2 # will create dev release when pushed git ref is not a tag
+        with:
+          target_branch: ${{github.ref_name}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_BOSH_ACCES_KEY_ID: ${{ secrets.AWS_BOSH_ACCES_KEY_ID }}
+          AWS_BOSH_SECRET_ACCES_KEY: ${{ secrets.AWS_BOSH_SECRET_ACCES_KEY }}
+
+      # See https://docs.github.com/en/actions/using-workflows/storing-workflow-data-as-artifacts
+      # This creates a zip file containing the k3s-master.tgz file
+
+      # See https://github.com/actions/upload-artifact#zipped-artifact-downloads
+      # > There is currently no way to download artifacts after a workflow run finishes in a format other than a zip or
+      # > to download artifact contents individually. One of the consequences of this limitation is that if a zip is
+      # > uploaded during a workflow run and then downloaded from the UI, there will be a double zip created.
+      - name: Archive bosh dev release tgz
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+        with:
+          name: archive-bosh-dev-release-tgz
+          path: |
+            helm-*.tgz

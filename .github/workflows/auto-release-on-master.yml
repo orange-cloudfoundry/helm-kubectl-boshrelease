@@ -1,0 +1,57 @@
+name: auto-release
+
+on:
+  workflow_dispatch: # to manually force a release on ignore paths
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '.github/**'
+      - .gitignore
+      - CONTRIBUTING.md
+      - README.md
+      - renovate.json5
+      - run-renovate-locally.bash
+
+jobs:
+  build:
+    name: "ship it"
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump version
+        id: bump-version
+        uses: ietf-tools/semver-action@2415a9e79db34eb828a8dc1d20d4890725737227 # v1
+        with:
+          token: ${{ github.token }}
+          branch: master
+          noVersionBumpBehavior: patch
+          majorList: major
+
+      - name: create bosh release
+        id: create-bosh-release
+        uses: orange-cloudfoundry/create-bosh-release-action@114f237653682479efe231f6d89e57096f8afe63 # v1.0.2
+        with:
+          target_branch: ${{github.ref_name}}
+          tag_name: ${{ steps.bump-version.outputs.next}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_BOSH_ACCES_KEY_ID: ${{ secrets.AWS_BOSH_ACCES_KEY_ID }}
+          AWS_BOSH_SECRET_ACCES_KEY: ${{ secrets.AWS_BOSH_SECRET_ACCES_KEY }}
+
+      # see https://github.com/ncipollo/release-action
+      - name: create github release
+        id: create-github-release
+        uses: ncipollo/release-action@6c75be85e571768fa31b40abf38de58ba0397db5 # v1.13.0
+        with:
+          tag: ${{ steps.create-bosh-release.outputs.tagged_version }}
+          draft: false
+          allowUpdates: false # > indicates if we should update a release if it already exists.
+          generateReleaseNotes: true
+          artifacts: ./${{ steps.create-bosh-release.outputs.file }}
+          artifactContentType: application/zip
+          artifactErrorsFailBuild: true # > indicates if artifact read or upload errors should fail the build.

@@ -1,0 +1,49 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+
+minimumRequiredVersion: 0.34.0
+directories:
+- path: src/github.com
+  contents:
+  - path: kubernetes-sigs/kustomize
+    githubRelease:
+      slug: kubernetes-sigs/kustomize
+      tag: kustomize/v5.0.3
+      disableAutoChecksumValidation: true
+      assetNames: # only download specific assets (optional; v0.12.0+). We use assetNames inside githubRelease instead of
+      # includePaths at path level. Using includePaths downloads all assets and filter after.
+      - "kustomize_*_linux_amd64.tar.gz"
+#      http:
+#        url: https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/{tag}/kustomize_{tag}_linux_amd64.tar.gz
+    permission: 0755
+  - path: kubernetes/kubectl
+    githubRelease:
+      slug: kubernetes/kubernetes
+      tag: v1.28.6
+      disableAutoChecksumValidation: true
+      http:
+        # The url parameter of http can interpolate the tag of the GitHub release using the {tag} token.
+        url: https://dl.k8s.io/release/{tag}/bin/linux/amd64/kubectl
+    permission: 0755
+  - path: helm/helm
+    githubRelease:
+      slug: helm/helm
+      tag: v3.13.3
+      disableAutoChecksumValidation: true
+      http:
+        # The url parameter of http can interpolate the tag of the GitHub release using the {tag} token.
+        url: https://get.helm.sh/helm-{tag}-linux-amd64.tar.gz
+    permission: 0755
+  - path: jqlang/jq
+    githubRelease:
+      slug: jqlang/jq
+      tag: jq-1.6
+      disableAutoChecksumValidation: true
+      assetNames: # only download specific assets (optional; v0.12.0+). We use assetNames inside githubRelease instead of
+        # includePaths at path level. Using includePaths downloads all assets and filter after.
+        - "jq-linux64"
+    permission: 0755
+
+
+
+

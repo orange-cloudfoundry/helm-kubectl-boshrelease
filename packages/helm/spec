@@ -3,4 +3,4 @@ name: helm
 
 
 files:
-- helm/helm.tar.gz
+- helm/helm

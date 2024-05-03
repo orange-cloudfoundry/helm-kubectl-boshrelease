@@ -4,10 +4,8 @@ set -e
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
-cp -a ${BOSH_COMPILE_TARGET}/helm/helm.tar.gz ${BOSH_INSTALL_TARGET}/
+cp -a ${BOSH_COMPILE_TARGET}/helm/helm ${BOSH_INSTALL_TARGET}/
 
 ls ${BOSH_INSTALL_TARGET}
 
-cd ${BOSH_INSTALL_TARGET}
-tar -xvzf helm.tar.gz
-chmod +x linux-amd64/helm
+chmod +x ${BOSH_INSTALL_TARGET}/helm

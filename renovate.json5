@@ -7,7 +7,7 @@
   enabledManagers: [
     "github-actions",
     "vendir",
-    "regex"
+    "custom.regex"
   ],
   ignorePaths: [
     'packages/**',
@@ -73,7 +73,7 @@
       customType: "regex",
       fileMatch: [ '\.github/workflows/.+\.ya?ml$'],
       matchStrings: [
-        // https://regex101.com/r/Hajw59/1
+        // https://regex101.com/r/Hajw59/2
         ' +uses: jaxxstorm\\/action-install-gh-release.*\\n.*\\n +repo: (?<depName>[a-z0-9\\.\\/\\-]*?)\\n +tag: (?<currentValue>[a-z0-9\\.\\/\\-\\+]*?) *\\n',
       ],
       datasourceTemplate: 'github-releases'

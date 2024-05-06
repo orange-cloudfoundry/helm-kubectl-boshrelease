@@ -60,8 +60,8 @@
     },
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
-      matchFileNames: [ '\.github/workflows/.+\.ya?ml$'],
-      matchManagers: ['custom.regex', 'regex'],
+      matchFileNames: [ '.github/workflows/*.yml'],
+      matchManagers: 'custom.regex',
       addLabels: [
         'cli-managed-by-jaxxstorm'
       ]
@@ -70,13 +70,14 @@
   customManagers: [
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
-//      customType: "regex",
-      fileMatch: [ '\.github/workflows/.+\.ya?ml$'],
+      customType: "regex",
+      fileMatch: [ '\.github/workflows/.+\.yml$'],
       matchStrings: [
         // https://regex101.com/r/Hajw59/2
         ' +uses: jaxxstorm\\/action-install-gh-release.*\\n.*\\n +repo: (?<depName>[a-z0-9\\.\\/\\-]*?)\\n +tag: (?<currentValue>[a-z0-9\\.\\/\\-\\+]*?) *\\n',
       ],
-      datasourceTemplate: 'github-releases'
+      datasourceTemplate: 'github-releases',
+
     }
 
   ]

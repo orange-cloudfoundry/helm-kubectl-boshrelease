@@ -15,6 +15,6 @@ kustomize/kustomize.tar.gz:
   object_id: 1a2a3e17-9122-4035-7186-bbe7eee88d4e
   sha: sha256:c627b1575c3fecbc7ad1c181c23a7adcacf19732dab627eb57e89a7bc4c1e929
 set_version.sh:
-  size: 284
-  object_id: 61f17ecd-3354-4e63-4b78-9993dec4e0b8
-  sha: sha256:353a0b168d07b8d6211e47bc394b9f8fff7fc297cf689537b33f90779379e466
+  size: 282
+  object_id: cdd852a2-893e-4cd2-47cf-493ce26d4c01
+  sha: sha256:3b0819f2a9880defb0c8b0b0c9e9aa64de380a90e649001ad0a7c6dd358cc003

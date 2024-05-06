@@ -1,0 +1,57 @@
+name: helm-kubectl
+version: 41.0.0
+commit_hash: e2a87d3
+uncommitted_changes: false
+jobs:
+- name: action
+  version: 40043591ab13db8309d097c74b66ca5bbf64da96a8318130ad3965481b4fdc77
+  fingerprint: 40043591ab13db8309d097c74b66ca5bbf64da96a8318130ad3965481b4fdc77
+  sha1: sha256:29758444587c72006594ecd43ce8bde90d659abbaee9a5b0e219e83063e0c9b3
+  packages:
+  - helm
+  - kubectl
+  - kustomize
+  - ruby-3.1
+  - action
+- name: helm-package
+  version: cb7b081c4ccf2652c4d74310f88e1a6cca568294cea3a48c514af9a4ee958f87
+  fingerprint: cb7b081c4ccf2652c4d74310f88e1a6cca568294cea3a48c514af9a4ee958f87
+  sha1: sha256:d8d856e7139352a24dd32807700457998e7e5f5fbe4309202f7b7acf6c204555
+  packages:
+  - helm
+packages:
+- name: action
+  version: 8e993bbf9f7b56fcb3ac362ba028cb2a69b5c4b631d4c7331872a7b0fda656f0
+  fingerprint: 8e993bbf9f7b56fcb3ac362ba028cb2a69b5c4b631d4c7331872a7b0fda656f0
+  sha1: sha256:b67a46f904c5a1b816d93641f3a8575ef345853d1bcc85f70d328b2e27e56af5
+  dependencies:
+  - ruby-3.1
+- name: helm
+  version: e91a2eb32f2b3dde7294cfbeb1e8a821f0ddec8856de24c5a2c53f5adf57bd96
+  fingerprint: e91a2eb32f2b3dde7294cfbeb1e8a821f0ddec8856de24c5a2c53f5adf57bd96
+  sha1: sha256:f99c2b32a2b411bd3d50e9ffe7b1124e5de4d3d657358b8eac42160b2b42fa16
+  dependencies: []
+- name: jq
+  version: 9eb2cab348bea8e8340f341340a5823cf01808a68f9cb29fabdca5b27cb2536a
+  fingerprint: 9eb2cab348bea8e8340f341340a5823cf01808a68f9cb29fabdca5b27cb2536a
+  sha1: sha256:f6460ac50f6af5a417179bf2b8bbec71363b8ec7ad879fb867ea1d8fad0cecf6
+  dependencies: []
+- name: kubectl
+  version: 798751514ec9b0ca2d3cf0fe7e5942477facf3968b4ffc7fbbb9f154a0c1b2b8
+  fingerprint: 798751514ec9b0ca2d3cf0fe7e5942477facf3968b4ffc7fbbb9f154a0c1b2b8
+  sha1: sha256:6cb54b47c43bcb2dd8857a3321e2ae36eb8462549a5a4793eed58fe437ad0c7f
+  dependencies: []
+- name: kustomize
+  version: 95189fc5566a0065886b5fc5546754e4081a7a1b058bbe855665c49ffcd55e80
+  fingerprint: 95189fc5566a0065886b5fc5546754e4081a7a1b058bbe855665c49ffcd55e80
+  sha1: sha256:3204e2765ca031cc6540b150fac90010b45ac65256c3b65400f1014389c4bf95
+  dependencies: []
+- name: ruby-3.1
+  version: 8b225e7cc2608305a7b784b5828b2b4b7c7adc3eb14af46e313d64a9e14a3ad6
+  fingerprint: 8b225e7cc2608305a7b784b5828b2b4b7c7adc3eb14af46e313d64a9e14a3ad6
+  sha1: sha256:fbbc5a8697f8798045546bab84d2d5cd7f8967898d51e7e5acee104b3c7649c8
+  dependencies: []
+license:
+  version: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  fingerprint: e2fd3ac71dc62401709de816464ce5a0eaeb1399d96615b6759bf85ed062ec13
+  sha1: sha256:c4a3fad64da34e39a227c0623c17cdbbe17f244305055a032c3fa35f746f6624

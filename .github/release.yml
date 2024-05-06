@@ -12,3 +12,4 @@ changelog:
       labels:
         - dependencies
         - manager/github-actions
+        - manager/vendir

@@ -1,83 +1,84 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:best-practices', //See https://docs.renovatebot.com/upgrade-best-practices/#use-the-configbest-practices-preset
-    ':disableRateLimiting'
+    'config:best-practices',
+    ':disableRateLimiting',
   ],
   enabledManagers: [
-    "github-actions",
-    "vendir",
-    "custom.regex"
+    'github-actions',
+    'vendir',
+    'custom.regex',
   ],
   ignorePaths: [
     'packages/**',
     'releases/**',
     'manifests/**',
-    'jobs/**'
+    'jobs/**',
   ],
   baseBranches: [
-    // don't run on renovate branches
-    "$default"
-    // See https://docs.renovatebot.com/configuration-options/#basebranches
-    // baseBranches supports Regular Expressions that must begin and end with /
-  ], //See also possible support for multiple base branches, one per K8S minor version https://docs.renovatebot.com/configuration-options/#basebranches
+    '$default',
+  ],
   packageRules: [
     {
-      description: "Add common labels",
-      matchDepPatterns: ["*"],
+      description: 'Add common labels',
+      matchDepPatterns: [
+        '*',
+      ],
       addLabels: [
-        // See full list of fields available at https://docs.renovatebot.com/templates/#other-available-fields
-        "datasource/{{datasource}}",
-        "depName/{{depNameSanitized}}",
-        "manager/{{manager}}"
-      ]
+        'datasource/{{datasource}}',
+        'depName/{{depNameSanitized}}',
+        'manager/{{manager}}',
+      ],
     },
     {
       description: 'Auto-merge patch releases, e.g. from 1.28.1 to 1.28.2',
       matchPackageNames: [
         'kubernetes/kubernetes',
-        'orange-cloudfoundry/create-bosh-release-action'
+        'orange-cloudfoundry/create-bosh-release-action',
       ],
-      //see https://docs.renovatebot.com/key-concepts/automerge/#automerge-non-major-updates
       matchUpdateTypes: [
-        'patch'
+        'patch',
       ],
       matchCurrentVersion: '!/-rc/',
       automerge: true,
-      //see https://docs.renovatebot.com/key-concepts/automerge/#absence-of-tests
-      ignoreTests: true
+      ignoreTests: true,
     },
     {
       description: 'Kubectl: Get distinct branches for each minor, e.g. 1.28.x and 1.29.x. See https://docs.renovatebot.com/presets-default/#separatepatchreleases and https://docs.renovatebot.com/faq/#separate-patch-releases-from-minor-releases',
       matchPackageNames: [
-        'kubernetes/kubernetes'
+        'kubernetes/kubernetes',
       ],
       separateMinorPatch: true,
       addLabels: [
-        'depName/kubernetes-kubectl' //override common labels for kubectl, as we have to scan kubernetes releases
+        'depName/kubernetes-kubectl',
       ],
-      separateMultipleMinor: true // https://github.com/renovatebot/renovate/pull/24538 is effective
+      separateMultipleMinor: true,
     },
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
-      matchFileNames: [ '\.github/workflows/.+\.ya?ml$'],
-      matchManagers: ['custom.regex', 'regex'],
+      matchFileNames: [
+        '.github/workflows/.+.ya?ml$',
+      ],
+      matchManagers: [
+        'custom.regex',
+        'custom.regex',
+      ],
       addLabels: [
-        'cli-managed-by-jaxxstorm'
-      ]
-    }
+        'cli-managed-by-jaxxstorm',
+      ],
+    },
   ],
   customManagers: [
     {
+      customType: 'regex',
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
-//      customType: "regex",
-      fileMatch: [ '\.github/workflows/.+\.ya?ml$'],
+      fileMatch: [
+        '.github/workflows/.+.ya?ml$',
+      ],
       matchStrings: [
-        // https://regex101.com/r/Hajw59/2
         ' +uses: jaxxstorm\\/action-install-gh-release.*\\n.*\\n +repo: (?<depName>[a-z0-9\\.\\/\\-]*?)\\n +tag: (?<currentValue>[a-z0-9\\.\\/\\-\\+]*?) *\\n',
       ],
-      datasourceTemplate: 'github-releases'
-    }
-
-  ]
+      datasourceTemplate: 'github-releases',
+    },
+  ],
 }

@@ -8,8 +8,9 @@ changelog:
         labels:
           - dependencies
           - manager/github-actions
+          - cli-managed-by-jaxxstorm
     - title: Chores
       labels:
         - dependencies
         - manager/github-actions
-        - manager/vendir
+        - cli-managed-by-jaxxstorm

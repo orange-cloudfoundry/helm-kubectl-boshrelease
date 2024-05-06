@@ -1,22 +1,69 @@
 #!/bin/bash
+set -x
+set -e # exit on non-zero status
+
+DEV_MODE="false"
+if [ "$1" = "dev-mode" ];then
+  DEV_MODE="true"
+fi
+
+echo "Current blobs"
+bosh blobs
+
+NEW_BLOBS_WERE_ADDED="false"
+
+# params
+# $1: src
+# $2: target
+function addBlobOnChecksumChange() {
+  src="$1"
+  target="$2"
+  blob_checksum=$(cat config/blobs.yml  | yq .'"'${target}'"'.sha)
+  blob_object_id=$(cat config/blobs.yml  | yq .'"'${target}'"'.object_id) # With dev release, blobs are not publish yet, so we need to add it again
+  src_checksum=$(cat "${src}"  | sha256sum |  cut -d " " -f1)
+  if [ "${blob_checksum}" != "sha256:${src_checksum}" ] || [ "$blob_object_id" = "null" ]; then
+    bosh add-blob ${src} ${target}
+    NEW_BLOBS_WERE_ADDED="true"
+  else
+    echo "skipping blob creation for ${target} with existing checksum: ${src_checksum}"
+  fi
+
+}
+
 source ./set_version.sh
-bosh add-blob set_version.sh set_version.sh
-
-HELM_FILE=helm-v${HELM_VERSION}-linux-amd64.tar.gz
-KUSTOMIZE_FILE=kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz
-
-wget https://get.helm.sh/${HELM_FILE}
-wget https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
-wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
-wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/${KUSTOMIZE_FILE}
+addBlobOnChecksumChange set_version.sh set_version.sh
+addBlobOnChecksumChange src/github.com/helm/helm/linux-amd64/helm helm/helm
+addBlobOnChecksumChange src/github.com/jqlang/jq/jq-linux64 jq/jq-linux64
+addBlobOnChecksumChange src/github.com/kubernetes/kubectl/kubectl kubectl/kubectl
+addBlobOnChecksumChange src/github.com/kubernetes-sigs/kustomize/kustomize_*_linux_amd64.tar.gz kustomize/kustomize.tar.gz
 
 
+# Inspired by https://github.com/orange-cloudfoundry/bosh-release-action/blob/8732ff085712d9980fc66e50892cb9c3d7a3f884/entrypoint.sh#L48-L58
+function configureS3BlobStore() {
+  if [ ! -z "${AWS_BOSH_ACCES_KEY_ID}" ]; then
+    cat - > config/private.yml <<EOS
+---
+blobstore:
+  options:
+    access_key_id: ${AWS_BOSH_ACCES_KEY_ID}
+    secret_access_key: ${AWS_BOSH_SECRET_ACCES_KEY}
+EOS
+  else
+    echo "::warning::AWS_BOSH_ACCES_KEY_ID not set, skipping config/private.yml"
+  fi
+}
 
-bosh add-blob jq-linux64 jq/jq-linux64
-bosh add-blob ${HELM_FILE} helm/helm.tar.gz
-bosh add-blob kubectl kubectl/kubectl
-bosh add-blob ${KUSTOMIZE_FILE} kustomize/kustomize.tar.gz
-rm ${KUSTOMIZE_FILE}
-rm ${HELM_FILE}
-rm kubectl
-rm jq-linux64
+echo "Configuring S3 blobstore systematically: S3 credential are required during the bosh create-release to download the blobs"
+configureS3BlobStore
+
+if [[ "$DEV_MODE" == "false" && "${NEW_BLOBS_WERE_ADDED}" == "true" ]] ; then
+  echo "Current blobs before upload"
+  bosh blobs
+
+  # See https://bosh.io/docs/release-blobs/#saving-blobs
+  bosh upload-blobs
+
+  echo "Current blobs after upload"
+  bosh blobs
+
+fi

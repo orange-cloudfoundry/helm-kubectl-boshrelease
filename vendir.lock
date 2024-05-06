@@ -1,0 +1,21 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - githubRelease:
+      tag: kustomize/v5.0.3
+      url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/102403187
+    path: kubernetes-sigs/kustomize
+  - githubRelease:
+      tag: v1.28.6
+      url: https://api.github.com/repos/kubernetes/kubernetes/releases/137446444
+    path: kubernetes/kubectl
+  - githubRelease:
+      tag: v3.13.3
+      url: https://api.github.com/repos/helm/helm/releases/133819033
+    path: helm/helm
+  - githubRelease:
+      tag: jq-1.6
+      url: https://api.github.com/repos/jqlang/jq/releases/13660432
+    path: jqlang/jq
+  path: src/github.com
+kind: LockConfig

@@ -1,0 +1,61 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:best-practices', //See https://docs.renovatebot.com/upgrade-best-practices/#use-the-configbest-practices-preset
+    ':disableRateLimiting',
+  ],
+  enabledManagers: [
+    "github-actions",
+    "vendir"
+  ],
+  ignorePaths: [
+    'packages/**',
+    'releases/**',
+    'manifests/**',
+    'jobs/**',
+  ],
+  baseBranches: [
+    // don't run on renovate branches
+    "$default",
+    // See https://docs.renovatebot.com/configuration-options/#basebranches
+    // baseBranches supports Regular Expressions that must begin and end with /
+  ], //See also possible support for multiple base branches, one per K8S minor version https://docs.renovatebot.com/configuration-options/#basebranches
+  packageRules: [
+    {
+      description: "Add common labels",
+      matchDepPatterns: ["*"],
+      addLabels: [
+        // See full list of fields available at https://docs.renovatebot.com/templates/#other-available-fields
+        "datasource/{{datasource}}",
+        "depName/{{depNameSanitized}}",
+        "manager/{{manager}}",
+      ]
+    },
+    {
+      description: 'Auto-merge patch releases, e.g. from 1.28.1 to 1.28.2',
+      matchPackageNames: [
+        'kubernetes/kubernetes',
+        'orange-cloudfoundry/create-bosh-release-action',
+      ],
+      //see https://docs.renovatebot.com/key-concepts/automerge/#automerge-non-major-updates
+      matchUpdateTypes: [
+        'patch',
+      ],
+      matchCurrentVersion: '!/-rc/',
+      automerge: true,
+      //see https://docs.renovatebot.com/key-concepts/automerge/#absence-of-tests
+      ignoreTests: true,
+    },
+    {
+      description: 'Kubectl: Get distinct branches for each minor, e.g. 1.28.x and 1.29.x. See https://docs.renovatebot.com/presets-default/#separatepatchreleases and https://docs.renovatebot.com/faq/#separate-patch-releases-from-minor-releases',
+      matchPackageNames: [
+        'kubernetes/kubernetes',
+      ],
+      separateMinorPatch: true,
+      addLabels: [
+        'depName/kubernetes-kubectl', //override common labels for kubectl, as we have to scan kubernetes releases
+      ],
+      separateMultipleMinor: true, // https://github.com/renovatebot/renovate/pull/24538 is effective
+    }
+  ],
+}

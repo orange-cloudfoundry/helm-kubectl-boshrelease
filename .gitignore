@@ -20,3 +20,5 @@ tmp
 my*.yml
 templates/private_manifest.yml
 
+/src/github.com/
+/renovate.log

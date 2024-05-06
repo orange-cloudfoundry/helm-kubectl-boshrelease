@@ -61,7 +61,7 @@
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
       matchFileNames: [ '\.github/workflows/.+\.ya?ml$'],
-      matchManagers: 'regex',
+      matchManagers: ['custom.regex', 'regex'],
       addLabels: [
         'cli-managed-by-jaxxstorm'
       ]
@@ -70,7 +70,7 @@
   customManagers: [
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
-      customType: "regex",
+//      customType: "regex",
       fileMatch: [ '\.github/workflows/.+\.ya?ml$'],
       matchStrings: [
         // https://regex101.com/r/Hajw59/2

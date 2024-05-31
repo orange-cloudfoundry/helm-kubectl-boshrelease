@@ -22,7 +22,7 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
         with:
           repo: cloudfoundry/bosh-cli
-          tag: v7.5.6
+          tag: v7.6.0
           extension-matching: disable
           chmod: 0755
           rename-to: bosh

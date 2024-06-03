@@ -35,7 +35,7 @@ jobs:
       # TODO: add caching for cli downloads, see https://github.com/marketplace/actions/cache
       - name: Install bosh-cli
         #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
-        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4 # v1.12.0
         with:
           repo: cloudfoundry/bosh-cli
           tag: v7.5.6
@@ -48,7 +48,7 @@ jobs:
 
       - name: Install vendir cli
         #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
-        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4 # v1.12.0
         with:
           repo: carvel-dev/vendir
           tag: v0.40.1
@@ -58,7 +58,7 @@ jobs:
 
       - name: Install yq cli
         #See https://github.com/marketplace/actions/install-a-binary-from-github-releases
-        uses: jaxxstorm/action-install-gh-release@71d17cb091aa850acb2a1a4cf87258d183eb941b # v1.11.0
+        uses: jaxxstorm/action-install-gh-release@25d5e2dd555cd74f1fab9ac1e6ea117acde2c0c4 # v1.12.0
         with:
           repo: mikefarah/yq
           tag: v4.44.1

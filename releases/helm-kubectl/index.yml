@@ -73,6 +73,8 @@ builds:
     version: "37"
   d81cbbf6-4aef-4f88-4f29-a508d52aafbe:
     version: "14"
+  d86b580b-248d-48b2-57b9-a2e50ab4de03:
+    version: 41.0.2
   db83a82f-c954-439a-631d-7c40e57be91b:
     version: "22"
   dfbdb123-6d51-4877-4294-3332332dd81e:

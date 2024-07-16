@@ -2,7 +2,8 @@
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
     'config:best-practices', //See https://docs.renovatebot.com/upgrade-best-practices/#use-the-configbest-practices-preset
-    ':disableRateLimiting'
+    ':disableRateLimiting',
+    'github>orange-cloudfoundry/renovate-public-presets:boshreleases-default.json5'
   ],
   enabledManagers: [
     "github-actions",

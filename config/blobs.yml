@@ -8,8 +8,8 @@ jq/jq-linux64:
   sha: sha256:af986793a515d500ab2d35f8d2aecd656e764504b789b66d7e1a0b727a124c44
 kubectl/kubectl:
   size: 49623192
-  object_id: 6426ef5e-3dbc-4b07-70f3-54af2e9f203f
-  sha: sha256:e1e8c08f7fc0b47e5d89422e573c3a2e658d95f1ee0c7ea6c8cb38f37140e607
+  object_id: 8de4b205-9459-417b-58d8-fb04007af25c
+  sha: sha256:1f7651ad0b50ef4561aa82e77f3ad06599b5e6b0b2a5fb6c4f474d95a77e41c5
 kustomize/kustomize.tar.gz:
   size: 5887075
   object_id: 1a2a3e17-9122-4035-7186-bbe7eee88d4e

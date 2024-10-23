@@ -19,7 +19,7 @@ directories:
   - path: kubernetes/kubectl
     githubRelease:
       slug: kubernetes/kubernetes
-      tag: v1.28.14
+      tag: v1.28.15
       disableAutoChecksumValidation: true
       http:
         # The url parameter of http can interpolate the tag of the GitHub release using the {tag} token.

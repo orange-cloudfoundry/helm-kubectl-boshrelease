@@ -61,7 +61,7 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@cd6b2b78ad38bdd294341cda064ec0692b06215b # v1.14.0
         with:
           repo: mikefarah/yq
-          tag: v4.44.3
+          tag: v4.44.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # reduce potential rate limiting
 

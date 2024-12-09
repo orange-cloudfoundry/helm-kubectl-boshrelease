@@ -4,7 +4,6 @@ name: action
 templates: 
   bin/run.erb: bin/run
   bin/post-deploy.erb: bin/post-deploy
-  bin/pre-stop.erb: bin/pre-stop
   bin/set_env.erb: bin/set_env
   bin/declare_vars.rb.erb: bin/declare_vars.rb
   bin/create_command_array.rb: bin/create_command_array.rb

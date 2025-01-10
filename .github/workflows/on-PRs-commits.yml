@@ -90,7 +90,7 @@ jobs:
       # > to download artifact contents individually. One of the consequences of this limitation is that if a zip is
       # > uploaded during a workflow run and then downloaded from the UI, there will be a double zip created.
       - name: Archive bosh dev release tgz
-        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
         with:
           name: helm-kubectl-dev-boshrelease-tgz
           path: |

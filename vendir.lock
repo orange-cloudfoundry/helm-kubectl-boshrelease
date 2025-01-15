@@ -6,8 +6,8 @@ directories:
       url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/102403187
     path: kubernetes-sigs/kustomize
   - githubRelease:
-      tag: v1.29.12
-      url: https://api.github.com/repos/kubernetes/kubernetes/releases/190042097
+      tag: v1.29.13
+      url: https://api.github.com/repos/kubernetes/kubernetes/releases/195009966
     path: kubernetes/kubectl
   - githubRelease:
       tag: v3.14.4

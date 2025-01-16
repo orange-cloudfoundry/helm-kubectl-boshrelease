@@ -7,6 +7,8 @@ builds:
     version: "15"
   1bc85c7d-1609-4de9-7d61-027074ea0191:
     version: "10"
+  1bd1dbec-1202-4898-497c-636c9e34c39d:
+    version: 41.0.10
   205b1a60-6c69-4a00-537a-bab8016bfa01:
     version: 41.0.6
   21ad72d9-5c85-400a-4e98-24a9fefc727c:

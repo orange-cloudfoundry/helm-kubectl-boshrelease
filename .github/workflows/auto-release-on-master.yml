@@ -104,7 +104,7 @@ jobs:
 
       - name: create bosh release
         id: create-bosh-release
-        uses: orange-cloudfoundry/create-bosh-release-action@a2a9c1f8c74ecaf1e317140ac2cda5861eb25b7f # v1.0.4
+        uses: orange-cloudfoundry/create-bosh-release-action@e6a71e3c8251a6a2a289acb474d64909d73cf87a # v1.0.5
         with:
           target_branch: ${{github.ref_name}}
           tag_name: ${{ steps.bump-version.outputs.nextStrict}}

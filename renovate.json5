@@ -32,7 +32,7 @@
         'manager/{{manager}}',
       ],
       matchDepNames: [
-        '/*/',
+        '*',
       ],
     },
     {

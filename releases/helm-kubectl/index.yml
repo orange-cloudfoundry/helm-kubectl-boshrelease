@@ -19,6 +19,8 @@ builds:
     version: 41.0.7
   284a53f7-c588-49e5-6155-5359f4c1f37f:
     version: "38"
+  2c685e56-cebb-4fa4-51c7-1fb78abd657d:
+    version: 41.0.12
   400e2aea-727b-4151-61d8-5a5641c21ec1:
     version: 41.0.9
   44e7aaae-a793-4614-55e6-5ea4264231ca:

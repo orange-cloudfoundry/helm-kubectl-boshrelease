@@ -116,7 +116,7 @@ jobs:
       # see https://github.com/ncipollo/release-action
       - name: create github release
         id: create-github-release
-        uses: ncipollo/release-action@cdcc88a9acf3ca41c16c37bb7d21b9ad48560d87 # v1.15.0
+        uses: ncipollo/release-action@bcfe5470707e8832e12347755757cec0eb3c22af # v1.18.0
         with:
           name: ${{ steps.bump-version.outputs.nextStrict }}
           tag: ${{ steps.create-bosh-release.outputs.tagged_version }}

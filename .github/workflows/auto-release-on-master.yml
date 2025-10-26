@@ -25,7 +25,7 @@ jobs:
 
       - name: Bump version
         id: bump-version
-        uses: ietf-tools/semver-action@000ddb2ebacad350ff2a15382a344dc05ea4c0a4 # v1.10.2
+        uses: ietf-tools/semver-action@c90370b2958652d71c06a3484129a4d423a6d8a8 # v1.11.0
         with:
           token: ${{ github.token }}
           branch: master

@@ -74,7 +74,7 @@ jobs:
           fi
       - name: create bosh dev release
         id: create-bosh-release
-        uses: orange-cloudfoundry/create-bosh-release-action@a3785b84b975b8460b08a8ace9d1cda4d024948f # v1.2.1 # will create dev release when pushed git ref is not a tag
+        uses: orange-cloudfoundry/create-bosh-release-action@019253a01b95116280610ab24bfbd73cee695d79 # v1.2.2 # will create dev release when pushed git ref is not a tag
         with:
           target_branch: ${{github.ref_name}}
         env:

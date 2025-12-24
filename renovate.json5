@@ -1,9 +1,9 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: [
-    'config:best-practices',
+    'config:best-practices', //See https://docs.renovatebot.com/upgrade-best-practices/#use-the-configbest-practices-preset
     ':disableRateLimiting',
-    'github>orange-cloudfoundry/renovate-public-presets:boshreleases-default.json5',
+    'github>orange-cloudfoundry/renovate-public-presets:boshreleases-default.json5'
   ],
   enabledManagers: [
     'github-actions',
@@ -17,12 +17,15 @@
     'jobs/**',
   ],
   baseBranchPatterns: [
-    '$default',
-  ],
+    '$default', // don't run on renovate branches
+    // See https://docs.renovatebot.com/configuration-options/#basebranches
+    // baseBranches supports Regular Expressions that must begin and end with /
+  ], //See also possible support for multiple base branches, one per K8S minor version https://docs.renovatebot.com/configuration-options/#basebranches
   packageRules: [
     {
       description: 'Add common labels',
       addLabels: [
+        // See full list of fields available at https://docs.renovatebot.com/templates/#other-available-fields
         'datasource/{{datasource}}',
         'depName/{{depNameSanitized}}',
         'manager/{{manager}}',
@@ -37,11 +40,13 @@
         'kubernetes/kubernetes',
         'orange-cloudfoundry/create-bosh-release-action',
       ],
+      //see https://docs.renovatebot.com/key-concepts/automerge/#automerge-non-major-updates
       matchUpdateTypes: [
         'patch',
       ],
       matchCurrentVersion: '!/-rc/',
       automerge: true,
+      //see https://docs.renovatebot.com/key-concepts/automerge/#absence-of-tests
       ignoreTests: true,
     },
     {
@@ -51,9 +56,9 @@
       ],
       separateMinorPatch: true,
       addLabels: [
-        'depName/kubernetes-kubectl',
+        'depName/kubernetes-kubectl', //override common labels for kubectl, as we have to scan kubernetes releases
       ],
-      separateMultipleMinor: true,
+      separateMultipleMinor: true, // https://github.com/renovatebot/renovate/pull/24538 is effective
     },
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
@@ -74,6 +79,7 @@
         '/.github/workflows/.+.yml$/',
       ],
       matchStrings: [
+        // https://regex101.com/r/Hajw59/2
         ' +uses: jaxxstorm\\/action-install-gh-release.*\\n.*\\n +repo: (?<depName>[a-z0-9\\.\\/\\-]*?)\\n +tag: (?<currentValue>[a-z0-9\\.\\/\\-\\+]*?) *\\n',
       ],
       datasourceTemplate: 'github-releases',

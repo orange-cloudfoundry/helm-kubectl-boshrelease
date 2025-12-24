@@ -16,9 +16,8 @@
     'manifests/**',
     'jobs/**',
   ],
-  baseBranches: [
-    // don't run on renovate branches
-    '$default',
+  baseBranchPatterns: [
+    '$default', // don't run on renovate branches
     // See https://docs.renovatebot.com/configuration-options/#basebranches
     // baseBranches supports Regular Expressions that must begin and end with /
   ], //See also possible support for multiple base branches, one per K8S minor version https://docs.renovatebot.com/configuration-options/#basebranches
@@ -76,8 +75,8 @@
     {
       description: 'Use to bump CLIs managed by jaxxstorm/action-install-gh-release',
       customType: 'regex',
-      fileMatch: [
-        '.github/workflows/.+.yml$',
+      managerFilePatterns: [
+        '/.github/workflows/.+.yml$/',
       ],
       matchStrings: [
         // https://regex101.com/r/Hajw59/2

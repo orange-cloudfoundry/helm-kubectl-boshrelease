@@ -10,8 +10,8 @@ directories:
       url: https://api.github.com/repos/kubernetes/kubernetes/releases/268945810
     path: kubernetes/kubectl
   - githubRelease:
-      tag: v3.14.4
-      url: https://api.github.com/repos/helm/helm/releases/150650182
+      tag: v3.19.4
+      url: https://api.github.com/repos/helm/helm/releases/270027010
     path: helm/helm
   - githubRelease:
       tag: jq-1.6

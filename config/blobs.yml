@@ -1,7 +1,7 @@
 helm/helm:
-  size: 50753536
-  object_id: 60dc152c-e4b4-47c1-6707-0f7c4ec18caa
-  sha: sha256:912d3c044f46dcc43c22d073dec7eacf6ba8701dfc7f60688174b3eaa30d3698
+  size: 60182712
+  object_id: 7d3ad301-d7cc-4605-50a8-d347047ba4a4
+  sha: sha256:ea22096683b9b61005584501e36168a1eadc5b6883a89df299f5a55e4e2dd283
 jq/jq-linux64:
   size: 3953824
   object_id: d348fd24-9fb2-452c-7a42-c19eee2dcd79

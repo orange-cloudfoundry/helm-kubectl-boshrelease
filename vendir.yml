@@ -28,7 +28,7 @@ directories:
   - path: helm/helm
     githubRelease:
       slug: helm/helm
-      tag: v3.19.4
+      tag: v4.0.4
       disableAutoChecksumValidation: true
       http:
         # The url parameter of http can interpolate the tag of the GitHub release using the {tag} token.

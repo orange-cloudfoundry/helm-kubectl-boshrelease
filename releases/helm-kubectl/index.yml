@@ -103,6 +103,8 @@ builds:
     version: "31"
   c3048cfc-1d65-432e-474e-c32513291eb6:
     version: 41.0.3
+  c9982368-e724-49ee-48c6-b68c9e2df333:
+    version: 42.0.13
   cc033fbd-caaf-4d0e-4a18-e67061caef05:
     version: 42.0.3
   ceb3569d-e312-4639-4b20-c7dfc8b3c7a4:

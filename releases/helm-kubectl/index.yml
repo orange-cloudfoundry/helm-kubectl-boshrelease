@@ -7,6 +7,8 @@ builds:
     version: "30"
   13e5df53-491a-4da1-7b9d-e997590f5d93:
     version: "15"
+  1a2a9818-83d5-468f-4d3c-78f68015807e:
+    version: 42.0.14
   1bc85c7d-1609-4de9-7d61-027074ea0191:
     version: "10"
   1bd1dbec-1202-4898-497c-636c9e34c39d:

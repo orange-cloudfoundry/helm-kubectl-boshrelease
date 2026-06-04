@@ -51,7 +51,7 @@ jobs:
         uses: jaxxstorm/action-install-gh-release@25e24d2d23ae098373794ef1d6faecb48ee52da8 # v3.0.0
         with:
           repo: carvel-dev/vendir
-          tag: v0.45.3
+          tag: v0.45.4
           extension-matching: disable
           chmod: 0755
           rename-to: vendir

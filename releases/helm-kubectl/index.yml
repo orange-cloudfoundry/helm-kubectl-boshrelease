@@ -17,6 +17,8 @@ builds:
     version: 42.0.5
   205b1a60-6c69-4a00-537a-bab8016bfa01:
     version: 41.0.6
+  21920a82-22ed-4dcb-6180-0999b36414bd:
+    version: 42.0.15
   21ad72d9-5c85-400a-4e98-24a9fefc727c:
     version: "21"
   224f4ce9-16aa-43bd-6c05-0a778a070502:
